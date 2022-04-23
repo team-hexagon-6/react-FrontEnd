@@ -1,0 +1,18 @@
+.header{
+    align-self: center;
+    margin: 10%;
+    margin-bottom: 13%;
+    color: #1376BD;
+}
+
+.form .row{
+    margin: 1%;
+}
+
+.btn-container{
+    margin-top: 9%;
+    margin-bottom: 5%;
+}
+.forgetPass{
+    margin-bottom: 10%
+}
