@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "../views/login/Login";
-import RegisterUser from "./views/registration/RegisterUser";
+import RegisterUser from "../views/registration/RegisterUser";
 
 export function Router() {
   return (
