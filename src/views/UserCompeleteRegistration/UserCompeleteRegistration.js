@@ -4,6 +4,9 @@ import Form from 'react-bootstrap/Form';
 import "./UserCompeleteRegistration.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row,Col } from 'react-bootstrap';
+import HeaderOne from "../../components/headers/HeaderOne";
+
+
 
 
 const {UserCompleteRegistrationValidationSchema } = require('./UserCompeleteRegistrationValidation');
@@ -38,6 +41,8 @@ export default function UserCompeleteRegistration() {
         event.preventDefault();    
     }
   return (
+    <div>
+    <HeaderOne/>
     <div className='form-container col-xl-5 mt-5 pt-5 mx-auto border border-2 '>
         
         <h1 className='fs-1 text-primary mb-5'>Complete Registration</h1>
@@ -86,6 +91,7 @@ export default function UserCompeleteRegistration() {
            <Button className='button btn btn-primary' size="lg" block="block" type="submit">Register</Button>
         </Form>
         
+    </div>
     </div>
   )
 }

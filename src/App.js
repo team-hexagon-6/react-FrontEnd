@@ -1,15 +1,11 @@
-
+import { Router } from './navigation/router';
+import './App.css';
 import "./assets/normalize.css";
-// import "./App.css";
-
-import UserCompleteRegistration from "./views/UserCompeleteRegistration/UserCompeleteRegistration"
 
 function App() {
   return (
-    <div className="App">
-      <UserCompleteRegistration/>
-    </div>
+    <Router/>
   );
-}
+  }
 
 export default App;
