@@ -1,16 +1,11 @@
-import logo from "./logo.svg";
+import { Router } from './navigation/router';
+import './App.css';
 import "./assets/normalize.css";
-// import "./App.css";
-import "./views/registration/RegisterUser.css";
-
-import RegisterUser from "./views/registration/RegisterUser";
 
 function App() {
   return (
-    <div className="App">
-      <RegisterUser />
-    </div>
+    <Router/>
   );
-}
+  }
 
 export default App;

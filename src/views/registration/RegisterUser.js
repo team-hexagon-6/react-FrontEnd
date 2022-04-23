@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { registration } from '../../JoiSchema';
 import AuthServices from '../../services/AuthServices';
+import "./RegisterUser.css";
 
 const RegisterUser = () => {
 
