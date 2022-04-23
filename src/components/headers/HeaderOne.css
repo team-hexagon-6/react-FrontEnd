@@ -1,0 +1,9 @@
+*{
+    margin: 0;
+}
+
+.headerOne img{
+    margin-top: 0 !important;
+    object-fit: contain;
+    height: 80px;
+}
