@@ -2,6 +2,7 @@
   text-align: center;
 }
 
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -21,12 +22,14 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(124, 87, 87);
+
 }
 
 .App-link {
-  color: #61dafb;
+  color: #97c9d7;
 }
+
 
 @keyframes App-logo-spin {
   from {
