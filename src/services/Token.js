@@ -3,7 +3,7 @@ const setAccessToken = (value) => {
 };
 
 const getAccessToken = () => {
-  localStorage.getItem("AccessToken");
+  return localStorage.getItem("AccessToken");
 };
 
 export default {
