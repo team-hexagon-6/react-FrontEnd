@@ -5,7 +5,7 @@ import "./UserCompleteRegistration.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row,Col } from 'react-bootstrap';
 import HeaderOne from "../../components/headers/HeaderOne";
-import AuthServices from '../../services/AuthServices';
+import UserServices from '../../services/API/UserServices';
 import {ValidateUserCompleteRegistration } from '../../JoiSchema';
 
 export default function UserCompleteRegistration()  {
@@ -40,7 +40,7 @@ export default function UserCompleteRegistration()  {
         } 
         else {
             try {
-                const response = await AuthServices.AuthUserCompleteRegistration(state);
+                const response = await UserServices.AuthUserCompleteRegistration(state);
             } catch (error) {
                 console.log(error.message);
             }
@@ -50,7 +50,7 @@ export default function UserCompleteRegistration()  {
   return (
     <div>
     <HeaderOne/>
-    <div className='form-container col-xl-5 mt-2 pt-5 mx-auto border border-2 '>
+    <div className='form-container col-xl-5 mt-2 pt-5 mx-auto '>
         
         <h1 className='fs-1 text-primary mb-5'>Complete Registration</h1>
          <Form onSubmit={handleSubmit} >
