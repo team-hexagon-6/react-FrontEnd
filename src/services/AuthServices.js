@@ -1,4 +1,4 @@
-import { DOMAIN_NAME } from "../config.json";
+// import { DOMAIN_NAME } from "../config.json";
 import axios from "axios";
 import token from "./Token";
 
@@ -8,7 +8,7 @@ const register = (data) => {
 
   return axios({
     method: "post",
-    url: DOMAIN_NAME + "/auth/register",
+    url: "http://localhost:3500/auth/register",
     data: {
       employee_id: data.user_id,
       employee_type: data.user_type,
@@ -21,7 +21,7 @@ const login = async (data) => {
 
   const response = await axios({
     method: "post",
-    url: DOMAIN_NAME + "/auth/login",
+    url: "http://localhost:3500/auth/login",
     data: {
       user_id: data.username,
       password: data.password,
