@@ -2,6 +2,7 @@ import { DOMAIN_NAME } from "../config.json";
 import axios from "axios";
 import token from "./Token";
 
+
 const register = (data) => {
   console.log(data);
 
@@ -30,7 +31,25 @@ const login = async (data) => {
   token.setAccessToken(response.data.access_token);
 };
 
+const AuthUserCompleteRegistration = (data) =>{
+    console.log(data);
+   
+    return axios({
+        method: 'post',
+        url: 'http://localhost:3500/api/update-profile',
+        data: {
+            firstname: data['First Name'],
+            lastname: data['Last Name'],
+            nic: data['NIC'],
+            contact_no:data['Contact Number'],
+            email:data['Email'],
+            birthday :data['Birthday']
+        }
+    });
+
+}
+
 export default {
-  register,
-  login,
-};
+    register,AuthUserCompleteRegistration,login
+}
+

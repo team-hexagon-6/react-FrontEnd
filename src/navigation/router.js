@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Login from "../views/login/Login";
 import RegisterUser from "../views/registration/RegisterUser";
-import UserCompeleteRegistration from './../views/UserCompeleteRegistration/UserCompeleteRegistration';
+import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
 
 
 export function Router() {
@@ -12,7 +12,7 @@ export function Router() {
         
         <Route path="/login" element={<Login />} />
         <Route path="/registerUser" element ={<RegisterUser/>}></Route>
-        <Route path="/userCompeleteRegistration" element ={<UserCompeleteRegistration/>}></Route>
+        <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
       </Routes>
     </BrowserRouter>
   );
