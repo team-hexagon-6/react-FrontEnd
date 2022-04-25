@@ -61,7 +61,7 @@ const RegisterUser = () => {
                         value={user_id}
                         onChange={(e) => setUserID(e.target.value)}
                     />
-                    {id_err != '' && <p className="error">{id_err}</p>}
+                   {id_err !='' && <p className="error">{id_err}</p>}
                 </Form.Group>
 
                 <Form.Group className="mb-3">
