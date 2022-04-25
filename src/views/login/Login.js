@@ -2,13 +2,25 @@ import React, { useState } from "react";
 import HeaderOne from "../../components/headers/HeaderOne";
 import "./Login.css";
 import { Link } from "react-router-dom";
+import AuthServices from "../../services/AuthServices";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const [error, setError] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (error) {
+    } else {
+      try {
+        const response = AuthServices.login({ username, password });
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
   };
 
   return (
