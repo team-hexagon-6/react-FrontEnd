@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { registration } from '../../JoiSchema';
+import Validation from '../../Validation';
 import AuthServices from '../../services/AuthServices';
 import "./RegisterUser.css";
 import HeaderOne from "../../components/headers/HeaderOne";
@@ -23,7 +23,7 @@ const RegisterUser = () => {
         setTypeErr('');
         setPwdErr('');
 
-        const { value, error } = registration({ user_id, user_type, password, re_password });
+        const { value, error } = Validation.registration({ user_id, user_type, password, re_password });
         if (error) {
             const errors = {};
             error.details.map(item => {
