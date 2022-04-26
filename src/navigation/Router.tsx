@@ -6,7 +6,7 @@ import RegisterUser from "../views/registration/RegisterUser";
 import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
 
 
-export function Router() {
+const  Router =() =>{
   return (
     <BrowserRouter>
       <Routes>
@@ -17,5 +17,10 @@ export function Router() {
         <Route path="/newTest" element = {<NewTest/>}></Route>
       </Routes>
     </BrowserRouter>
+    // <div>
+    //   hello world
+    // </div>
   );
 }
+
+export default Router;

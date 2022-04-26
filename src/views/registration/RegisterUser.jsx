@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { registration } from '../../JoiSchema';
+import Validation from '../../Validation';
 import AuthServices from '../../services/AuthServices';
 import "./RegisterUser.css";
 import HeaderOne from "../../components/headers/HeaderOne";
+
+import {toast} from 'react-toastify';
 
 const RegisterUser = () => {
 
@@ -23,7 +25,7 @@ const RegisterUser = () => {
         setTypeErr('');
         setPwdErr('');
 
-        const { value, error } = registration({ user_id, user_type, password, re_password });
+        const { value, error } = Validation.registration({ user_id, user_type, password, re_password });
         if (error) {
             const errors = {};
             error.details.map(item => {
@@ -42,8 +44,29 @@ const RegisterUser = () => {
         } else {
             try {
                 const response = await AuthServices.register({ user_id, user_type, password });
+                console.log(response);
+                if(response.status===200){
+                    toast.success('Registration Successfull', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
             } catch (error) {
                 console.log(error.message);
+                toast.error(error.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }
         }
     }

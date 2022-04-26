@@ -10,7 +10,7 @@ const register = (data) => {
 
   return axios({
     method: "post",
-    url: APIEndpoint +'/register',
+    url: APIEndpoint + '/register',
     data: {
       employee_id: data.user_id,
       employee_type: data.user_type,
@@ -23,18 +23,19 @@ const login = async (data) => {
 
   const response = await axios({
     method: "post",
-    url: APIEndpoint +'/login',
+    url: APIEndpoint + '/login',
     data: {
       user_id: data.username,
       password: data.password,
     },
   });
-  console.log(response);
+  console.log("response", response);
   token.setAccessToken(response.data.access_token);
+  return response;
 };
 
 export default {
-    register,
-    login
+  register,
+  login
 }
 

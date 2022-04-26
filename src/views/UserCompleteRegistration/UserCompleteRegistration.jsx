@@ -6,9 +6,9 @@ import 'font-awesome/css/font-awesome.css';
 import { Row,Col } from 'react-bootstrap';
 import HeaderOne from "../../components/headers/HeaderOne";
 import UserServices from '../../services/API/UserServices';
-import {ValidateUserCompleteRegistration } from '../../JoiSchema';
+import Validation  from '../../Validation';
 
-export default function UserCompleteRegistration()  {
+const  UserCompleteRegistration =() => {
     
     const formValues={
         'First Name':'',
@@ -30,7 +30,7 @@ export default function UserCompleteRegistration()  {
 
     const errors = {};
     const handleSubmit=async(event)=>{
-        const {value,error}=ValidateUserCompleteRegistration(state)
+        const {value,error}=Validation.ValidateUserCompleteRegistration(state)
         event.preventDefault();
         console.log(state);
         if (error) {
@@ -114,3 +114,6 @@ export default function UserCompleteRegistration()  {
     </div>
   )
 }
+
+
+export default UserCompleteRegistration;
