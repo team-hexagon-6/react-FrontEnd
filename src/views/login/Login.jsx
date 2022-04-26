@@ -4,21 +4,45 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthServices from "../../services/AuthServices";
 
+import {toast} from 'react-toastify';
+
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [error, setError] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (error) {
     } else {
       try {
-        const response = AuthServices.login({ username, password });
+        const response = await AuthServices.login({ username, password });
+        console.log("response - 2",response);
+        if(response.status===200){
+          toast.success('Login Successfully', {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              });
+      }
       } catch (error) {
         console.log(error.message);
+        toast.error(error.message, {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          });
+
       }
     }
   };

@@ -5,6 +5,8 @@ import AuthServices from '../../services/AuthServices';
 import "./RegisterUser.css";
 import HeaderOne from "../../components/headers/HeaderOne";
 
+import {toast} from 'react-toastify';
+
 const RegisterUser = () => {
 
     const [user_id, setUserID] = useState('');
@@ -42,8 +44,29 @@ const RegisterUser = () => {
         } else {
             try {
                 const response = await AuthServices.register({ user_id, user_type, password });
+                console.log(response);
+                if(response.status===200){
+                    toast.success('Registration Successfull', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
             } catch (error) {
                 console.log(error.message);
+                toast.error(error.message, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
             }
         }
     }

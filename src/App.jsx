@@ -5,14 +5,25 @@ import "./App.css";
 import "./assets/normalize.css";
 import 'font-awesome/css/font-awesome.css';
 
-import Test from "./navigation/Test";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   // return <Router />;
   return (
     <div className="App">
-  {/* <Test /> */}
-  <Router/>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Router/>
     </div>
   );
 }
