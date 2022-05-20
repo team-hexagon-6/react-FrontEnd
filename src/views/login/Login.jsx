@@ -3,34 +3,49 @@ import HeaderOne from "../../components/headers/HeaderOne";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthServices from "../../services/AuthServices";
+import Validation from "../../Validation";
 
-import {toast} from 'react-toastify';
+import { toast } from "react-toastify";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [error, setError] = useState("");
+  const [usernameError, setUsernameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const { value, error } = Validation.login({
+      username,
+      password,
+    });
     if (error) {
+      const errors = {};
+      error.details.map((item) => {
+        errors[item.path[0]] = item.message;
+      });
+      if (errors.username)
+        setUsernameError(errors.username.replace('"username"', "Username"));
+      if (errors.password) {
+        setPasswordError("Password you entered does not match");
+        console.log(passwordError);
+      }
     } else {
       try {
         const response = await AuthServices.login({ username, password });
-        console.log("response - 2",response);
-        if(response.status===200){
-          toast.success('Login Successfully', {
-              position: "top-center",
-              autoClose: 5000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              });
-      }
+        console.log("response - 2", response);
+        if (response.status === 200) {
+          toast.success("Login Successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
       } catch (error) {
         console.log(error.message);
         toast.error(error.message, {
@@ -41,8 +56,7 @@ function Login() {
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          });
-
+        });
       }
     }
   };
@@ -55,11 +69,11 @@ function Login() {
         <div className="form">
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-auto">
-              <label for="Username" className="col-form-label">
+              <label htmlFor="Username" className="col-form-label">
                 Username
               </label>
             </div>
-            <div class="col-auto">
+            <div className="col-auto">
               <input
                 type="text"
                 className="form-control"
@@ -71,10 +85,17 @@ function Login() {
               />
             </div>
           </div>
-
+          {usernameError && (
+            <p
+              className="d-flex justify-content-center"
+              style={{ color: "red" }}
+            >
+              {usernameError}
+            </p>
+          )}
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-auto">
-              <label for="Password" class="col-form-label">
+              <label htmlFor="Password" className="col-form-label">
                 Password
               </label>
             </div>
@@ -91,6 +112,14 @@ function Login() {
               />
             </div>
           </div>
+          {passwordError && (
+            <p
+              className="d-flex justify-content-center"
+              style={{ color: "red" }}
+            >
+              {passwordError}
+            </p>
+          )}
           <div className="btn-container d-flex justify-content-center ">
             <button
               type="submit"
