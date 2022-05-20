@@ -4,6 +4,7 @@ import Login from "../views/login/Login";
 import NewTest from "../views/new_test/NewTest";
 import RegisterUser from "../views/registration/RegisterUser";
 import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
+import PatientReport from './../views/patientReport/PatientReport';
 
 
 const  Router =() =>{
@@ -15,6 +16,7 @@ const  Router =() =>{
         <Route path="/registerUser" element ={<RegisterUser/>}></Route>
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
         <Route path="/newTest" element = {<NewTest/>}></Route>
+        <Route path="/patientReport" element ={<PatientReport/>}></Route>
       </Routes>
     </BrowserRouter>
     // <div>
