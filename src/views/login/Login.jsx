@@ -66,7 +66,7 @@ function Login() {
       <HeaderOne />
       <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
         <h3 className="header">Login</h3>
-        <div className="form">
+        <div className="form1">
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-auto">
               <label htmlFor="Username" className="col-form-label">
