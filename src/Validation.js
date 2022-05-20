@@ -53,9 +53,47 @@ const ValidateUserCompleteRegistration = (data) => {
 
 }
 
+const new_test = (data) => {
+    const reg_schema = Joi.object({
+        patient_id: Joi.string()
+            .alphanum()
+            .min(3)
+            .max(30)
+            .required(),
 
+        test_type: Joi.string().required(),
+        date: Joi.string().required(),
+
+    });
+
+    const { error, value } = reg_schema.validate(data, { abortEarly: false });
+
+    return { value, error };
+
+}
+
+// Image validation (Not joi)
+const imageValidation = (fileInput) => {
+
+    var filePath = fileInput.value;
+
+    // Allowing file type
+    var allowedExtensions =
+        /(\.jpg|\.jpeg|\.png)$/i;
+
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type. Only JPG, JPEG & PNG types are supported.');
+        fileInput.value = '';
+        return false;
+    }
+
+    return true;
+
+}
 
 export default {
     registration,
-    ValidateUserCompleteRegistration
+    ValidateUserCompleteRegistration,
+    new_test,
+    imageValidation
 }

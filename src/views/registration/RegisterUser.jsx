@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import { Form, Button } from "react-bootstrap";
 import Validation from '../../Validation';
 import AuthServices from '../../services/AuthServices';
@@ -9,6 +10,11 @@ import {toast} from 'react-toastify';
 
 const RegisterUser = () => {
 
+    // Taking query string values from url
+    // const search = useLocation().search;
+    // const name = new URLSearchParams(search).get('a');
+    // console.log("Querystring: ", name);
+
     const [user_id, setUserID] = useState('');
     const [user_type, setUserType] = useState('');
     const [password, setPassword] = useState('');
@@ -17,6 +23,8 @@ const RegisterUser = () => {
     const [id_err, setIdErr] = useState('');
     const [type_err, setTypeErr] = useState('');
     const [pwd_err, setPwdErr] = useState('');
+    
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -41,11 +49,11 @@ const RegisterUser = () => {
             if (errors.re_password)
                 setPwdErr('Two passwords do not match');
 
-        } else {
+        } 
+        else {
             try {
                 const response = await AuthServices.register({ user_id, user_type, password });
-                console.log(response);
-                if(response.status===200){
+                if(response.status===201){
                     toast.success('Registration Successfull', {
                         position: "top-center",
                         autoClose: 5000,
@@ -55,10 +63,12 @@ const RegisterUser = () => {
                         draggable: true,
                         progress: undefined,
                         });
+                    setTimeout(navigate('/login?registration=successful'), 3000);
                 }
+                
+
             } catch (error) {
-                console.log(error.message);
-                toast.error(error.message, {
+                toast.error(`User with ID: ${user_id} already exists`, {
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,

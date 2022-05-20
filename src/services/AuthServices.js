@@ -18,6 +18,7 @@ const register = (data) => {
     },
   });
 };
+
 const login = async (data) => {
   console.log(data);
 
