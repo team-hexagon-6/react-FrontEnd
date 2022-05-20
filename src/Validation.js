@@ -88,10 +88,26 @@ const imageValidation = (fileInput) => {
     return true;
 
 }
+const login = (data) => {
+  const reg_schema = Joi.object({
+    username: Joi.string().alphanum().min(3).max(30).required(),
+
+    password: Joi.string().pattern(
+      new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+      )
+    ),
+  });
+
+  const { error, value } = reg_schema.validate(data, { abortEarly: false });
+
+  return { value, error };
+};
 
 export default {
     registration,
     ValidateUserCompleteRegistration,
     new_test,
-    imageValidation
+    imageValidation,
+    login
 }
