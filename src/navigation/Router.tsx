@@ -6,17 +6,21 @@ import RegisterUser from "../views/registration/RegisterUser";
 import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
 import PatientReport from './../views/patientReport/PatientReport';
 
+import NotFound from "../views/not_found/NotFound"; 
 
 const  Router =() =>{
   return (
     <BrowserRouter>
       <Routes>
         
+        <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registerUser" element ={<RegisterUser/>}></Route>
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
         <Route path="/newTest" element = {<NewTest/>}></Route>
         <Route path="/patientReport" element ={<PatientReport/>}></Route>
+        <Route path="*" element = {<NotFound/>}></Route>
+        
       </Routes>
     </BrowserRouter>
     // <div>
