@@ -12,11 +12,11 @@ const NewTest = () => {
     const [test_type, setTestType] = useState('');
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
-    
+
 
     const [id_err, setIdErr] = useState('');
     const [type_err, setTypeErr] = useState('');
-    const [img_err, setImgErr]= useState('');
+    const [img_err, setImgErr] = useState('');
     const [date_err, setDateErr] = useState('');
 
     const radios = [
@@ -38,9 +38,9 @@ const NewTest = () => {
                         'imagePreview').innerHTML =
                         '<img src="' + e.target.result + '"/>';
 
-                setBase64Img(reader.result.replace("data:", "")
-                .replace(/^.+,/, ""));
-                
+                    setBase64Img(reader.result.replace("data:", "")
+                        .replace(/^.+,/, ""));
+
                 };
 
                 reader.readAsDataURL(fileInput.files[0]);
@@ -50,7 +50,7 @@ const NewTest = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         setIdErr('');
         setTypeErr('');
         setDateErr('');
@@ -136,7 +136,7 @@ const NewTest = () => {
                                 <div className="container upload_preview">
                                     <Form.Control type="file" id="file" onChange={fileValidation} />
                                     {img_err != '' && <p className="error">{img_err}</p>}
-                                    <div className="preview" id="imagePreview"></div>
+                                    <div className="preview" id="imagePreview"><img src="../../public/No_Preview.png" alt=""/></div>
                                 </div>
 
                             </Form.Group>
@@ -144,7 +144,7 @@ const NewTest = () => {
                         <div className="col-md-3"></div>
                     </div>
 
-                    <div className="row bottom_div">
+                    <div className=" container row bottom_div justify-content-center">
                         <div className="col-md-6">
                             <Form.Label>Date</Form.Label>
                             <Form.Control
@@ -165,6 +165,7 @@ const NewTest = () => {
 
                 </Form>
             </div>
+
 
         </div>
     );

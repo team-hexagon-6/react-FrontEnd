@@ -5,6 +5,7 @@ import NewTest from "../views/new_test/NewTest";
 import RegisterUser from "../views/registration/RegisterUser";
 import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
 import NotFound from "../views/not_found/NotFound"; 
+import AllUsers from "../views/all_users/AllUsers";
 
 const  Router =() =>{
   return (
@@ -12,12 +13,15 @@ const  Router =() =>{
       <Routes>
         
         <Route path="/" element={<Login />} />
+        <Route path="*" element = {<NotFound/>}></Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/registerUser" element ={<RegisterUser/>}></Route>
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
         <Route path="/newTest" element = {<NewTest/>}></Route>
-        <Route path="*" element = {<NotFound/>}></Route>
+        <Route path="/allUsers" element = {<AllUsers/>}></Route>
         
+
       </Routes>
     </BrowserRouter>
     // <div>
