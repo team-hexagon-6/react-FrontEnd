@@ -24,6 +24,7 @@ function App() {
         pauseOnHover
       />
       <Router/>
+      {console.log(Router.element)}
     </div>
   );
 }
