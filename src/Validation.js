@@ -1,4 +1,4 @@
-import Joi from 'joi';
+import Joi from "joi";
 
 // const Joi = require('joi');
 
@@ -16,26 +16,24 @@ import Joi from 'joi';
 //     });
 
 const registration = (data) => {
-    const reg_schema = Joi.object({
-        user_id: Joi.string()
-            .alphanum()
-            .min(3)
-            .max(30)
-            .required(),
+  const reg_schema = Joi.object({
+    user_id: Joi.string().alphanum().min(3).max(30).required(),
 
-        user_type: Joi.string().required(),
+    user_type: Joi.string().required(),
 
-        password: Joi.string()
-            .pattern(new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')),
+    password: Joi.string().pattern(
+      new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+      )
+    ),
 
-        re_password: Joi.ref('password'),
-    });
+    re_password: Joi.ref("password"),
+  });
 
-    const { error, value } = reg_schema.validate(data, { abortEarly: false });
+  const { error, value } = reg_schema.validate(data, { abortEarly: false });
 
-    return { value, error };
-
-}
+  return { value, error };
+};
 
 const ValidateUserCompleteRegistration = (data) => {
     const UserCompleteRegistrationValidationSchema = Joi.object({
@@ -90,10 +88,26 @@ const imageValidation = (fileInput) => {
     return true;
 
 }
+const login = (data) => {
+  const reg_schema = Joi.object({
+    username: Joi.string().alphanum().min(3).max(30).required(),
+
+    password: Joi.string().pattern(
+      new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+      )
+    ),
+  });
+
+  const { error, value } = reg_schema.validate(data, { abortEarly: false });
+
+  return { value, error };
+};
 
 export default {
     registration,
     ValidateUserCompleteRegistration,
     new_test,
-    imageValidation
+    imageValidation,
+    login
 }

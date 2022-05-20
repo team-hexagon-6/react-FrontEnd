@@ -1,76 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import HeaderOne from "../../components/headers/HeaderOne";
-import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthServices from "../../services/AuthServices";
-import Validation from "../../Validation";
 
-import { toast } from "react-toastify";
-
-function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  const [usernameError, setUsernameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { value, error } = Validation.login({
-      username,
-      password,
-    });
-    if (error) {
-      const errors = {};
-      error.details.map((item) => {
-        errors[item.path[0]] = item.message;
-      });
-      if (errors.username)
-        setUsernameError(errors.username.replace('"username"', "Username"));
-      if (errors.password) {
-        setPasswordError("Password you entered does not match");
-        console.log(passwordError);
-      }
-    } else {
-      try {
-        const response = await AuthServices.login({ username, password });
-        console.log("response - 2", response);
-        if (response.status === 200) {
-          toast.success("Login Successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
-        }
-      } catch (error) {
-        console.log(error.message);
-        toast.error(error.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    }
-  };
+function AddPatient() {
+  const [id, setID] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [nic, setNIC] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [birthday, setBirthday] = useState("");
 
   return (
-    <div className="login">
+    <div>
       <HeaderOne />
       <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
-        <h3 className="header">Login</h3>
+        <h3 className="header">Add Patient</h3>
         <div className="form">
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-auto">
-              <label htmlFor="Username" className="col-form-label">
-                Username
+              <label htmlFor="" className="col-form-label">
+                First Name
               </label>
             </div>
             <div className="col-auto">
@@ -78,9 +28,9 @@ function Login() {
                 type="text"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                value={username}
+                value={firstName}
                 onChange={(e) => {
-                  setUsername(e.target.value);
+                  setFirstName(e.target.value);
                 }}
               />
             </div>
@@ -95,7 +45,7 @@ function Login() {
           )}
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-auto">
-              <label htmlFor="Password" className="col-form-label">
+              <label htmlFor="" className="col-form-label">
                 Password
               </label>
             </div>
@@ -138,4 +88,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default AddPatient;
