@@ -1,16 +1,14 @@
-import React from 'react'
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import "./UserCompleteRegistration.css";
+import React from 'react';
+import HeaderOne from "../../components/headers/HeaderOne";
+import "./PatientReport.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row,Col } from 'react-bootstrap';
-import HeaderOne from "../../components/headers/HeaderOne";
-import UserServices from '../../services/API/UserServices';
-import Validation  from '../../Validation';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
-const  UserCompleteRegistration =() => {
-    
-    
+
+const PatientReport =()=>{
+
     const formValues={
         'First Name':'',
         'Last Name':'',
@@ -51,32 +49,51 @@ const  UserCompleteRegistration =() => {
   return (
     <div>
     <HeaderOne/>
-    <div className='form-container col-xl-5 mt-2 pt-5 mx-auto '>
+    <div className='form-container col-xl-5 mx-auto '>
         
-        <h1 className='fs-1 text-primary mb-5'>Complete Registration</h1>
+        <h1 className='fs-1 fw-bold mb-3'>Report</h1>
+        <Row>
+        <Col>
+        <div className='Header-One'>
+        <HeaderOne />
+        </div>
+        </Col>
+        <Col>
+        <div className='Hospital-details mt-3 '>
+        <h5 className='mb-0'>Hospital Name</h5>
+        <h6 className='mb-0'>Hospital Address </h6>
+        Contact Details
+        </div>
+        </Col>
+        </Row>
+        <hr />
+        <h6>   Report- Parkinson Disease Test</h6> 
          <Form onSubmit={handleSubmit} >
-            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='First Name'>
-                <Form.Label column sm={4}>First Name</Form.Label>
+            <Form.Group as={Row} className='fa fw-bold col-xl-12 mt-3 mb-2 mx-auto' controlId='First Name'>
+                
                 <Col sm={6} >
-                <Form.Control  type="text" name='First Name' placeholder='&#xf007; First Name' onChange={handleUser} />
-                {errordata['First Name'] !== '' && <p className="error">{errordata['First Name']}</p>}
+                <Form.Label column sm={4}>First Name</Form.Label>
+                <Form.Control  type="text" name='First Name' placeholder='&#xf007; First Name' disabled />
+                </Col>
+                
+                
+                 <Col sm={6}>
+                <Form.Label column sm={4} >Last Name </Form.Label>
+                <Form.Control type="text" name='Last Name' placeholder='&#xf234; Last Name' disabled/>
+               
                 </Col>
                 
             </Form.Group>
 
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Last Name'>
-                 <Form.Label column sm={4} >Last Name </Form.Label>
-                 <Col sm={6}>
-                <Form.Control type="text" name='Last Name' placeholder='&#xf234; Last Name' onChange={handleUser}/>
-                {errordata['Last Name'] !== '' && <p className="error">{errordata['Last Name']}</p>}
-                </Col>
+                
                 
             </Form.Group>
 
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='NIC'>
                 <Form.Label column sm={4} >NIC</Form.Label>
                 <Col sm={6}>
-                <Form.Control type="text" name='NIC' placeholder='&#xf2c2; NIC' onChange={handleUser}/>
+                <Form.Control type="text" name='NIC' placeholder='&#xf2c2; NIC' disabled/>
                 {errordata.NIC !== '' && <p className="error">{errordata.NIC}</p>}
                 </Col>
                 
@@ -85,7 +102,7 @@ const  UserCompleteRegistration =() => {
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Contact Number'>
                 <Form.Label column sm={4}>Contact Number</Form.Label>
                 <Col sm={6}>
-                <Form.Control type="text" name='Contact Number' placeholder='&#xf095; Contact Number' onChange={handleUser}/>
+                <Form.Control type="text" name='Contact Number' placeholder='&#xf095; Contact Number' disabled/>
                 {errordata['Contact Number'] !== '' && <p className="error">{errordata['Contact Number']}</p>}
                 </Col>
                 
@@ -94,7 +111,7 @@ const  UserCompleteRegistration =() => {
            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Email'>
                <Form.Label column sm={4} >Email</Form.Label>
                <Col sm={6}>
-               <Form.Control type="text" name='Email' placeholder='&#xf0e0; Email' onChange={handleUser}/>
+               <Form.Control type="text" name='Email' placeholder='&#xf0e0; Email' disabled/>
                {errordata.Email !== '' && <p className="error">{errordata.Email}</p>}
                </Col>
                
@@ -103,18 +120,23 @@ const  UserCompleteRegistration =() => {
            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Birthday'>
                <Form.Label column sm={4} >Birthday</Form.Label>
                <Col sm={6}>
-               <Form.Control type="date" name='Birthday' placeholder='&#xf1fd; Birthday' onChange={handleUser}/>
+               <Form.Control type="date" name='Birthday' placeholder='&#xf1fd; Birthday' disabled/>
                {errordata.Birthday !== '' && <p className="error">{errordata.Birthday}</p>}
                </Col>
               
            </Form.Group>
-           <Button className='btn btn-primary button' size="lg" block="block" type="submit">Register</Button>
+           
         </Form>
-        
+        <div className='b'>
+            <Button  type="submit" style={{"border-radius": "5px","margin":"0px 5px 20px"}} >Print Report</Button>
+        </div>
+
     </div>
     </div>
   )
+
+
+
 }
 
-
-export default UserCompleteRegistration;
+export default PatientReport;
