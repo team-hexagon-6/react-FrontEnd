@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Button, ButtonGroup, Card, Form, ToggleButton } from "react-bootstrap";
 import HeaderOne from "../../components/headers/HeaderOne";
 import "./NewTest.css"
 import Validation from '../../Validation';
+import ExaminerServices from "../../services/API/ExaminerServices";
+import _503 from "../not_found/_503";
+import {toast} from 'react-toastify';
+
 
 const NewTest = () => {
 
@@ -12,6 +16,8 @@ const NewTest = () => {
     const [test_type, setTestType] = useState('');
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
+    const [testTypes, setTestTypes] = useState([]);
+
 
 
     const [id_err, setIdErr] = useState('');
@@ -74,11 +80,62 @@ const NewTest = () => {
             if (errors.date)
                 setDateErr(errors.date.replace('"date"', 'Date'));
         } else {
-            window.alert(`Please confirm test delails\n\nPatient ID: ${patient_id}\nTest type: ${test_type}\nDate: ${date}\n\n\Click OK to start the test.`);
+            window.alert(`Please confirm test details\n\nPatient ID: ${patient_id}\nTest type: ${test_type}\nDate: ${date}\n\n\Click OK to start the test.`);
+            try{
+                const response = await ExaminerServices.dotest({ patient_id, test_type, date,base64_img });
+                if(response.status===201){
+                    toast.success('Start test Successfull', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                    setTimeout(navigate('/login?registration=successful'), 3000);
+                }
+                
+
+            } catch (error) {
+                console.log(error);
+                toast.error(`P with ID: ${patient_id} already exists`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            }
+            
+            
         }
     }
 
+    useEffect(()=>{
+        getTestTypes();
+     },[])
+ 
+     const getTestTypes=async()=>{
+         try{
+             const testType= await ExaminerServices.gettesttypes();
+             console.log(testType.data.testTypes);
+             setTestTypes(testType.data.testTypes);
+            
+         }
+         catch(err){
+             console.log(err);
+             
+         }
+         
+     }
+
+    
+    if(testTypes){
     return (
+
         <div className="new_test">
 
             <HeaderOne />
@@ -169,6 +226,14 @@ const NewTest = () => {
 
         </div>
     );
+    }else{
+        return(
+            <div>
+                <_503/>
+            </div>
+
+        );
+    }
 }
 
 export default NewTest;
