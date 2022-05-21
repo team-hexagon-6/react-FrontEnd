@@ -3,9 +3,12 @@ import HeaderOne from "../../components/headers/HeaderOne";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import { Card, Form, Button, Table, FormControl, InputGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import AdminServices from "../../services/API/AdminServices";
 
 const AllUsers = () => {
+
+
 
     // When update button is clicked
     const navigate = useNavigate();
@@ -17,39 +20,40 @@ const AllUsers = () => {
     // Search term
     const [search, setSearch] = useState('');
 
-    const handleSubmit = async (e) => {
+    const [users, setUsers] = useState([]);
+    const [doctors, setDoctors] = useState([]);
+    const [examiners, setExaminers] = useState([]);
 
+    useEffect(() => {
+        getAllUsers();
+    }, []);
+
+    const getAllUsers = async () => {
+        try {
+            const response = await AdminServices.getAllUsers(0, 3);
+            setUsers(response.data.data);
+        } catch (error) {
+            console.log(error);
+        }
     }
-
-    const arr = [{ id: "10", fn: "Deshan", ln: "Lakshitha", nic: "1111111", no:"0111111", mail: "adsdada", bd: "2525" }, { id: "11", fn: "Kamal", ln: "Silva", nic: "1111111", no:"0111111", mail: "adsdada", bd: "2525" }, { id: "12", fn: "Anjana", ln: "Lakshitha", nic: "1111111", no:"0111111", mail: "adsdada", bd: "2525" }];
-
+    
+    console.log(users);
+    let d = [];
+    let e = [];
+    users.map(
+        (value, key) => {
+            if (value.auth.usertype.name == "doctor") {
+                d.push(value);
+            } else if (value.auth.usertype.name == "examiner") {
+                e.push(value);
+            }
+        }
+    );
+    setDoctors(d);
+    setExaminers(e);
     return (
 
         <div className="all_users">
-
-            {/* sample database result object to html convert with search enabled */}
-            {arr.filter(
-                (value, key) => {
-                    if (search == "")
-                        return value;
-                    else if (value.ab.toLowerCase().includes(search.toLowerCase())) {
-                        return value;
-                    }
-                }
-            )
-                .map(
-                    (value, key) => {
-                        return (
-                            // Tables should come here
-
-                            
-
-                            <div className="user" key={key}>
-                                {/* <p>{value.ab}</p> */}
-                            </div>
-                        )
-                    }
-                )}
 
             <HeaderOne />
 
@@ -59,16 +63,14 @@ const AllUsers = () => {
 
                 <div className="d-flex form">
                     <div className="row">
-                    <input
-                        type="search"
-                        placeholder="Search by Name"
-                        style={{ borderRadius: "20px", border: "2px solid #1376BD", height: "40px"}}
-                        onChange={(event) => setSearch(event.target.value)}
-                    />
+                        <input
+                            type="search"
+                            placeholder="Search by Name"
+                            style={{ borderRadius: "20px", border: "2px solid #1376BD", height: "40px" }}
+                            onChange={(event) => setSearch(event.target.value)}
+                        />
                     </div>
                 </div>
-
-
 
                 <h4 className="category" >Doctors</h4>
 
@@ -86,16 +88,34 @@ const AllUsers = () => {
                             </tr>
                         </thead>
                         <tbody style={{ color: "black" }}>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><Button className="btn-primary" style={{ borderRadius: "20px" }}>Update</Button></td>
-                            </tr>
+                            {/* sample database result object to html convert with search enabled */}
+                            {doctors.filter(
+                                (value, key) => {
+                                    if (search == "") {
+                                        return value;
+                                    }
+                                    else if (value.firstname.toLowerCase().includes(search.toLowerCase()) || value.lastname.toLowerCase().includes(search.toLowerCase())) {
+                                        return value;
+                                    }
+                                }
+                            ).map((value, key) => {
+                                // Tables should come here
+
+                                return (
+                                    <tr key={key}>
+                                        <td>{value.auth.id}</td>
+                                        <td>{value.firstname}</td>
+                                        <td>{value.lastname}</td>
+                                        <td>{value.nic}</td>
+                                        <td>{value.contact_no}</td>
+                                        <td>{value.email}</td>
+                                        <td>{value.birthday.slice(0, 10)}</td>
+                                        <td><Button className="btn-primary" style={{ borderRadius: "20px" }}>Update</Button></td>
+                                    </tr>
+                                )
+                            }
+                            )}
+
                         </tbody>
                     </Table>
                 </div>
@@ -116,19 +136,38 @@ const AllUsers = () => {
                             </tr>
                         </thead>
                         <tbody style={{ color: "black" }}>
-                            <tr>
-                                <td>1</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td><Button className="btn-primary" style={{ borderRadius: "20px" }}>Update</Button></td>
-                            </tr>
+                            {/* sample database result object to html convert with search enabled */}
+                            {examiners.filter(
+                                (value, key) => {
+                                    if (search == "") {
+                                        return value;
+                                    }
+                                    else if (value.firstname.toLowerCase().includes(search.toLowerCase()) || value.lastname.toLowerCase().includes(search.toLowerCase())) {
+                                        return value;
+                                    }
+                                }
+                            ).map((value, key) => {
+                                // Tables should come here
+
+                                return (
+                                    <tr key={key}>
+                                        <td>{value.auth.id}</td>
+                                        <td>{value.firstname}</td>
+                                        <td>{value.lastname}</td>
+                                        <td>{value.nic}</td>
+                                        <td>{value.contact_no}</td>
+                                        <td>{value.email}</td>
+                                        <td>{value.birthday.slice(0, 10)}</td>
+                                        <td><Button className="btn-primary" style={{ borderRadius: "20px" }}>Update</Button></td>
+                                    </tr>
+                                )
+                            }
+                            )}
+
                         </tbody>
                     </Table>
                 </div>
+
             </div>
 
         </div >
