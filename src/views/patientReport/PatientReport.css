@@ -1,7 +1,7 @@
 .form-container {
     text-align: center;
     border: 1px solid #1376BD;
-    border-radius: 10px;
+    border-radius: 40px;
     background-color: white;
    text-shadow: blue;
     
@@ -40,4 +40,10 @@
   .b{
       text-align: right;
       margin: 0px 10px;
+  }
+
+  .DetailsSection{
+    text-align: left;
+    margin-left: 10px;
+    
   }

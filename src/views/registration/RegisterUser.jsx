@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Form, Button } from "react-bootstrap";
 import Validation from '../../Validation';
 import AuthServices from '../../services/AuthServices';
 import "./RegisterUser.css";
 import HeaderOne from "../../components/headers/HeaderOne";
-
+import _503 from "../not_found/_503";
 import {toast} from 'react-toastify';
+
 
 const RegisterUser = () => {
 
@@ -23,6 +24,7 @@ const RegisterUser = () => {
     const [id_err, setIdErr] = useState('');
     const [type_err, setTypeErr] = useState('');
     const [pwd_err, setPwdErr] = useState('');
+    const [userTypes, setUserTypes] = useState([]);
     
     const navigate = useNavigate();
 
@@ -81,6 +83,24 @@ const RegisterUser = () => {
         }
     }
 
+    useEffect(()=>{
+       getUserTypes();
+    },[])
+
+    const getUserTypes=async()=>{
+        try{
+            const userType= await AuthServices.getusertypes();
+            console.log(userType.data.data);
+            setUserTypes( userType.data.data);
+           
+        }
+        catch(err){
+            console.log(err);
+            
+        }
+        
+    }
+    if (userTypes){
     return (
         <div className="register_user">
 
@@ -111,12 +131,14 @@ const RegisterUser = () => {
                             <Form.Group className="mb-3">
                                 <Form.Label>User type</Form.Label><br />
                                 <div className="row">
-                                    <div className="col-md-3">
-                                        <input type="radio" value="doctor" name="user_type" onChange={(e) => setUserType(e.target.value)} /> Doctor
-                                    </div>
-                                    <div className="col-md-3">
+                                    {userTypes && userTypes.map((userType)=>
+                                        <div className="col-md-3" key={userType.slug}>
+                                            <input type="radio" value={userType.slug} name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
+                                        </div>
+                                    )}
+                                    {/* <div className="col-md-3">
                                         <input type="radio" value="examiner" name="user_type" onChange={(e) => setUserType(e.target.value)} /> Examiner
-                                    </div>
+                                    </div> */}
                                 </div>
                                 {type_err != '' && <p className="error">{type_err}</p>}
                             </Form.Group>
@@ -168,6 +190,16 @@ const RegisterUser = () => {
 
         </div>
     );
+    }
+    else{
+        return(
+            <div>
+                <_503/>
+            </div>
+
+        );
+    }
+
 }
 
 export default RegisterUser;

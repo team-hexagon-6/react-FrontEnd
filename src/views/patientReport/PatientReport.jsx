@@ -1,134 +1,158 @@
-import React from 'react';
+import {useEffect,useState} from 'react';
 import HeaderOne from "../../components/headers/HeaderOne";
 import "./PatientReport.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row,Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import ExaminerServices from '../../services/API/ExaminerServices';
+import { useParams } from 'react-router-dom';
+
 
 
 const PatientReport =()=>{
 
-    const formValues={
-        'First Name':'',
-        'Last Name':'',
-        'NIC' :'',
-        'Contact Number' :'',
-        'Email' :'',
-        'Birthday' :''
-    }
+    const [details,setPatientDetails]=useState({});
+   
+    const params=useParams();
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-    const [state,setState]=React.useState(formValues);
-    const [errordata,setError]=React.useState(formValues);
-    
-    const handleUser=(event)=>{
-        setState({
-            ...state,
-            [event.target.name] : event.target.value})
-    }
+    useEffect(()=>{
+        getPatientDetails();
+     },[])
 
-    const errors = {};
-    const handleSubmit=async(event)=>{
-        const {value,error}=Validation.ValidateUserCompleteRegistration(state)
-        event.preventDefault();
-        console.log(state);
-        if (error) {
-            error.details.map(item => {
-                errors[item.path[0]] = item.message;
-            });    
-        } 
-        else {
-            try {
-                const response = await UserServices.AuthUserCompleteRegistration(state);
-            } catch (error) {
-                console.log(error.message);
-            }
-        } 
-        setError(errors);
+    const getPatientDetails=async()=>{
+        try{
+
+            const Details= await ExaminerServices.getpatientdetails(params);
+            setPatientDetails(Details.data.data);
+            console.log(details);
+        }
+        catch(err){
+            console.log(err);
+            
+        }
+        
     }
   return (
     <div>
     <HeaderOne/>
-    <div className='form-container col-xl-5 mx-auto '>
+    <div className='form-container col-xl-4 mx-auto '>
         
-        <h1 className='fs-1 fw-bold mb-3'>Report</h1>
+        <h1 className='fs-1 fw-bold mb-0'>Report</h1>
         <Row>
         <Col>
-        <div className='Header-One'>
+        <div className='Header-One mb-0'>
         <HeaderOne />
         </div>
         </Col>
         <Col>
         <div className='Hospital-details mt-3 '>
-        <h5 className='mb-0'>Hospital Name</h5>
-        <h6 className='mb-0'>Hospital Address </h6>
-        Contact Details
+        <h4 className='mb-0' style={{'font-size':17}}>MDK Hospital</h4>
+        <h5 className='mb-0' style={{'font-size':15}}>99/Horana Road</h5>
+        <h5 className='mb-0' style={{'font-size':14}}> 0342251888/034227299</h5>
+       
         </div>
         </Col>
         </Row>
-        <hr />
+        <hr  style={{margin:'1px 3px'}} />
         <h6>   Report- Parkinson Disease Test</h6> 
-         <Form onSubmit={handleSubmit} >
-            <Form.Group as={Row} className='fa fw-bold col-xl-12 mt-3 mb-2 mx-auto' controlId='First Name'>
+        <u><h6 className='DetailsSection mb-4'>Patient Details:</h6></u>
+         <Form >
+         <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='0th Row'>
+            <Form.Label  sm={4}>Patient ID</Form.Label>
+            <Form.Control  type="text" maxlength='4' size='sm' value={details.id} name='First Name'  disabled />
+         </Form.Group>
+            <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
                 
-                <Col sm={6} >
-                <Form.Label column sm={4}>First Name</Form.Label>
-                <Form.Control  type="text" name='First Name' placeholder='&#xf007; First Name' disabled />
+                <Col align='left' sm={6} >
+                <Form.Label  sm={4}>First Name</Form.Label>
+                <Form.Control  type="text" size='sm' value={details.firstname} name='First Name'  disabled />
                 </Col>
                 
                 
-                 <Col sm={6}>
-                <Form.Label column sm={4} >Last Name </Form.Label>
-                <Form.Control type="text" name='Last Name' placeholder='&#xf234; Last Name' disabled/>
+                 <Col align='left' sm={6}>
+                <Form.Label sm={4} >Last Name </Form.Label>
+                <Form.Control type="text" size='sm' value={details.lastname} name='Last Name'  disabled/>
                
                 </Col>
                 
             </Form.Group>
 
-            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Last Name'>
+            {/* <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Last Name'>
                 
+                
+            </Form.Group> */}
+
+            <Form.Group as={Row} className='fa fw-bold col-xl-10 mb-3 mx-auto' controlId='2nd Row'>
+               
+                <Col align='left' sm={6}>
+                <Form.Label sm={4} >NIC</Form.Label>
+                <Form.Control type="text" size='sm' value={details.nic} name='NIC'  disabled/>
+
+                </Col>
+                <Col align='left' sm={6}>
+                <Form.Label sm={5}>Contact Number</Form.Label>
+                <Form.Control type="text" size='sm' value={details.contact_no} name='Contact Number'disabled/>
+
+                </Col>
+
+
                 
             </Form.Group>
 
-            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='NIC'>
-                <Form.Label column sm={4} >NIC</Form.Label>
-                <Col sm={6}>
-                <Form.Control type="text" name='NIC' placeholder='&#xf2c2; NIC' disabled/>
-                {errordata.NIC !== '' && <p className="error">{errordata.NIC}</p>}
-                </Col>
+            {/* <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Contact Number'>
                 
-            </Form.Group>
-
-            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Contact Number'>
-                <Form.Label column sm={4}>Contact Number</Form.Label>
-                <Col sm={6}>
-                <Form.Control type="text" name='Contact Number' placeholder='&#xf095; Contact Number' disabled/>
-                {errordata['Contact Number'] !== '' && <p className="error">{errordata['Contact Number']}</p>}
-                </Col>
                 
-           </Form.Group>
+                
+           </Form.Group> */}
 
-           <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Email'>
-               <Form.Label column sm={4} >Email</Form.Label>
-               <Col sm={6}>
-               <Form.Control type="text" name='Email' placeholder='&#xf0e0; Email' disabled/>
-               {errordata.Email !== '' && <p className="error">{errordata.Email}</p>}
+           <Form.Group as={Row} className='fa fw-bold col-xl-10 mb-2 mx-auto' controlId='3rd Row'>
+               
+               <Col align='left' sm={6}>
+               <Form.Label sm={4} >Email</Form.Label>
+               <Form.Control type="text" size='sm'  value={details.email} name='Email' disabled/>
+               </Col>
+
+               <Col align='left' sm={6}>
+               <Form.Label sm={4} >Birthday</Form.Label>
+               <Form.Control type="text" size='sm' value={details.birthday} name='Birthday' disabled/>
                </Col>
                
            </Form.Group>
 
-           <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Birthday'>
-               <Form.Label column sm={4} >Birthday</Form.Label>
-               <Col sm={6}>
-               <Form.Control type="date" name='Birthday' placeholder='&#xf1fd; Birthday' disabled/>
-               {errordata.Birthday !== '' && <p className="error">{errordata.Birthday}</p>}
-               </Col>
+           {/* <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Birthday'>
+               
               
            </Form.Group>
-           
+            */}
+            <br />
+             <u><h6 className='DetailsSection'>Test Results:</h6></u>
+            <div className='row'>
+                <div className='col mb-3'>
+                <hr className='DetailsSection mt-4' style={{margin:'1px'}}></hr>
+                    <h6>Signature</h6>
+                </div>
+                <div className='col '>
+            
+                    <hr style={{margin:'4px'}} className=' mt-4'></hr>
+                    <h6>Checked by</h6>
+                </div>
+                <div className='col '>
+                {date}
+                 <hr style={{margin:'4px'}} className=' mt-0'></hr>
+                    <h6>Date</h6>
+                </div>
+
+            </div>
+             
+
+
+
         </Form>
         <div className='b'>
-            <Button  type="submit" style={{"border-radius": "5px","margin":"0px 5px 20px"}} >Print Report</Button>
+            <Button  type="submit" style={{"borderRadius": "5px","margin":"0px 5px 20px"}} onClick={()=>window.print()} >Print Report</Button>
         </div>
 
     </div>

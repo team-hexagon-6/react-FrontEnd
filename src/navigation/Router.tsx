@@ -22,7 +22,7 @@ const  Router =() =>{
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
         <Route path="/newTest" element = {<NewTest/>}></Route>
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
-        <Route path="/patientReport" element ={<PatientReport/>}></Route>
+        <Route path="/patientReport/:id" element ={<PatientReport/>}></Route>
         <Route path="*" element = {<NotFound/>}></Route>
         
 
