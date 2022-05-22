@@ -5,14 +5,24 @@ import token from "../Token"
 //API endpoint
 const APIEndpoint = config.DOMAIN_NAME + '/api';
 
-const getpatientdetails = (params) => {
+const getpatientdetails = (patientid) => {
     return axios({
       method: "get",
-      url: APIEndpoint+`/patient/get-patient/${params.id}`,
+      url: APIEndpoint+`/patient/get-patient/${patientid}`,
       headers: {Authorization: `Bearer ${token.getAccessToken()}`},
       
     });
   };
+
+  const getpatienttestdetails = (testrecordid) => {
+    return axios({
+      method: "get",
+      url: APIEndpoint+`/test/test-record/${testrecordid}`,
+      headers: {Authorization: `Bearer ${token.getAccessToken()}`},
+      
+    });
+  };
+
 
 const dotest =(data)=>{
     return axios({
@@ -42,5 +52,6 @@ const gettesttypes =()=>{
 export default{
    getpatientdetails,
    dotest,
-   gettesttypes
+   gettesttypes,
+   getpatienttestdetails
 }

@@ -90,9 +90,8 @@ const RegisterUser = () => {
     const getUserTypes=async()=>{
         try{
             const userType= await AuthServices.getusertypes();
-            console.log(userType.data.data);
             setUserTypes( userType.data.data);
-           
+
         }
         catch(err){
             console.log(err);
@@ -100,6 +99,8 @@ const RegisterUser = () => {
         }
         
     }
+    console.log(userTypes);
+           
     if (userTypes){
     return (
         <div className="register_user">
@@ -136,9 +137,6 @@ const RegisterUser = () => {
                                             <input type="radio" value={userType.slug} name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
                                         </div>
                                     )}
-                                    {/* <div className="col-md-3">
-                                        <input type="radio" value="examiner" name="user_type" onChange={(e) => setUserType(e.target.value)} /> Examiner
-                                    </div> */}
                                 </div>
                                 {type_err != '' && <p className="error">{type_err}</p>}
                             </Form.Group>

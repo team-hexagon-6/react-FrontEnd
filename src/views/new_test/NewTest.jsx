@@ -157,19 +157,21 @@ const NewTest = () => {
                                 {id_err != '' && <p className="error">{id_err}</p>}
                             </Form.Group>
                         </div>
+          
                         <div className="col-md-6">
                             <Form.Group className="mb-3">
                                 <Form.Label>Type of The Test</Form.Label>
+
                                 <div className="col-md-3">
                                     <ButtonGroup className="mb-12">
-                                        {radios.map((radio, idx) => (
+                                        {testTypes.map((radio, idx) => (
                                             <ToggleButton
                                                 key={idx}
                                                 id={`radio-${idx}`}
                                                 type="radio"
                                                 variant={idx % 2 ? 'outline-primary' : 'outline-primary'}
                                                 name="radio"
-                                                value={radio.value}
+                                                value={radio.slug}
                                                 checked={test_type === radio.value}
                                                 onChange={(e) => setTestType(e.currentTarget.value)}
                                             >
@@ -178,6 +180,7 @@ const NewTest = () => {
                                         ))}
                                     </ButtonGroup>
                                 </div>
+
                                 {type_err != '' && <p className="error">{type_err}</p>}
                             </Form.Group>
 

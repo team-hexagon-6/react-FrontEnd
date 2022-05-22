@@ -12,8 +12,10 @@ import { useParams } from 'react-router-dom';
 
 const PatientReport =()=>{
 
-    const [details,setPatientDetails]=useState({});
-   
+    const [reportdetails,setReportDetails]=useState({
+        details:{},
+        testdetails:{}
+    });
     const params=useParams();
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -25,21 +27,25 @@ const PatientReport =()=>{
     const getPatientDetails=async()=>{
         try{
 
-            const Details= await ExaminerServices.getpatientdetails(params);
-            setPatientDetails(Details.data.data);
-            console.log(details);
+            const patientDetails= await ExaminerServices.getpatientdetails(params.patientid);
+            const patienttestDetails= await ExaminerServices.getpatienttestdetails(params.testid);
+            setReportDetails({
+                ...reportdetails,
+                details:patientDetails.data.data,
+                testdetails:patienttestDetails.data.testRecord[0]
+            })
         }
         catch(err){
             console.log(err);
-            
         }
         
     }
+    
+    
   return (
     <div>
     <HeaderOne/>
-    <div className='form-container col-xl-4 mx-auto '>
-        
+    <div className='form-container col-xl-5 mx-auto '>
         <h1 className='fs-1 fw-bold mb-0'>Report</h1>
         <Row>
         <Col>
@@ -62,19 +68,19 @@ const PatientReport =()=>{
          <Form >
          <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='0th Row'>
             <Form.Label  sm={4}>Patient ID</Form.Label>
-            <Form.Control  type="text" maxlength='4' size='sm' value={details.id} name='First Name'  disabled />
+            <Form.Control  type="text" maxlength='4' size='sm' value={ reportdetails.details.id} name='First Name'  disabled />
          </Form.Group>
             <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
                 
                 <Col align='left' sm={6} >
                 <Form.Label  sm={4}>First Name</Form.Label>
-                <Form.Control  type="text" size='sm' value={details.firstname} name='First Name'  disabled />
+                <Form.Control  type="text" size='sm' value={reportdetails.details.firstname} name='First Name'  disabled />
                 </Col>
                 
                 
                  <Col align='left' sm={6}>
                 <Form.Label sm={4} >Last Name </Form.Label>
-                <Form.Control type="text" size='sm' value={details.lastname} name='Last Name'  disabled/>
+                <Form.Control type="text" size='sm' value={reportdetails.details.lastname} name='Last Name'  disabled/>
                
                 </Col>
                 
@@ -89,12 +95,12 @@ const PatientReport =()=>{
                
                 <Col align='left' sm={6}>
                 <Form.Label sm={4} >NIC</Form.Label>
-                <Form.Control type="text" size='sm' value={details.nic} name='NIC'  disabled/>
+                <Form.Control type="text" size='sm' value={reportdetails.details.nic} name='NIC'  disabled/>
 
                 </Col>
                 <Col align='left' sm={6}>
                 <Form.Label sm={5}>Contact Number</Form.Label>
-                <Form.Control type="text" size='sm' value={details.contact_no} name='Contact Number'disabled/>
+                <Form.Control type="text" size='sm' value={reportdetails.details.contact_no} name='Contact Number'disabled/>
 
                 </Col>
 
@@ -112,12 +118,12 @@ const PatientReport =()=>{
                
                <Col align='left' sm={6}>
                <Form.Label sm={4} >Email</Form.Label>
-               <Form.Control type="text" size='sm'  value={details.email} name='Email' disabled/>
+               <Form.Control type="text" size='sm'  value={reportdetails.details.email} name='Email' disabled/>
                </Col>
 
                <Col align='left' sm={6}>
                <Form.Label sm={4} >Birthday</Form.Label>
-               <Form.Control type="text" size='sm' value={details.birthday} name='Birthday' disabled/>
+               <Form.Control type="text" size='sm' value={reportdetails.details.birthday} name='Birthday' disabled/>
                </Col>
                
            </Form.Group>
@@ -129,6 +135,50 @@ const PatientReport =()=>{
             */}
             <br />
              <u><h6 className='DetailsSection'>Test Results:</h6></u>
+
+
+            <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='4th Row'>
+                <Form.Label  sm={4}>Test ID</Form.Label>
+                <Form.Control  type="text" maxlength='4' size='sm' value={reportdetails?.testdetails?.test?.id || ''} name='Test ID'  disabled />
+            </Form.Group>
+            <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
+                
+                <Col align='left' sm={6} >
+                <Form.Label  sm={4}>Test Type</Form.Label>
+                <Form.Control  type="text" size='sm' value={reportdetails?.testdetails?.test_type || ''} name='First Name'  disabled />
+                </Col>
+                
+                
+                 <Col align='left' sm={6}>
+                <Form.Label sm={4} >Test Start At</Form.Label>
+                <Form.Control type="text" size='sm' value={reportdetails?.testdetails?.test?.created_at || ''} name='Last Name'  disabled/>
+               
+                </Col>
+                
+            </Form.Group>
+            <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
+                
+                <Col align='left' sm={6} >
+                <Form.Label  sm={4}>Examiner ID</Form.Label>
+                <Form.Control  type="text" size='sm' value={reportdetails?.testdetails?.examiner_id || ''} name='First Name'  disabled />
+                </Col>
+                
+                
+                 <Col align='left' sm={6}>
+                <Form.Label sm={4} >Examiner Name </Form.Label>
+                <Form.Control type="text" size='sm' value={'Examiner Name'} name='Last Name'  disabled/>
+               
+                </Col>
+                
+            </Form.Group>
+            <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='4th Row'>
+                <Form.Label  sm={4}>Test Result</Form.Label>
+                <Form.Control  type="text" maxlength='4' size='sm' value={reportdetails?.testdetails?.test_result || ''} name='Test ID'  disabled />
+            </Form.Group> 
+
+
+
+
             <div className='row'>
                 <div className='col mb-3'>
                 <hr className='DetailsSection mt-4' style={{margin:'1px'}}></hr>
