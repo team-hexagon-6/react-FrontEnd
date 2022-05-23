@@ -8,6 +8,7 @@ import PatientReport from './../views/patientReport/PatientReport';
 
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
+import AdminDashboard from "../views/dashboard/AdminDashboard";
 
 const  Router =() =>{
   return (
@@ -24,6 +25,7 @@ const  Router =() =>{
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
         <Route path="/patientReport/:patientid/:testid" element ={<PatientReport/>}></Route>
         <Route path="*" element = {<NotFound/>}></Route>
+        <Route path="/adminDashboard" element = {<AdminDashboard/>}></Route>
         
 
       </Routes>
