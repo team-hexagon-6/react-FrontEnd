@@ -9,6 +9,7 @@ import { RequireAuth } from "../utils/requireAuth";
 
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
+import AdminDashboard from "../views/dashboard/AdminDashboard";
 import TestDetails from "../views/test_details/TestDetails";
 import TestRecords from "../views/test_records/TestRecords";
 import { AuthProvider } from "../utils/auth";
@@ -30,6 +31,7 @@ const  Router =() =>{
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
         <Route path="/patientReport/:patientid/:testid" element ={<PatientReport/>}></Route>
         <Route path="*" element = {<NotFound/>}></Route>
+        <Route path="/adminDashboard" element = {<AdminDashboard/>}></Route>
         <Route path="/testDetails/:patientid" element ={<TestDetails/>}></Route>
         <Route path="/testRecords/:testid" element ={<TestRecords/>}></Route>
         

@@ -54,6 +54,7 @@ const RegisterUser = () => {
         } 
         else {
             try {
+                console.log(user_type);
                 const response = await AuthServices.register({ user_id, user_type, password });
                 if(response.status===201){
                     toast.success('Registration Successfull', {
@@ -94,12 +95,11 @@ const RegisterUser = () => {
 
         }
         catch(err){
-            console.log(err);
+            // console.log(err);
             
         }
-        
     }
-    console.log(userTypes);
+    // console.log(userTypes);
            
     if (userTypes){
     return (
