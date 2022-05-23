@@ -23,6 +23,15 @@ const AuthUserCompleteRegistration = (data) =>{
     });
 }
 
+const getUser = () => {
+    return axios({
+        method: 'get',
+        url: APIEndpoint + '/user/user',
+        headers: { Authorization: `Bearer ${token.getAccessToken()}` }
+    });
+}
+
 export default{
-    AuthUserCompleteRegistration
+    AuthUserCompleteRegistration,
+    getUser,
 }
