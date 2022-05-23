@@ -1,0 +1,42 @@
+.test_header {
+    color: #1376BD;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.test_form {
+    justify-content: center;
+    width: fit-content;
+    border: 1px solid #1376BD;
+    border-left: 10px solid #1376BD;
+    padding: 10px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    /* top: 50%; */
+}
+
+img {
+    height: 300px;
+}
+
+.test_button {
+    float: right;
+}
+
+.preview {
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    border: 2px solid #1376BD;
+    border-radius: 10px;
+    display: flex;
+}
+
+img {
+    border-radius: 10px;
+}
+
+.upload_preview {
+    overflow: hidden;
+}
