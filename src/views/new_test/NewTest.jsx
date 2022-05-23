@@ -6,6 +6,7 @@ import Validation from '../../Validation';
 import ExaminerServices from "../../services/API/ExaminerServices";
 import _503 from "../not_found/_503";
 import {toast} from 'react-toastify';
+import { useParams } from 'react-router-dom';
 
 
 const NewTest = () => {
@@ -17,6 +18,8 @@ const NewTest = () => {
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
     const [testTypes, setTestTypes] = useState([]);
+    const params=useParams();
+    console.log(params);
 
 
 
@@ -152,8 +155,9 @@ const NewTest = () => {
                                     className="fa"
                                     style={{ borderRadius: "20px" }}
                                     placeholder="&#xf2c2; Patient id"
-                                    onChange={(e) => setPatientID(e.target.value)}
-                                />
+                                    value={params.patientid}
+                                    // onChange={(e) => setPatientID(e.target.value)}
+                                disabled/>
                                 {id_err != '' && <p className="error">{id_err}</p>}
                             </Form.Group>
                         </div>
