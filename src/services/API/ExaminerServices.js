@@ -14,7 +14,7 @@ const getpatientdetails = (patientid) => {
     });
   };
 
-  const getpatienttestdetails = (testrecordid) => {
+  const getpatienttestdetails1 = (testrecordid) => {
     return axios({
       method: "get",
       url: APIEndpoint+`/test/test-record/${testrecordid}`,
@@ -22,6 +22,25 @@ const getpatientdetails = (patientid) => {
       
     });
   };
+
+  const getpatienttestdetails = (skip,take,patient_id) => {
+    return axios({
+      method: "get",
+      url: APIEndpoint+`/test/tests?skip=${skip}&take=${take}&patient_id=${patient_id}`,
+      headers: {Authorization: `Bearer ${token.getAccessToken()}`},
+      
+    });
+  };
+
+  const getpatienttestrecordsforatest = (testid) => {
+    return axios({
+      method: "get",
+      url: APIEndpoint+`/test/test/${testid}`,
+      headers: {Authorization: `Bearer ${token.getAccessToken()}`},
+      
+    });
+  };
+
 
 
 const dotest =(data)=>{
@@ -35,9 +54,19 @@ const dotest =(data)=>{
         },
         
       });
-
-
 }
+
+const createtest = (patient_id) => {
+  return axios({
+    method: "post",
+    url: APIEndpoint+'/test/create-new-test',
+    data:{
+      patient_id:patient_id
+    },
+    headers: {Authorization: `Bearer ${token.getAccessToken()}`},
+    
+  });
+};
 
 const gettesttypes =()=>{
   return axios({
@@ -47,11 +76,28 @@ const gettesttypes =()=>{
   });
 
 }
+
+const confirmtest =(test_id,patient_id)=>{
+  return axios({
+    method: "post",
+    url: APIEndpoint + '/test/confirm-test',
+    data:{
+      test_id:test_id,
+      patient_id:patient_id
+    },
+    headers: {Authorization: `Bearer ${token.getAccessToken()}`}
+  });
+
+}
+
   
 
 export default{
    getpatientdetails,
    dotest,
    gettesttypes,
-   getpatienttestdetails
+   getpatienttestdetails,
+   getpatienttestrecordsforatest,
+   createtest,
+   confirmtest
 }

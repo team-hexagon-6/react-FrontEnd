@@ -14,7 +14,7 @@ const PatientReport =()=>{
 
     const [reportdetails,setReportDetails]=useState({
         details:{},
-        testdetails:{}
+        testrecords:{}
     });
     const params=useParams();
     var today = new Date();
@@ -28,11 +28,11 @@ const PatientReport =()=>{
         try{
 
             const patientDetails= await ExaminerServices.getpatientdetails(params.patientid);
-            const patienttestDetails= await ExaminerServices.getpatienttestdetails(params.testid);
+            const testRecords=await ExaminerServices.getpatienttestrecordsforatest(params.testid);
             setReportDetails({
                 ...reportdetails,
                 details:patientDetails.data.data,
-                testdetails:patienttestDetails.data.testRecord[0]
+                testrecords:testRecords.data.test
             })
         }
         catch(err){
@@ -45,6 +45,7 @@ const PatientReport =()=>{
   return (
     <div>
     <HeaderOne/>
+    {console.log(reportdetails.testrecords)}
     <div className='form-container col-xl-5 mx-auto '>
         <h1 className='fs-1 fw-bold mb-0'>Report</h1>
         <Row>
@@ -68,7 +69,7 @@ const PatientReport =()=>{
          <Form >
          <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='0th Row'>
             <Form.Label  sm={4}>Patient ID</Form.Label>
-            <Form.Control  type="text" maxlength='4' size='sm' value={ reportdetails.details.id} name='First Name'  disabled />
+            <Form.Control  type="text"size='sm' value={ reportdetails.details.id} name='First Name'  disabled />
          </Form.Group>
             <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
                 
@@ -85,96 +86,59 @@ const PatientReport =()=>{
                 </Col>
                 
             </Form.Group>
-
-            {/* <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Last Name'>
-                
-                
-            </Form.Group> */}
-
-            <Form.Group as={Row} className='fa fw-bold col-xl-10 mb-3 mx-auto' controlId='2nd Row'>
-               
-                <Col align='left' sm={6}>
-                <Form.Label sm={4} >NIC</Form.Label>
-                <Form.Control type="text" size='sm' value={reportdetails.details.nic} name='NIC'  disabled/>
-
-                </Col>
-                <Col align='left' sm={6}>
-                <Form.Label sm={5}>Contact Number</Form.Label>
-                <Form.Control type="text" size='sm' value={reportdetails.details.contact_no} name='Contact Number'disabled/>
-
-                </Col>
-
-
-                
-            </Form.Group>
-
-            {/* <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Contact Number'>
-                
-                
-                
-           </Form.Group> */}
-
-           <Form.Group as={Row} className='fa fw-bold col-xl-10 mb-2 mx-auto' controlId='3rd Row'>
-               
-               <Col align='left' sm={6}>
-               <Form.Label sm={4} >Email</Form.Label>
-               <Form.Control type="text" size='sm'  value={reportdetails.details.email} name='Email' disabled/>
-               </Col>
-
-               <Col align='left' sm={6}>
-               <Form.Label sm={4} >Birthday</Form.Label>
-               <Form.Control type="text" size='sm' value={reportdetails.details.birthday} name='Birthday' disabled/>
-               </Col>
-               
-           </Form.Group>
-
-           {/* <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Birthday'>
-               
-              
-           </Form.Group>
-            */}
             <br />
-             <u><h6 className='DetailsSection'>Test Results:</h6></u>
+             <u><h6 className='DetailsSection'>Test Details:</h6></u>
 
 
             <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='4th Row'>
-                <Form.Label  sm={4}>Test ID</Form.Label>
-                <Form.Control  type="text" maxlength='4' size='sm' value={reportdetails?.testdetails?.test?.id || ''} name='Test ID'  disabled />
-            </Form.Group>
-            <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
-                
                 <Col align='left' sm={6} >
-                <Form.Label  sm={4}>Test Type</Form.Label>
-                <Form.Control  type="text" size='sm' value={reportdetails?.testdetails?.test_type || ''} name='First Name'  disabled />
+                <Form.Label  sm={4}>Test ID</Form.Label>
+                <Form.Control  type="text"size='sm' value={reportdetails?.testrecords?.id || ''} name='Test ID'  disabled />
                 </Col>
-                
-                
-                 <Col align='left' sm={6}>
+                <Col align='left' sm={6}>
                 <Form.Label sm={4} >Test Start At</Form.Label>
-                <Form.Control type="text" size='sm' value={reportdetails?.testdetails?.test?.created_at || ''} name='Last Name'  disabled/>
+                <Form.Control type="text" size='sm' value={reportdetails?.testrecords?.created_at || ''} name='Last Name'  disabled/>
                
                 </Col>
-                
             </Form.Group>
+            {reportdetails?.testrecords?.testrecord?.map((row,index)=>(
+            <div>
+               <u> <h6 className='DetailsSection'>Test Record: {index+1}</h6></u>
             <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
-                
-                <Col align='left' sm={6} >
+            <Col align='left' sm={6} >
                 <Form.Label  sm={4}>Examiner ID</Form.Label>
-                <Form.Control  type="text" size='sm' value={reportdetails?.testdetails?.examiner_id || ''} name='First Name'  disabled />
+                <Form.Control  type="text" size='sm' value={row.examiner.user_id || ''} name='First Name'  disabled />
                 </Col>
                 
-                
-                 <Col align='left' sm={6}>
+                <Col align='left' sm={6}>
                 <Form.Label sm={4} >Examiner Name </Form.Label>
                 <Form.Control type="text" size='sm' value={'Examiner Name'} name='Last Name'  disabled/>
-               
+                </Col>
+                
+                
+                
+
+                
+            </Form.Group>
+            <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
+                
+            <Col align='left' sm={6} >
+                <Form.Label  sm={4}>Test Type</Form.Label>
+                <Form.Control  type="text" size='sm' value={row.test_type.name || ''} name='First Name'  disabled />
+                </Col>
+                
+                 
+                <Col align='left' sm={6} >
+                <Form.Label  sm={4}>Test Result</Form.Label>
+                <Form.Control  type="text"  size='sm' value={row.test_result.name || ''} name='Test ID'  disabled />
                 </Col>
                 
             </Form.Group>
-            <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='4th Row'>
-                <Form.Label  sm={4}>Test Result</Form.Label>
-                <Form.Control  type="text" maxlength='4' size='sm' value={reportdetails?.testdetails?.test_result || ''} name='Test ID'  disabled />
-            </Form.Group> 
+            {/* <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='4th Row'>
+                
+            </Form.Group>  */}
+            </div>))
+            }
 
 
 
