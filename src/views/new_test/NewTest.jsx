@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Button, ButtonGroup, Card, Form, ToggleButton } from "react-bootstrap";
 import HeaderOne from "../../components/headers/HeaderOne";
 import "./NewTest.css"
 import Validation from '../../Validation';
+import ExaminerServices from "../../services/API/ExaminerServices";
+import _503 from "../not_found/_503";
+import {toast} from 'react-toastify';
+import { useParams } from 'react-router-dom';
+
 
 const NewTest = () => {
 
@@ -12,11 +17,15 @@ const NewTest = () => {
     const [test_type, setTestType] = useState('');
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
-    
+    const [testTypes, setTestTypes] = useState([]);
+    const params=useParams();
+    console.log(params);
+
+
 
     const [id_err, setIdErr] = useState('');
     const [type_err, setTypeErr] = useState('');
-    const [img_err, setImgErr]= useState('');
+    const [img_err, setImgErr] = useState('');
     const [date_err, setDateErr] = useState('');
 
     const radios = [
@@ -38,9 +47,9 @@ const NewTest = () => {
                         'imagePreview').innerHTML =
                         '<img src="' + e.target.result + '"/>';
 
-                setBase64Img(reader.result.replace("data:", "")
-                .replace(/^.+,/, ""));
-                
+                    setBase64Img(reader.result.replace("data:", "")
+                        .replace(/^.+,/, ""));
+
                 };
 
                 reader.readAsDataURL(fileInput.files[0]);
@@ -50,7 +59,7 @@ const NewTest = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         setIdErr('');
         setTypeErr('');
         setDateErr('');
@@ -74,11 +83,62 @@ const NewTest = () => {
             if (errors.date)
                 setDateErr(errors.date.replace('"date"', 'Date'));
         } else {
-            window.alert(`Please confirm test delails\n\nPatient ID: ${patient_id}\nTest type: ${test_type}\nDate: ${date}\n\n\Click OK to start the test.`);
+            window.alert(`Please confirm test details\n\nPatient ID: ${patient_id}\nTest type: ${test_type}\nDate: ${date}\n\n\Click OK to start the test.`);
+            try{
+                const response = await ExaminerServices.dotest({ patient_id, test_type, date,base64_img });
+                if(response.status===201){
+                    toast.success('Start test Successfull', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                    setTimeout(navigate('/login?registration=successful'), 3000);
+                }
+                
+
+            } catch (error) {
+                console.log(error);
+                toast.error(`P with ID: ${patient_id} already exists`, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            }
+            
+            
         }
     }
 
+    useEffect(()=>{
+        getTestTypes();
+     },[])
+ 
+     const getTestTypes=async()=>{
+         try{
+             const testType= await ExaminerServices.gettesttypes();
+             console.log(testType.data.testTypes);
+             setTestTypes(testType.data.testTypes);
+            
+         }
+         catch(err){
+             console.log(err);
+             
+         }
+         
+     }
+
+    
+    if(testTypes){
     return (
+
         <div className="new_test">
 
             <HeaderOne />
@@ -95,24 +155,27 @@ const NewTest = () => {
                                     className="fa"
                                     style={{ borderRadius: "20px" }}
                                     placeholder="&#xf2c2; Patient id"
-                                    onChange={(e) => setPatientID(e.target.value)}
-                                />
+                                    value={params.patientid}
+                                    // onChange={(e) => setPatientID(e.target.value)}
+                                disabled/>
                                 {id_err != '' && <p className="error">{id_err}</p>}
                             </Form.Group>
                         </div>
+          
                         <div className="col-md-6">
                             <Form.Group className="mb-3">
                                 <Form.Label>Type of The Test</Form.Label>
+
                                 <div className="col-md-3">
                                     <ButtonGroup className="mb-12">
-                                        {radios.map((radio, idx) => (
+                                        {testTypes.map((radio, idx) => (
                                             <ToggleButton
                                                 key={idx}
                                                 id={`radio-${idx}`}
                                                 type="radio"
                                                 variant={idx % 2 ? 'outline-primary' : 'outline-primary'}
                                                 name="radio"
-                                                value={radio.value}
+                                                value={radio.slug}
                                                 checked={test_type === radio.value}
                                                 onChange={(e) => setTestType(e.currentTarget.value)}
                                             >
@@ -121,6 +184,7 @@ const NewTest = () => {
                                         ))}
                                     </ButtonGroup>
                                 </div>
+
                                 {type_err != '' && <p className="error">{type_err}</p>}
                             </Form.Group>
 
@@ -136,7 +200,7 @@ const NewTest = () => {
                                 <div className="container upload_preview">
                                     <Form.Control type="file" id="file" onChange={fileValidation} />
                                     {img_err != '' && <p className="error">{img_err}</p>}
-                                    <div className="preview" id="imagePreview"></div>
+                                    <div className="preview" id="imagePreview"><img src="../../public/No_Preview.png" alt=""/></div>
                                 </div>
 
                             </Form.Group>
@@ -144,7 +208,7 @@ const NewTest = () => {
                         <div className="col-md-3"></div>
                     </div>
 
-                    <div className="row bottom_div">
+                    <div className=" container row bottom_div justify-content-center">
                         <div className="col-md-6">
                             <Form.Label>Date</Form.Label>
                             <Form.Control
@@ -166,8 +230,17 @@ const NewTest = () => {
                 </Form>
             </div>
 
+
         </div>
     );
+    }else{
+        return(
+            <div>
+                <_503/>
+            </div>
+
+        );
+    }
 }
 
 export default NewTest;

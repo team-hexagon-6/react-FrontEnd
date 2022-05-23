@@ -10,6 +10,7 @@ import Validation  from '../../Validation';
 
 const  UserCompleteRegistration =() => {
     
+    
     const formValues={
         'First Name':'',
         'Last Name':'',
@@ -107,7 +108,7 @@ const  UserCompleteRegistration =() => {
                </Col>
               
            </Form.Group>
-           <Button className='button btn btn-primary' size="lg" block="block" type="submit">Register</Button>
+           <Button className='btn btn-primary button' size="lg" block="block" type="submit">Register</Button>
         </Form>
         
     </div>

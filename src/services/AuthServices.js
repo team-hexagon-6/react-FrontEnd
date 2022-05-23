@@ -19,6 +19,15 @@ const register = (data) => {
   });
 };
 
+const getusertypes = () => {
+  return axios({
+    method: "get",
+    url: APIEndpoint + '/user-types',
+    headers: {Authorization: `Bearer ${token.getAccessToken()}`}
+  });
+};
+
+
 const login = async (data) => {
   console.log(data);
 
@@ -37,6 +46,7 @@ const login = async (data) => {
 
 export default {
   register,
-  login
+  login,
+  getusertypes
 }
 

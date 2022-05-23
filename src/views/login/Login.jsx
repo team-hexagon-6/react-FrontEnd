@@ -4,10 +4,17 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthServices from "../../services/AuthServices";
 import Validation from "../../Validation";
+import { useNavigate,useLocation } from "react-router-dom";
 
 import { toast } from "react-toastify";
+import { useAuth } from "../../utils/auth";
 
 function Login() {
+  const auth=useAuth();
+  const navigate =useNavigate();
+  const location =useLocation();
+
+  const redirectPath = location.state?.path || '/'
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -45,6 +52,9 @@ function Login() {
             draggable: true,
             progress: undefined,
           });
+          auth.login(username);
+          navigate(redirectPath,{replace:true})
+
         }
       } catch (error) {
         console.log(error.message);
@@ -66,7 +76,7 @@ function Login() {
       <HeaderOne />
       <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
         <h3 className="header">Login</h3>
-        <div className="form">
+        <div className="form1">
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-auto">
               <label htmlFor="Username" className="col-form-label">
