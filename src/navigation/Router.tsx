@@ -8,6 +8,10 @@ import PatientReport from './../views/patientReport/PatientReport';
 
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
+import Clerkpage from "../views/Clerkpage/Clerkpage";
+import AllPatient from "../views/allpatient/AllPatient";
+import Doctor from "../views/Doctor/Doctor";
+import AdminDashboard from "../views/Admin/AdminDashboard";
 
 const  Router =() =>{
   return (
@@ -22,6 +26,11 @@ const  Router =() =>{
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
         <Route path="/newTest" element = {<NewTest/>}></Route>
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
+        <Route path="/clerk" element = {<Clerkpage/>}></Route>
+        <Route path="/allpatients" element = {<AllPatient/>}></Route>
+        <Route path="/doctor" element = {<Doctor/>}></Route>
+        <Route path="/admin" element = {<AdminDashboard/>}></Route>
+
         <Route path="/patientReport/:patientid/:testid" element ={<PatientReport/>}></Route>
         <Route path="*" element = {<NotFound/>}></Route>
         

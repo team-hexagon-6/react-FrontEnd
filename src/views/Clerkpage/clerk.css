@@ -1,0 +1,111 @@
+.optionss{
+    /* height: 50%; */
+    background-color: rgba(255,255,255,0.5);
+    border: 1px solid #1376bdf5;
+    border-left:15px solid #1376bdf5 ;
+    /* border-radius: 5px; */
+    margin: auto;
+    width:40%;
+    margin-top:150px;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    height: auto;
+    /* width: 200px; */
+    
+
+}
+.input_id{
+  border: 2px solid blue;
+  background-color: rgba(105, 105, 105, 0.63);
+  width: 50%;
+  border-radius: 15px;
+  height: 30px;
+  text-align: center;
+  color: blue;
+  font-size: 18px;
+  /* float: left; */
+}
+#update{
+    margin-left: 50px;
+}
+
+
+
+.butts{
+    width: 100%;
+    padding: 7px;
+    /* border: 1px solid rgb(0, 68, 255); */
+    background-color: #1376bdf5;
+    color: white;
+    position: relative;
+    border-radius: 15px;
+    cursor: pointer;
+    /* box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); */
+
+    
+}
+
+
+.butts:hover{
+    background-color: blue;
+    /* border: 1px solid aquamarine; */
+}
+.navbar {
+    overflow: hidden;
+    /* background-color: #333; */
+    /* position: relative; */
+    position:fixed;
+    top: 0;
+    width: 100%;
+    list-style-type: none;
+    margin: 0px;
+    padding: 2px;
+    background-color:  #4c6696;
+    /* border: 1px solid white; */
+    /* box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); */
+    border-radius: 5px;
+    left: 0;
+    /* right: 2px; */
+  }
+/* .sign{
+    margin-left: 90%;
+} */
+.lists{
+  margin-left: 20px;
+  margin-top: 0px;
+  border: 1px solid white;
+  padding: 0px;
+  border-radius: 5px;
+  visibility: hidden;
+  width:200px;
+}
+  
+.lists:hover  {
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+}
+  .navbar a {
+      /* margin-left: 70%; */
+    background-color: #4c6696;
+    float: right;
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-radius: 10px;
+    /* border-left: 1px solid rgb(6, 6, 49); */
+  }
+  
+  .navbar a:hover {
+    background:#264888;
+    color: rgb(248, 233, 233);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+    border:1px solid aquamarine;
+    cursor: pointer;
+  }
+
+
