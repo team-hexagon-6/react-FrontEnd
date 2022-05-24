@@ -126,6 +126,7 @@ const addPatient = (data) => {
         "date.max": `Age must be 18+;"Birthday" must be before or equal to "01-01-2005`,
       })
       .required(),
+    Gender: Joi.string().required(),
   });
   const { error, value } = addPatientSchema.validate(data, {
     abortEarly: false,
