@@ -10,7 +10,7 @@ import { RequireAuth } from "../utils/requireAuth";
 
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
-import Clerkpage from "../views/Clerkpage/Clerkpage";
+import Examiner from "../views/Examiner/Examiner";
 import AllPatient from "../views/allpatient/AllPatient";
 import Doctor from "../views/Doctor/Doctor";
 import AdminDashboard from "../views/dashboard/AdminDashboard";
@@ -19,6 +19,7 @@ import TestRecords from "../views/test_records/TestRecords";
 import { AuthProvider } from "../utils/auth";
 import HomePage from './../views/HomePage/HomePage';
 import AdminUpdate from "../views/update/AdminUpdate";
+import ViewPatient from "../views/View_patient/view_patient";
 
 const  Router =() =>{
   return (
@@ -34,8 +35,9 @@ const  Router =() =>{
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
         <Route path="/newTest/:patientid" element = {<NewTest/>}></Route>
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
-        <Route path="/clerk" element = {<Clerkpage/>}></Route>
+        <Route path="/examiner" element = {<Examiner/>}></Route>
         <Route path="/allpatients" element = {<AllPatient/>}></Route>
+        <Route path="/viewPatient" element = {<ViewPatient />}></Route>
         <Route path="/doctor" element = {<Doctor/>}></Route>
 
         <Route path="/patientReport/:patientid/:testid" element ={<PatientReport/>}></Route>

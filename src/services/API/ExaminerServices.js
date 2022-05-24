@@ -15,7 +15,7 @@ const getpatientdetails = (patientid) => {
 const addPatient = (data) => {
   return axios({
     method: "post",
-    url: APIEndpoint + "/add-new-patient",
+    url: APIEndpoint + "patient/add-new-patient",
     data: {
       patient_id: data["PatientID"],
       firstname: data["First Name"],
@@ -30,13 +30,13 @@ const addPatient = (data) => {
   });
 };
 
-const getpatienttestdetails1 = (testrecordid) => {
-  return axios({
-    method: "get",
-    url: APIEndpoint + `/test/test-record/${testrecordid}`,
-    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
-  });
-};
+// const getpatienttestdetails1 = (testrecordid) => {
+//   return axios({
+//     method: "get",
+//     url: APIEndpoint + `/test/test-record/${testrecordid}`,
+//     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+//   });
+// };
 
 const getpatienttestdetails = (skip, take, patient_id) => {
   return axios({
@@ -100,13 +100,10 @@ const confirmtest = (test_id, patient_id) => {
   });
 };
 
-
-
-  
-const getPatients =()=>{
+const getPatients =(skip,take)=>{
   return axios({
     method: "get",
-    url: APIEndpoint + '/get-all-patients',
+    url: APIEndpoint + `/patient/get-all-patients?skip=${skip}&take=${take}`,
     headers: {Authorization: `Bearer ${token.getAccessToken()}`}
   });
 
