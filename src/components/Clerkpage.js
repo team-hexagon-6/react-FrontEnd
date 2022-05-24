@@ -6,7 +6,7 @@ function Clerkpage() {
   return (
     <div>
 
-        <div class="navbar">
+        <div className="navbar">
         <a href="#">Home</a>
         <a href="#contact">Log Out</a>
 

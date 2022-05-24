@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './clerk.css'
 
-class Clerkpage extends Component{
+const Clerkpage =()=>{
 
   // handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -38,7 +38,7 @@ class Clerkpage extends Component{
   //     }
     
   // };
-  render(){
+  
 
   
   return (
@@ -66,6 +66,6 @@ class Clerkpage extends Component{
     </div>
   )
 }
-}
 
-export default Clerkpage
+
+export default Clerkpage;

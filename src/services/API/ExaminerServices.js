@@ -91,6 +91,14 @@ const confirmtest =(test_id,patient_id)=>{
 }
 
   
+const getPatients =()=>{
+  return axios({
+    method: "get",
+    url: APIEndpoint + '/get-all-patients',
+    headers: {Authorization: `Bearer ${token.getAccessToken()}`}
+  });
+
+}
 
 export default{
    getpatientdetails,
@@ -99,5 +107,6 @@ export default{
    getpatienttestdetails,
    getpatienttestrecordsforatest,
    createtest,
-   confirmtest
+   confirmtest,
+   getPatients
 }

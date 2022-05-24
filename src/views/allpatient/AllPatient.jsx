@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { useNavigate } from "react-router-dom";
 import HeaderOne from "../../components/headers/HeaderOne";
+import { useEffect, useState } from "react"; 
 import {
   Card,
   Form,
@@ -10,61 +12,69 @@ import {
 } from "react-bootstrap";
 
 import './allpatients.css'
-export class AllPatient extends Component {
-    constructor(props) {
-        super(props)
-      
-        this.state = {
-            names : ['11111', '22222', '33333'],
-            filter:'',
-            patient_id:''
-        }
-      }
+import ExaminerServices from '../../services/API/ExaminerServices';
 
-      setfilter = (event)=>{
-        this.setState({
-          filter : event.target.value
-        })
+const AllPatient =  () => {
+
+  const [names,setnames] = useState(['Bruce', 'Clark', 'Diana','Bruce1', 'Clark1', 'Diana1','Bruce2', 'Clark2', 'Diana2']);
+  const [filter, setfilter] = useState('');
+  const [patient_id, setPatientId] = useState('');
+  const [all_ids, setAllPatient] = useState([]);
+
+    const navigate = useNavigate();
+    const navigateMe = () => {
+      // console.log("delete user fn");
+      navigate(`/doctor`);
+    };
+
+
+    useEffect(() => {
+      getPatients();
+    }, []);
+  
+    const getPatients = async () => {
+      try {
+          const response = await ExaminerServices.getPatients();
+          setAllPatient(response.data);
+
+      } catch (error) {
+        console.log(error);
       }
-      setPatientId = (event)=>{
-        this.setState({
-          patient_id : event.target.value
-        })
-      }
-  render() {
+    };
+
     return (
       <div>
     <HeaderOne/>
-      
       <div className='out_layouts'>   
-      <div class="float-parent-element">
-        <div class="float-child-element">
-          <div class="fetch">
+      <div className="float-parent-element">
+        <div className="float-child-element">
+          <div className="fetch">
           <div className="input-group mb-3">
               <input
+              placeholder='Search Patient ID'
                 type="text"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                value={this.state.filter}
-                onChange={this.setfilter}
+                value={filter}
+                onChange={(event)=>{setfilter(event.target.value)}}
               />
-               <button class="btn btn-outline-secondary" type="button" id="button-addon2">Filter</button>
+               
 
             </div>
           </div>
         </div>
-        <div class="float-child-element">
-          <div class="search">
+        <div className="float-child-element">
+          <div className="search">
             
           <div className="input-group mb-3">
               <input
                 type="text"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                value={this.state.patient_id}
-                onChange={this.setPatientId}
+                value={patient_id}
+                onChange={(event)=>{setPatientId(event.target.value)}}
               />
-               <button class="btn btn-outline-secondary" type="button" id="button-addon2">Show Patient</button>
+               <button onClick={()=>{navigateMe()}} className="btn btn-outline-secondary" type="button" id="button-addon2">Show Patient</button>
 
             </div>
             </div>
@@ -90,7 +100,13 @@ export class AllPatient extends Component {
         </thead>
         <tbody style={{ color: "black" }}>
           {/* sample database result object to html convert with search enabled */}
-          {this.state.names.map((name) => {
+          {names.filter((name)=>{
+            if(filter == ''){
+              return name;
+            }else if(name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())){
+              return name;
+            }
+          }).map((name) => {
               // Tables should come here
 
               return (
@@ -137,6 +153,6 @@ export class AllPatient extends Component {
     </div>
     )
   }
-}
 
-export default AllPatient
+
+export default AllPatient;

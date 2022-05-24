@@ -1,22 +1,11 @@
 import React, { Component } from 'react'
 import './doctor.css'
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react"; 
 
-class Doctor extends Component {
-    constructor(props) {
-        super(props)
-      
-        this.state = {
-          patient_id:''
-        }
-      }
+const Doctor =()=> {
+  const [patient_id, setPatientId] = useState('');
 
-      setPatientId = (event)=>{
-        this.setState({
-          patient_id : event.target.value
-        })
-      }
-
-  render() {
     return (
       <div>
           <div className='options'>
@@ -25,10 +14,10 @@ class Doctor extends Component {
                 type="text"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
-                value={this.state.patient_id}
-                onChange={this.setPatientId}
+                value={patient_id}
+                onChange={(event)=>setPatientId(event.target.value)}
               />
-               <button class="btn btn-outline-secondary" type="button" id="button-addon2">Show Patient</button>
+               <button className="btn btn-outline-secondary" type="button" id="button-addon2">Show Patient</button>
 
             </div>
                     <br></br>
@@ -42,6 +31,6 @@ class Doctor extends Component {
       </div>
     )
   }
-}
 
-export default Doctor
+
+export default Doctor;
