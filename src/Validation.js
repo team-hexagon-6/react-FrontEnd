@@ -104,10 +104,27 @@ const login = (data) => {
   return { value, error };
 };
 
+const adminUpdatePwd = (data) => {
+  const admin_update_pwd_schema = Joi.object({
+    password: Joi.string().pattern(
+      new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+      )
+    ),
+
+    re_password: Joi.ref("password"),
+  });
+
+  const { error, value } = admin_update_pwd_schema.validate(data, { abortEarly: false });
+
+  return { value, error };
+}
+
 export default {
     registration,
     ValidateUserCompleteRegistration,
     new_test,
     imageValidation,
-    login
+    login,
+    adminUpdatePwd
 }
