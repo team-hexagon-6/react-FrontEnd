@@ -21,7 +21,20 @@ const getExaminers = (skip, take) => {
     });
 };
 
+const updatePassword = (data) => {
+    return axios({
+        method: "post",
+        url: APIEndpoint + '/update-password-by-admin',
+        data: {
+            new_password: data.password,
+            user_id: data.user_id,
+        },
+        headers: { Authorization: `Bearer ${token.getAccessToken()}` }
+    });
+}
+
 export default {
     getDoctors,
     getExaminers,
+    updatePassword,
 }
