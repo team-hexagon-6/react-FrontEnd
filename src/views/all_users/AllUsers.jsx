@@ -2,7 +2,7 @@ import "./AllUsers.css";
 import HeaderOne from "../../components/headers/HeaderOne";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import { Card, Form, Button, Table, FormControl, InputGroup, DropdownButton, Dropdown, Pagination, } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AdminServices from "../../services/API/AdminServices";
 
@@ -21,9 +21,10 @@ const AllUsers = () => {
 
   // When update button is clicked
   const navigate = useNavigate();
+  const params = useParams();
   const updateUser = (user_id) => {
-    console.log("delete user fn");
-    navigate(`/userCompleteRegistration?user=${user_id}`);
+
+    navigate(`/updateUser/${user_id}`);
   };
 
   // Search term
@@ -67,10 +68,8 @@ const AllUsers = () => {
           </div>
         </div>
 
-        <h4 className="category">{usertype}</h4>
-
-        <div className="user_display">
-
+        <div className="title_search">
+          <h4 className="category">{usertype}</h4>
           <input
             type="search"
             placeholder="  Search a user"
@@ -81,11 +80,14 @@ const AllUsers = () => {
               display: "flex",
               float: "right",
               width: "25%",
-              marginBottom: "10px", 
+              marginBottom: "10px",
+              marginTop: "20px",
             }}
             onChange={(event) => setSearch(event.target.value)}
           />
+        </div>
 
+        <div className="user_display">
           {users.length === 0 &&
             <div><h5 style={{ color: "black", textAlign: "center", margin: "10px" }}>No {usertype} to display</h5>
               <div className="image">

@@ -1,0 +1,10 @@
+.update_header {
+    color: #1376BD;
+    text-align: center;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    margin: 1px;
+}
