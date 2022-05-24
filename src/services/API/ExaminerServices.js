@@ -100,13 +100,26 @@ const confirmtest = (test_id, patient_id) => {
   });
 };
 
-export default {
-  getpatientdetails,
-  dotest,
-  gettesttypes,
-  getpatienttestdetails,
-  getpatienttestrecordsforatest,
-  createtest,
-  confirmtest,
-  addPatient,
-};
+
+
+  
+const getPatients =()=>{
+  return axios({
+    method: "get",
+    url: APIEndpoint + '/get-all-patients',
+    headers: {Authorization: `Bearer ${token.getAccessToken()}`}
+  });
+
+}
+
+export default{
+   getpatientdetails,
+   dotest,
+   gettesttypes,
+   getpatienttestdetails,
+   getpatienttestrecordsforatest,
+   createtest,
+   confirmtest,
+   getPatients,
+   addPatient
+}
