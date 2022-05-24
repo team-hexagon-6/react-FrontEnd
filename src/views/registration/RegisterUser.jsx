@@ -71,7 +71,7 @@ const RegisterUser = () => {
                 
 
             } catch (error) {
-                toast.error(`User with ID: ${user_id} already exists`, {
+                toast.error(`Registration Failed`, {
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,

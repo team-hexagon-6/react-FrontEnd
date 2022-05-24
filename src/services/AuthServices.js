@@ -16,6 +16,7 @@ const register = (data) => {
       employee_type: data.user_type,
       password: data.password,
     },
+    headers: {Authorization: `Bearer ${token.getAccessToken()}`}
   });
 };
 
