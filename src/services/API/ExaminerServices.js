@@ -6,22 +6,37 @@ import token from "../Token"
 const APIEndpoint = config.DOMAIN_NAME + '/api';
 
 const getpatientdetails = (patientid) => {
-    return axios({
-      method: "get",
-      url: APIEndpoint+`/patient/get-patient/${patientid}`,
-      headers: {Authorization: `Bearer ${token.getAccessToken()}`},
-      
-    });
-  };
+  return axios({
+    method: "get",
+    url: APIEndpoint + `/patient/get-patient/${patientid}`,
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
+const addPatient = (data) => {
+  return axios({
+    method: "post",
+    url: APIEndpoint + "patient/add-new-patient",
+    data: {
+      patient_id: data["PatientID"],
+      firstname: data["First Name"],
+      lastname: data["Last Name"],
+      nic: data["NIC"],
+      contact_no: data["Contact Number"],
+      email: data["Email"],
+      birthday: data["Birthday"],
+      gender_type: data["Gender"],
+    },
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
 
-  const getpatienttestdetails1 = (testrecordid) => {
-    return axios({
-      method: "get",
-      url: APIEndpoint+`/test/test-record/${testrecordid}`,
-      headers: {Authorization: `Bearer ${token.getAccessToken()}`},
-      
-    });
-  };
+// const getpatienttestdetails1 = (testrecordid) => {
+//   return axios({
+//     method: "get",
+//     url: APIEndpoint + `/test/test-record/${testrecordid}`,
+//     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+//   });
+// };
 
   const getpatienttestdetails = (skip,take,patient_id) => {
     return axios({
@@ -85,6 +100,14 @@ const confirmtest =(test_id,patient_id)=>{
       test_id:test_id,
       patient_id:patient_id
     },
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
+
+const getPatients =(skip,take)=>{
+  return axios({
+    method: "get",
+    url: APIEndpoint + `/patient/get-all-patients?skip=${skip}&take=${take}`,
     headers: {Authorization: `Bearer ${token.getAccessToken()}`}
   });
 

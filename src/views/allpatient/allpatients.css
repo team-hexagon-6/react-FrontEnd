@@ -1,0 +1,71 @@
+
+
+.out_layouts{
+  background-color: rgba(255,255,255,0.5);
+  border: 1px solid #1376bdf5;
+  border-left:15px solid #1376bdf5 ;
+  /* border-radius: 5px; */
+  margin: auto;
+  width: 60%;
+  margin-top:100px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 30px;
+  padding-bottom: 50px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  height: auto;
+  /* width: 200px; */
+
+}
+
+
+
+
+
+.float-parent-element { 
+  width: 100%; 
+} 
+.float-child-element{ 
+float: left;  
+width: 50%; 
+}
+
+.fetch { 
+  /* background-color: red;  */
+  /* margin-left: 50%;  */
+  height: 50px; 
+  width: 50%;
+  /* background-color: white; */
+} 
+.search { 
+  /* margin-left: 50%;  */
+  width: 70%;
+  height: 50px; 
+  margin-left: 30%;
+  /* background-color: aliceblue; */
+  /* background-color: yellow;  */
+}
+/* .idvalue{
+  width: 20%;
+} */
+.butt1{
+  width: 25%;
+  padding: 7px;
+  /* border: 1px solid rgb(0, 68, 255); */
+  background-color: #274b8d;
+  color: white;
+  position: relative;
+  border-radius: 15px;
+  cursor: pointer;
+  /* float: left; */
+  /* box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); */
+
+  
+}
+
+
+.butt:hover{
+    background-color: rgb(19, 19, 177);
+    /* border: 1px solid aquamarine; */
+}
+
