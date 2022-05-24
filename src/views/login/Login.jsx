@@ -75,6 +75,9 @@ function Login() {
     <div className="login">
       <HeaderOne />
       <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
+      <div className="image">
+                <img src="../../public/login.png" alt=""/>
+            </div>
         <h3 className="header">Login</h3>
         <div className="form1">
           <div className="justify-content-center row g-3 align-items-center">
@@ -135,14 +138,15 @@ function Login() {
               type="submit"
               className="btn btn-primary w-50"
               onClick={handleSubmit}
+              style={{borderRadius: "20px"}}
             >
               Submit
             </button>
           </div>
         </div>
-        <Link to="" className="d-flex forgetPass justify-content-center">
+        {/* <Link to="" className="d-flex forgetPass justify-content-center">
           Forget Password?
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import TestDetails from "../views/test_details/TestDetails";
 import TestRecords from "../views/test_records/TestRecords";
 import { AuthProvider } from "../utils/auth";
 import HomePage from './../views/HomePage/HomePage';
+import AdminUpdate from "../views/update/AdminUpdate";
 
 const  Router =() =>{
   return (
@@ -34,7 +35,7 @@ const  Router =() =>{
         <Route path="/adminDashboard" element = {<AdminDashboard/>}></Route>
         <Route path="/testDetails/:patientid" element ={<TestDetails/>}></Route>
         <Route path="/testRecords/:testid" element ={<TestRecords/>}></Route>
-        
+        <Route path="/updateUser/:user_id" element ={<AdminUpdate/>}></Route>
 
       </Routes>
     </BrowserRouter>
