@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import AddPatient from "../views/addPatient/AddPatient";
 import Login from "../views/login/Login";
 import NewTest from "../views/new_test/NewTest";
 import RegisterUser from "../views/registration/RegisterUser";
@@ -35,6 +36,7 @@ const  Router =() =>{
         <Route path="/adminDashboard" element = {<AdminDashboard/>}></Route>
         <Route path="/testDetails/:patientid" element ={<TestDetails/>}></Route>
         <Route path="/testRecords/:testid" element ={<TestRecords/>}></Route>
+        <Route path="/addPatient" element={<AddPatient/>}></Route>
         <Route path="/updateUser/:user_id" element ={<AdminUpdate/>}></Route>
 
       </Routes>
