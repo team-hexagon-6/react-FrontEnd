@@ -86,10 +86,10 @@ const TestDetails =()=>{
     //     return (
     //         <div>
     //             {response.data.test_id}
-    //             <div class="btn-group" role="group" aria-label="Basic example">
-    //             <button type="button" class="btn btn-secondary" onClick={handleButtonTestRecords}>Test Records</button>
-    //             <button type="button" class="btn btn-secondary" onClick={handleStartTest} disabled={disable}>Start Test</button>
-    //             <button type="button" class="btn btn-secondary" onClick={handleActive} disabled={disable} >{disable? 'DeActivated':'DeActive'}</button>
+    //             <div className="btn-group" role="group" aria-label="Basic example">
+    //             <button type="button" className="btn btn-secondary" onClick={handleButtonTestRecords}>Test Records</button>
+    //             <button type="button" className="btn btn-secondary" onClick={handleStartTest} disabled={disable}>Start Test</button>
+    //             <button type="button" className="btn btn-secondary" onClick={handleActive} disabled={disable} >{disable? 'DeActivated':'DeActive'}</button>
     //             </div> <br/>
     //         </div>
             
@@ -136,10 +136,10 @@ const TestDetails =()=>{
         {reportdetails.testdetails.map((row, index)=>(
             <div>
                 {row.id}
-              <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
-              <button type="button" class="btn btn-secondary" onClick={handleStartTest}  disabled={row.confirmed} >Start Test</button>
-              <button type="button" class="btn btn-secondary" onClick={handleActive} disabled={row.confirmed} data-id={row.id} >{row.confirmed? 'DeActivated':'DeActive'}</button>
+              <div className="btn-group" role="group" aria-label="Basic example">
+              <button type="button" className="btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
+              <button type="button" className="btn btn-secondary" onClick={handleStartTest}  disabled={row.confirmed} >Start Test</button>
+              <button type="button" className="btn btn-secondary" onClick={handleActive} disabled={row.confirmed} data-id={row.id} >{row.confirmed? 'DeActivated':'DeActive'}</button>
               </div> <br/>
             </div>
 

@@ -54,6 +54,7 @@ const RegisterUser = () => {
         } 
         else {
             try {
+                console.log(user_type);
                 const response = await AuthServices.register({ user_id, user_type, password });
                 if(response.status===201){
                     toast.success('Registration Successfull', {
@@ -70,7 +71,7 @@ const RegisterUser = () => {
                 
 
             } catch (error) {
-                toast.error(`User with ID: ${user_id} already exists`, {
+                toast.error(`Registration Failed`, {
                     position: "top-center",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -94,12 +95,11 @@ const RegisterUser = () => {
 
         }
         catch(err){
-            console.log(err);
+            // console.log(err);
             
         }
-        
     }
-    console.log(userTypes);
+    // console.log(userTypes);
            
     if (userTypes){
     return (

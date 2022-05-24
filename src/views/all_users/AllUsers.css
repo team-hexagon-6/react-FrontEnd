@@ -16,6 +16,7 @@
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
+    display: inline-block;
 }
 
 .card_title {
@@ -23,6 +24,9 @@
     border-bottom: 1px solid #1376BD;
 }
 
-.update_button {
-
+.image {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
 }
+
