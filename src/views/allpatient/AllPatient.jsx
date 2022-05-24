@@ -19,6 +19,7 @@ const AllPatient =  () => {
   const [names,setnames] = useState(['Bruce', 'Clark', 'Diana','Bruce1', 'Clark1', 'Diana1','Bruce2', 'Clark2', 'Diana2']);
   const [filter, setfilter] = useState('');
   const [patient_id, setPatientId] = useState('');
+  
   const [all_ids, setAllPatient] = useState([]);
 
     const navigate = useNavigate();
