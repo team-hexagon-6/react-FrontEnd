@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderOne from "../../components/headers/HeaderOne";
 import { Link } from "react-router-dom";
 import ExaminerServices from "../../services/API/ExaminerServices";
@@ -20,6 +20,8 @@ function AddPatient() {
   const [state, setState] = useState(formValues);
   const [errorData, setErrorData] = useState(formValues);
 
+  const [genderTypes, setGenderTypes] = useState([]);
+
   const errors = {};
   const handleValidity = (e) => {
     setState({
@@ -38,11 +40,12 @@ function AddPatient() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { value, error } = Validation.addPatient(state);
-    // console.log(state);
+    console.log(state);
     if (error) {
       error.details.map((item) => {
         errors[item.path[0]] = item.message;
       });
+      console.log(errors);
     } else {
       try {
         const response = await ExaminerServices.addPatient(state);
@@ -52,6 +55,20 @@ function AddPatient() {
       }
     }
     setErrorData(errors);
+  };
+
+  useEffect(() => {
+    getGenderTypes();
+  }, []);
+
+  const getGenderTypes = async () => {
+    try {
+      const genderType = await ExaminerServices.getGenderTypes();
+      console.log(genderType);
+      setGenderTypes(genderType.data.data);
+    } catch (err) {
+      // console.log(err);
+    }
   };
 
   return (
@@ -237,14 +254,21 @@ function AddPatient() {
                 Gender
               </Form.Label>
               <Col sm={1}>
-                <DropdownButton
-                  bsPrefix="button1"
-                  id="dropdown-basic-button"
-                  title={state.Gender == "" ? "Gender" : state.Gender}
-                  onSelect={handleSelect}
-                >
-                  <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
-                  <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
+                {console.log("Gender types are", genderTypes)}
+                <DropdownButton bsPrefix="button1" id="dropdown-basic-button">
+                  {genderTypes.map((gender, key) => {
+                    return (
+                      <Dropdown.Item
+                        title={state.Gender == "" ? "Gender" : gender.name}
+                        onSelect={handleSelect}
+                        eventKey={gender.slug}
+                      >
+                        {gender.name}
+                      </Dropdown.Item>
+                    );
+                  })}
+                  {/* <Dropdown.Item eventKey="Male">Male</Dropdown.Item> */}
+                  {/* <Dropdown.Item eventKey="Female">Female</Dropdown.Item> */}
                 </DropdownButton>
               </Col>
               <Row>

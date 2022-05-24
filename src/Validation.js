@@ -127,6 +127,7 @@ const addPatient = (data) => {
       })
       .required(),
     Gender: Joi.string().required(),
+    PatientID: Joi.string().required(),
   });
   const { error, value } = addPatientSchema.validate(data, {
     abortEarly: false,
@@ -164,7 +165,7 @@ const imageValidation = (fileInput) => {
 };
 const login = (data) => {
   const reg_schema = Joi.object({
-    username: Joi.string().alphanum().min(3).max(30).required(),
+    username: Joi.string().min(3).max(30).required(),
 
     password: Joi.string().pattern(
       new RegExp(

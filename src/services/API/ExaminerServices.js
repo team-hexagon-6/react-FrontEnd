@@ -15,7 +15,7 @@ const getpatientdetails = (patientid) => {
 const addPatient = (data) => {
   return axios({
     method: "post",
-    url: APIEndpoint + "/add-new-patient",
+    url: APIEndpoint + "/patient/add-new-patient",
     data: {
       patient_id: data["PatientID"],
       firstname: data["First Name"],
@@ -87,6 +87,13 @@ const gettesttypes = () => {
     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
+const getGenderTypes = () => {
+  return axios({
+    method: "get",
+    url: APIEndpoint + "/patient/gender-types",
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
 
 const confirmtest = (test_id, patient_id) => {
   return axios({
@@ -109,4 +116,5 @@ export default {
   createtest,
   confirmtest,
   addPatient,
+  getGenderTypes,
 };
