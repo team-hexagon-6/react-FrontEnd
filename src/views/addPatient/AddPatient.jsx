@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import HeaderOne from "../../components/headers/HeaderOne";
 import { Link } from "react-router-dom";
 import ExaminerServices from "../../services/API/ExaminerServices";
@@ -14,13 +14,33 @@ function AddPatient() {
     "Contact Number": "",
     Email: "",
     Birthday: "",
-    Gender: "",
-    PatientID: "P12345679",
+    GenderName: "",
+    GenderValue:"",
   };
+
+  
   const [state, setState] = useState(formValues);
   const [errorData, setErrorData] = useState(formValues);
-
+  const [genderTypes, setgenderTypes] = useState([])
   const errors = {};
+
+  useEffect(()=>{
+    getGenderTypes();
+ },[])
+
+ const getGenderTypes=async()=>{
+     try{
+         const genderType= await ExaminerServices.getgendertypes();
+         console.log(genderType.data.data);
+         setgenderTypes( genderType.data.data);
+
+     }
+     catch(err){
+         // console.log(err);
+         
+     }
+ }
+
   const handleValidity = (e) => {
     setState({
       ...state,
@@ -28,10 +48,12 @@ function AddPatient() {
     });
   };
   const handleSelect = (event) => {
-    console.log("event is", event);
+    
+    console.log("event is",event.split(',')[0]);
     setState({
       ...state,
-      Gender: event,
+      GenderName:event.split(',')[0],
+      GenderValue: event.split(',')[1]
     });
   };
 
@@ -45,6 +67,7 @@ function AddPatient() {
       });
     } else {
       try {
+        console.log(state);
         const response = await ExaminerServices.addPatient(state);
         console.log(response);
       } catch (error) {
@@ -53,6 +76,8 @@ function AddPatient() {
     }
     setErrorData(errors);
   };
+
+
 
   return (
     <div>
@@ -193,6 +218,8 @@ function AddPatient() {
                 className="form-control"
                 aria-describedby="passwordHelpInline"
                 onChange={handleValidity}
+                style={{width:'204px'}}
+              
               />
             </div>
           </div>
@@ -227,35 +254,35 @@ function AddPatient() {
             </p>
           )} */}
           <div className="flex justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center"></div>
-            <Form.Group
-              as={Row}
-              className="fw-bold col-xl-12 mb-3 mx-auto"
-              controlId="Gender"
-            >
-              <Form.Label className="fa" column sm={4}>
+            <div className="col-3 text-center">
+              <Form.Label className="col-form-label" style={{ margin: " 0px  20px" }} >
                 Gender
               </Form.Label>
-              <Col sm={1}>
+            </div>
+            <div className="col-6">
+              
                 <DropdownButton
                   bsPrefix="button1"
                   id="dropdown-basic-button"
-                  title={state.Gender == "" ? "Gender" : state.Gender}
+                  title={state.GenderName == "" ? "Gender" : state.GenderName}
                   onSelect={handleSelect}
-                >
-                  <Dropdown.Item eventKey="Male">Male</Dropdown.Item>
-                  <Dropdown.Item eventKey="Female">Female</Dropdown.Item>
+                > {genderTypes.map((row)=>(
+                  
+                  <Dropdown.Item eventKey={[row.name,row.slug]}>{row.name}</Dropdown.Item>
+                  
+                  ))}
                 </DropdownButton>
-              </Col>
+              
+              </div>
               <Row>
-                <Col></Col>
-                <Col sm={8}>
-                  {errorData["Gender"] !== "" && (
-                    <p className="error">{errorData["Gender"]}</p>
+                <Col >
+                  {errorData["GenderName"] !== "" && (
+                    <p   className="d-flex justify-content-center"
+                    style={{ color: "red" }}>{errorData["GenderName"]}</p>
                   )}
                 </Col>
               </Row>
-            </Form.Group>
+          
           </div>
           <div className="btn-container d-flex justify-content-center ">
             <button

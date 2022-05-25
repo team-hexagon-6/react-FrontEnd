@@ -1,6 +1,7 @@
 import config from "../../config.json";
 import axios from "axios";
 import token from "../Token";
+import { genderTypes } from './../../../../node-server/prisma/seed/genderTypes';
 
 //API endpoint
 const APIEndpoint = config.DOMAIN_NAME + "/api";
@@ -15,28 +16,28 @@ const getpatientdetails = (patientid) => {
 const addPatient = (data) => {
   return axios({
     method: "post",
-    url: APIEndpoint + "/add-new-patient",
+    url: APIEndpoint + "/patient/add-new-patient",
     data: {
-      patient_id: data["PatientID"],
+      patient_id:"P1234566669",
       firstname: data["First Name"],
       lastname: data["Last Name"],
       nic: data["NIC"],
       contact_no: data["Contact Number"],
       email: data["Email"],
       birthday: data["Birthday"],
-      gender_type: data["Gender"],
+      gender_type: data["GenderValue"],
     },
     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
 
-const getpatienttestdetails1 = (testrecordid) => {
-  return axios({
-    method: "get",
-    url: APIEndpoint + `/test/test-record/${testrecordid}`,
-    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
-  });
-};
+// const getpatienttestdetails1 = (testrecordid) => {
+//   return axios({
+//     method: "get",
+//     url: APIEndpoint + `/test/test-record/${testrecordid}`,
+//     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+//   });
+// };
 
 const getpatienttestdetails = (skip, take, patient_id) => {
   return axios({
@@ -47,6 +48,15 @@ const getpatienttestdetails = (skip, take, patient_id) => {
     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
+
+const getgendertypes = () => {
+  return axios({
+    method: "get",
+    url: APIEndpoint + "/patient/gender-types",
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
+
 
 const getpatienttestrecordsforatest = (testid) => {
   return axios({
@@ -100,13 +110,10 @@ const confirmtest = (test_id, patient_id) => {
   });
 };
 
-
-
-  
-const getPatients =()=>{
+const getPatients =(skip,take)=>{
   return axios({
     method: "get",
-    url: APIEndpoint + '/get-all-patients',
+    url: APIEndpoint + `/patient/get-all-patients?skip=${skip}&take=${take}`,
     headers: {Authorization: `Bearer ${token.getAccessToken()}`}
   });
 
@@ -121,5 +128,6 @@ export default{
    createtest,
    confirmtest,
    getPatients,
-   addPatient
+   addPatient,
+   getgendertypes
 }

@@ -1,47 +1,65 @@
-.optionss{
+.options{
     /* height: 50%; */
     background-color: rgba(255,255,255,0.5);
     border: 1px solid #1376bdf5;
     border-left:15px solid #1376bdf5 ;
-    /* border-radius: 5px; */
     margin: auto;
-    width:40%;
+    width: 30%;
     margin-top:150px;
-    padding-left: 150px;
-    padding-right: 150px;
+    padding-left: 100px;
+    padding-right: 100px;
     padding-top: 100px;
     padding-bottom: 100px;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-    height: auto;
     /* width: 200px; */
-    
+  
 
 }
+
+
 
 #update{
     margin-left: 50px;
+    background-color: #1376bdf5;
 }
 
 
 
-.butts{
+.buttz{
     width: 100%;
     padding: 7px;
     /* border: 1px solid rgb(0, 68, 255); */
-    background-color: #1376bdf5;
+    background-color: #274b8d;
     color: white;
     position: relative;
     border-radius: 15px;
     cursor: pointer;
+    /* float: left; */
     /* box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); */
 
     
 }
 
-.butts:hover{
-    background-color: blue;
-    /* border: 1px solid aquamarine; */
+
+.butt1{
+  width: 25%;
+  padding: 7px;
+  /* border: 1px solid rgb(0, 68, 255); */
+  background-color: #274b8d;
+  color: white;
+  position: relative;
+  border-radius: 15px;
+  cursor: pointer;
+  /* float: left; */
+  /* box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%); */
+
+  
 }
 
+
+#update:hover{
+    background-color: rgb(19, 19, 177);
+    /* border: 1px solid aquamarine; */
+}
 
 

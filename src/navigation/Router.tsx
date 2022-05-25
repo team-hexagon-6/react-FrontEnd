@@ -4,13 +4,13 @@ import AddPatient from "../views/addPatient/AddPatient";
 import Login from "../views/login/Login";
 import NewTest from "../views/new_test/NewTest";
 import RegisterUser from "../views/registration/RegisterUser";
-import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
+import UpdateProfile from "../views/UpdateProfile/UpdateProfile";
 import PatientReport from './../views/patientReport/PatientReport';
 import { RequireAuth } from "../utils/requireAuth";
 
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
-import Clerkpage from "../views/Clerkpage/Clerkpage";
+import Examiner from "../views/Examiner/Examiner";
 import AllPatient from "../views/allpatient/AllPatient";
 import Doctor from "../views/Doctor/Doctor";
 import AdminDashboard from "../views/dashboard/AdminDashboard";
@@ -20,6 +20,10 @@ import { AuthProvider } from "../utils/auth";
 import HomePage from './../views/HomePage/HomePage';
 import AdminUpdate from "../views/update/AdminUpdate";
 import About from "../views/about/About";
+import ViewPatient from "../views/View_patient/view_patient";
+
+// FIXME: This is a temporary solution to get the pagination working.
+import TestingPage from "../views/testingroute/TestingPage";
 
 const  Router =() =>{
   return (
@@ -33,11 +37,12 @@ const  Router =() =>{
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registerUser" element ={<RequireAuth><RegisterUser/></RequireAuth>}></Route>
-        <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
+        <Route path="/updateProfile" element ={<UpdateProfile/>}></Route>
         <Route path="/newTest/:patientid" element = {<NewTest/>}></Route>
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
-        <Route path="/clerk" element = {<Clerkpage/>}></Route>
+        <Route path="/examiner" element = {<Examiner/>}></Route>
         <Route path="/allpatients" element = {<AllPatient/>}></Route>
+        <Route path="/viewPatient" element = {<ViewPatient />}></Route>
         <Route path="/doctor" element = {<Doctor/>}></Route>
 
         <Route path="/patientReport/:patientid/:testid" element ={<PatientReport/>}></Route>
@@ -48,6 +53,8 @@ const  Router =() =>{
         <Route path="/addPatient" element={<AddPatient/>}></Route>
         <Route path="/updateUser/:user_id" element ={<AdminUpdate/>}></Route>
 
+        {/* FIXME: this is testing route just for testing remove when the deploying */}
+        <Route path="/testing" element ={<TestingPage/>}></Route>
       </Routes>
     </BrowserRouter>
     </AuthProvider>

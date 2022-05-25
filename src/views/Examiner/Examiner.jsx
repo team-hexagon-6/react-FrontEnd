@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
-import './clerk.css'
+import './Examiner.css'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import HeaderOne from '../../components/headers/HeaderOne';
 
-const Clerkpage =()=>{
+
+const Examiner =()=>{
+  let navigate=useNavigate();
+  const [patient_id, setPatientId] = useState('');
 
   // handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -44,16 +50,29 @@ const Clerkpage =()=>{
   return (
 
       <div>
+         <HeaderOne />
         <div className='optionss'>
-            <button className='butts'  onClick={()=>{}}>Add Patient</button>
+            <button className='butts'  onClick={()=>{ navigate("/addPatient")}}>Add Patient</button>
             <br></br>
             <br></br>
             <br></br>
-            <button className='butts' onClick={()=>{}}>View All Patients</button>
+            <button className='butts' onClick={()=>{ navigate('/allpatients')}}>View All Patients</button>
             <br></br>
             <br></br>
             <br></br>
-            <button className='butts' onClick={()=>{}}>View Patient</button>
+            {/* <button className='butts' onClick={()=>{ navigate('/viewPatient')}}>View Patient</button> */}
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                aria-describedby="passwordHelpInline"
+                value={patient_id}
+                onChange={(event)=>setPatientId(event.target.value)}
+                required
+              />
+               <button className="btn btn-outline-secondary" type="button" id="button-addon2"  onClick={()=>{navigate(`/testDetails/${patient_id}`)}}>Search Patient</button>
+
+            </div>
             <br></br>
             <br></br>
             <br></br>
@@ -68,4 +87,4 @@ const Clerkpage =()=>{
 }
 
 
-export default Clerkpage;
+export default Examiner;

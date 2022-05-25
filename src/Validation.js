@@ -35,7 +35,7 @@ const registration = (data) => {
   return { value, error };
 };
 
-const ValidateUserCompleteRegistration = (data) => {
+const validateupdateprofile = (data) => {
   const UserCompleteRegistrationValidationSchema = Joi.object({
     "First Name": Joi.string()
       .regex(/^[A-Z][a-z0-9_-]{2,}$/)
@@ -126,7 +126,8 @@ const addPatient = (data) => {
         "date.max": `Age must be 18+;"Birthday" must be before or equal to "01-01-2005`,
       })
       .required(),
-    Gender: Joi.string().required(),
+    GenderName: Joi.string().required(),
+    GenderValue: Joi.string().required()
   });
   const { error, value } = addPatientSchema.validate(data, {
     abortEarly: false,
@@ -198,7 +199,7 @@ const adminUpdatePwd = (data) => {
 
 export default {
   registration,
-  ValidateUserCompleteRegistration,
+  validateupdateprofile,
   new_test,
   imageValidation,
   login,

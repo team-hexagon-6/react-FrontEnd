@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import './doctor.css'
+import './view_patient.css'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react"; 
 
-const Doctor =()=> {
+const ViewPatient =()=> {
   const [patient_id, setPatientId] = useState('');
   let navigate=useNavigate();
 
     return (
       <div>
           <div className='options'>
-          
-              {/* <input
+          <div className="input-group mb-3">
+              <input
                 type="text"
                 className="form-control"
                 aria-describedby="passwordHelpInline"
@@ -19,27 +19,9 @@ const Doctor =()=> {
                 onChange={(event)=>setPatientId(event.target.value)}
                 required
               />
-               <button className="btn btn-outline-secondary" type="button" id="button-addon2"  onClick={()=>{navigate(`/testDetails/${patient_id}`)}}>Show Patient</button> */}
-               
-      
-           
-            <button className='butts' onClick={()=>{ navigate('/allpatients')}}>View All Patients</button>
-            <br></br>
-            <br></br>
-            <br></br>
-            <button className='butts' onClick={()=>{ navigate('/viewPatient')}}>View Patient</button>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-            <br></br>
-           
-        
+               <button className="btn btn-outline-secondary" type="button" id="button-addon2"  onClick={()=>{navigate(`/testDetails/${patient_id}`)}}>Show Patient</button>
 
-        
-
-
-          
+            </div>
                     <br></br>
                     <br></br>
                     <br></br>
@@ -53,4 +35,4 @@ const Doctor =()=> {
   }
 
 
-export default Doctor;
+export default ViewPatient ;

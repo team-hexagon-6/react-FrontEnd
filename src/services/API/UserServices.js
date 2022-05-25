@@ -5,12 +5,10 @@ import token from "../Token";
 //API endpoint
 const APIEndpoint = config.DOMAIN_NAME + "/api";
 
-const AuthUserCompleteRegistration = (data) => {
-  console.log(data);
-  console.log("token ", token.getAccessToken());
+const updateprofile = (data) => {
   return axios({
     method: "post",
-    url: APIEndpoint + "/update-profile",
+    url: APIEndpoint + "/user/update-profile",
     data: {
       firstname: data["First Name"],
       lastname: data["Last Name"],
@@ -32,6 +30,6 @@ const getUser = () => {
 }
 
 export default{
-    AuthUserCompleteRegistration,
+    updateprofile,
     getUser,
 }

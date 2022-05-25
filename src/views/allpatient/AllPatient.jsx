@@ -25,7 +25,7 @@ const AllPatient =  () => {
     const navigate = useNavigate();
     const navigateMe = () => {
       // console.log("delete user fn");
-      navigate(`/doctor`);
+      navigate(`/testDetails/${patient_id}`);
     };
 
 
@@ -35,8 +35,9 @@ const AllPatient =  () => {
   
     const getPatients = async () => {
       try {
-          const response = await ExaminerServices.getPatients();
-          setAllPatient(response.data);
+          const response = await ExaminerServices.getPatients(0, 50);
+          console.log(response);
+          setAllPatient(response.data.data);
 
       } catch (error) {
         console.log(error);
@@ -59,6 +60,7 @@ const AllPatient =  () => {
                 value={filter}
                 onChange={(event)=>{setfilter(event.target.value)}}
               />
+              <button className="btn btn-outline-secondary" type="button" id="button-addon2">Filter</button>
                
 
             </div>
@@ -86,8 +88,8 @@ const AllPatient =  () => {
         <thead>
           <tr>
             <th>Patient ID</th>
-            <th></th>
-            <th></th>
+            <th>First Name</th>
+            <th>Last Name</th>
             <th></th>
             <th></th>
             <th></th>
@@ -101,10 +103,10 @@ const AllPatient =  () => {
         </thead>
         <tbody style={{ color: "black" }}>
           {/* sample database result object to html convert with search enabled */}
-          {names.filter((name)=>{
+          {all_ids.filter((name)=>{
             if(filter == ''){
               return name;
-            }else if(name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())){
+            }else if((name.firstname + name.lastname).toLocaleLowerCase().includes(filter.toLocaleLowerCase())){
               return name;
             }
           }).map((name) => {
@@ -112,9 +114,9 @@ const AllPatient =  () => {
 
               return (
                 <tr key={name}>
-                  <td>{name}</td>
                   <td></td>
-                  <td></td>
+                  <td>{name.firstname}</td>
+                  <td>{name.lastname}</td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -125,6 +127,8 @@ const AllPatient =  () => {
                   <Button
                       className="btn-primary"
                       style={{ borderRadius: "20px" }}
+                      // data-id={name.patient_id}
+                      // onClick={(event)=>{navigate(`/testDetails/${event.currentTarget.getAttribute("data-id")}`)}}
                     >
                       View
                     </Button>
@@ -133,6 +137,8 @@ const AllPatient =  () => {
                     <Button
                       className="btn-primary"
                       style={{ borderRadius: "20px" }}
+                       // data-id={name.patient_id}
+                      // onClick={(event)=>{navigate(`/testDetails/${event.currentTarget.getAttribute("data-id")}`)}}
                     >
                       Do Test
                     </Button></td>
@@ -140,6 +146,8 @@ const AllPatient =  () => {
                     <Button
                       className="btn-primary"
                       style={{ borderRadius: "20px" }}
+                       // data-id={name.patient_id}
+                      // onClick={(event)=>{navigate(`/testDetails/${event.currentTarget.getAttribute("data-id")}`)}}
                     >
                       Update
                     </Button>
