@@ -4,7 +4,7 @@ import AddPatient from "../views/addPatient/AddPatient";
 import Login from "../views/login/Login";
 import NewTest from "../views/new_test/NewTest";
 import RegisterUser from "../views/registration/RegisterUser";
-import UserCompleteRegistration from "../views/UserCompleteRegistration/UserCompleteRegistration";
+import UpdateProfile from "../views/UpdateProfile/UpdateProfile";
 import PatientReport from './../views/patientReport/PatientReport';
 import { RequireAuth } from "../utils/requireAuth";
 
@@ -35,7 +35,7 @@ const  Router =() =>{
 
         <Route path="/login" element={<Login />} />
         <Route path="/registerUser" element ={<RequireAuth><RegisterUser/></RequireAuth>}></Route>
-        <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
+        <Route path="/updateProfile" element ={<UpdateProfile/>}></Route>
         <Route path="/newTest/:patientid" element = {<NewTest/>}></Route>
         <Route path="/allUsers" element = {<AllUsers/>}></Route>
         <Route path="/examiner" element = {<Examiner/>}></Route>

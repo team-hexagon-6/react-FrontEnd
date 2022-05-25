@@ -1,14 +1,14 @@
 import React from 'react'
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import "./UserCompleteRegistration.css";
+import "./UpdateProfile.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row,Col } from 'react-bootstrap';
 import HeaderOne from "../../components/headers/HeaderOne";
 import UserServices from '../../services/API/UserServices';
 import Validation  from '../../Validation';
 
-const  UserCompleteRegistration =() => {
+const  UpdateProfile =() => {
     
     
     const formValues={
@@ -31,7 +31,7 @@ const  UserCompleteRegistration =() => {
 
     const errors = {};
     const handleSubmit=async(event)=>{
-        const {value,error}=Validation.ValidateUserCompleteRegistration(state)
+        const {value,error}=Validation.validateupdateprofile(state)
         event.preventDefault();
         console.log(state);
         if (error) {
@@ -41,7 +41,8 @@ const  UserCompleteRegistration =() => {
         } 
         else {
             try {
-                const response = await UserServices.AuthUserCompleteRegistration(state);
+                const response = await UserServices.updateprofile(state);
+                console.log(response)
             } catch (error) {
                 console.log(error.message);
             }
@@ -117,4 +118,4 @@ const  UserCompleteRegistration =() => {
 }
 
 
-export default UserCompleteRegistration;
+export default UpdateProfile;
