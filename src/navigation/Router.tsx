@@ -24,6 +24,7 @@ import ViewPatient from "../views/View_patient/view_patient";
 
 // FIXME: This is a temporary solution to get the pagination working.
 import TestingPage from "../views/testingroute/TestingPage";
+import Dashboard from "../views/dashboard/Dashboard";
 
 const  Router =() =>{
   return (
@@ -47,6 +48,7 @@ const  Router =() =>{
 
         <Route path="/patientReport/:patientid/:testid" element ={<PatientReport/>}></Route>
         <Route path="*" element = {<NotFound/>}></Route>
+        <Route path="/dashboard" element = {<Dashboard/>}></Route>
         <Route path="/adminDashboard" element = {<AdminDashboard/>}></Route>
         <Route path="/testDetails/:patientid" element ={<TestDetails/>}></Route>
         <Route path="/testRecords/:testid" element ={<TestRecords/>}></Route>
