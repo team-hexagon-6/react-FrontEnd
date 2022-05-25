@@ -53,7 +53,8 @@ function Login() {
             progress: undefined,
           });
           auth.login(username);
-          navigate(redirectPath,{replace:true})
+          // navigate(redirectPath,{replace:true})
+          navigate('/dashboard');
 
         }
       } catch (error) {
