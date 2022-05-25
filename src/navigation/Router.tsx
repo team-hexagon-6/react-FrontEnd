@@ -21,6 +21,9 @@ import HomePage from './../views/HomePage/HomePage';
 import AdminUpdate from "../views/update/AdminUpdate";
 import ViewPatient from "../views/View_patient/view_patient";
 
+// FIXME: This is a temporary solution to get the pagination working.
+import TestingPage from "../views/testingroute/TestingPage";
+
 const  Router =() =>{
   return (
     <AuthProvider> 
@@ -48,6 +51,8 @@ const  Router =() =>{
         <Route path="/addPatient" element={<AddPatient/>}></Route>
         <Route path="/updateUser/:user_id" element ={<AdminUpdate/>}></Route>
 
+        {/* FIXME: this is testing route just for testing remove when the deploying */}
+        <Route path="/testing" element ={<TestingPage/>}></Route>
       </Routes>
     </BrowserRouter>
     </AuthProvider>
