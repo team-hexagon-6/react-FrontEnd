@@ -7,6 +7,7 @@ import { Row,Col } from 'react-bootstrap';
 import HeaderOne from "../../components/headers/HeaderOne";
 import UserServices from '../../services/API/UserServices';
 import Validation  from '../../Validation';
+import { useState,useEffect } from 'react';
 
 const  UpdateProfile =() => {
     
@@ -20,8 +21,9 @@ const  UpdateProfile =() => {
         'Birthday' :''
     }
 
-    const [state,setState]=React.useState(formValues);
-    const [errordata,setError]=React.useState(formValues);
+    const [state,setState]=useState(formValues);
+    const [errordata,setError]=useState(formValues);
+    const [user, setUser] = useState([])
     
     const handleUser=(event)=>{
         setState({
@@ -30,6 +32,22 @@ const  UpdateProfile =() => {
     }
 
     const errors = {};
+
+    useEffect(()=>{
+        getUser();
+     },[])
+ 
+     const getUser=async()=>{
+         try{
+             const getuser= await UserServices.getUser();
+             setUser( getuser.data.data);
+ 
+         }
+         catch(err){
+             // console.log(err);
+             
+         }
+     }
     const handleSubmit=async(event)=>{
         const {value,error}=Validation.validateupdateprofile(state)
         event.preventDefault();
@@ -49,17 +67,20 @@ const  UpdateProfile =() => {
         } 
         setError(errors);
     }
+
+
+
   return (
     <div>
     <HeaderOne/>
     <div className='form-container col-xl-5 mt-2 pt-5 mx-auto '>
-        
-        <h1 className='fs-1 text-primary mb-5'>Complete Registration</h1>
+        {console.log(user)}
+        <h1 className='fs-1 text-primary mb-5'>Update Profile</h1>
          <Form onSubmit={handleSubmit} >
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='First Name'>
                 <Form.Label column sm={4}>First Name</Form.Label>
                 <Col sm={6} >
-                <Form.Control  type="text" name='First Name' placeholder='&#xf007; First Name' onChange={handleUser} />
+                <Form.Control  type="text" value={user?.auth?.complete_profile? user.firstname : ''} name='First Name' placeholder='&#xf007; First Name' onChange={handleUser} />
                 {errordata['First Name'] !== '' && <p className="error">{errordata['First Name']}</p>}
                 </Col>
                 
@@ -68,7 +89,7 @@ const  UpdateProfile =() => {
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Last Name'>
                  <Form.Label column sm={4} >Last Name </Form.Label>
                  <Col sm={6}>
-                <Form.Control type="text" name='Last Name' placeholder='&#xf234; Last Name' onChange={handleUser}/>
+                <Form.Control type="text" value={user?.auth?.complete_profile? user.lastname : ''} name='Last Name' placeholder='&#xf234; Last Name' onChange={handleUser}/>
                 {errordata['Last Name'] !== '' && <p className="error">{errordata['Last Name']}</p>}
                 </Col>
                 
@@ -77,7 +98,7 @@ const  UpdateProfile =() => {
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='NIC'>
                 <Form.Label column sm={4} >NIC</Form.Label>
                 <Col sm={6}>
-                <Form.Control type="text" name='NIC' placeholder='&#xf2c2; NIC' onChange={handleUser}/>
+                <Form.Control type="text" value={user?.auth?.complete_profile? user.nic : ''} name='NIC' placeholder='&#xf2c2; NIC' onChange={handleUser}/>
                 {errordata.NIC !== '' && <p className="error">{errordata.NIC}</p>}
                 </Col>
                 
@@ -86,7 +107,7 @@ const  UpdateProfile =() => {
             <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Contact Number'>
                 <Form.Label column sm={4}>Contact Number</Form.Label>
                 <Col sm={6}>
-                <Form.Control type="text" name='Contact Number' placeholder='&#xf095; Contact Number' onChange={handleUser}/>
+                <Form.Control type="text" value={user?.auth?.complete_profile? user.contact_no : ''} name='Contact Number' placeholder='&#xf095; Contact Number' onChange={handleUser}/>
                 {errordata['Contact Number'] !== '' && <p className="error">{errordata['Contact Number']}</p>}
                 </Col>
                 
@@ -95,7 +116,7 @@ const  UpdateProfile =() => {
            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Email'>
                <Form.Label column sm={4} >Email</Form.Label>
                <Col sm={6}>
-               <Form.Control type="text" name='Email' placeholder='&#xf0e0; Email' onChange={handleUser}/>
+               <Form.Control type="text" value={user?.auth?.complete_profile? user.email : ''} name='Email' placeholder='&#xf0e0; Email' onChange={handleUser}/>
                {errordata.Email !== '' && <p className="error">{errordata.Email}</p>}
                </Col>
                
@@ -104,7 +125,7 @@ const  UpdateProfile =() => {
            <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='Birthday'>
                <Form.Label column sm={4} >Birthday</Form.Label>
                <Col sm={6}>
-               <Form.Control type="date" name='Birthday' placeholder='&#xf1fd; Birthday' onChange={handleUser}/>
+               <Form.Control type="date" value={user?.auth?.complete_profile? user.birthday.split('T')[0] : ''} name='Birthday' placeholder='&#xf1fd; Birthday' onChange={handleUser}/>
                {errordata.Birthday !== '' && <p className="error">{errordata.Birthday}</p>}
                </Col>
               
