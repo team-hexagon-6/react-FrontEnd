@@ -1,0 +1,46 @@
+.row {
+    border-bottom: 1px solid #6ee0d1f5;
+    margin: 10px;
+}
+
+.about_card {
+    overflow: hidden;
+    /* margin: 5px; */
+    /* padding: 5px; */
+}
+
+.container {
+    text-align: center;
+}
+
+img {
+    max-height: 400px;
+}
+
+.footer {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: normal;
+}
+
+.about_header {
+    color: #1376BD;
+    text-align: center;
+}
+
+h6 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.des {
+    /* font-family: Arial, Helvetica, sans-serif; */
+    font-weight: lighter;
+}
+
+.info {
+    margin: 20px;
+    padding: 50px;
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}

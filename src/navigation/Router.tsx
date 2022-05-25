@@ -19,6 +19,7 @@ import TestRecords from "../views/test_records/TestRecords";
 import { AuthProvider } from "../utils/auth";
 import HomePage from './../views/HomePage/HomePage';
 import AdminUpdate from "../views/update/AdminUpdate";
+import About from "../views/about/About";
 
 const  Router =() =>{
   return (
@@ -29,6 +30,7 @@ const  Router =() =>{
         <Route path="/" element={<HomePage />} />
         <Route path="*" element = {<NotFound/>}></Route>
 
+        <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registerUser" element ={<RequireAuth><RegisterUser/></RequireAuth>}></Route>
         <Route path="/userCompleteRegistration" element ={<UserCompleteRegistration/>}></Route>
