@@ -16,6 +16,7 @@ import TestRecords from "../views/test_records/TestRecords";
 import { AuthProvider } from "../utils/auth";
 import HomePage from './../views/HomePage/HomePage';
 import AdminUpdate from "../views/update/AdminUpdate";
+import UpdateProfile from "../views/updatePatientprofile/UpdateProfile";
 
 const  Router =() =>{
   return (
@@ -38,7 +39,7 @@ const  Router =() =>{
         <Route path="/testRecords/:testid" element ={<TestRecords/>}></Route>
         <Route path="/addPatient" element={<AddPatient/>}></Route>
         <Route path="/updateUser/:user_id" element ={<AdminUpdate/>}></Route>
-
+        <Route path="/updatePatient/:patient_id" element ={<UpdateProfile/>}></Route>
       </Routes>
     </BrowserRouter>
     </AuthProvider>

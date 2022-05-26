@@ -1,0 +1,19 @@
+{/* <nav className='primary-nav'>
+    <NavLink to='/'>
+        Home
+    </NavLink> <br />
+    <NavLink to='/about'>
+        About
+    </NavLink> <br />
+    <NavLink to='/products'>
+        Products
+    </NavLink><br />
+    <NavLink to='/profile'>
+        Profile
+    </NavLink> <br />
+    {
+    !auth.user && (<NavLink to='/login'>
+        Login
+    </NavLink>)
+    }
+</nav> */}
