@@ -9,6 +9,8 @@ import { useNavigate,useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuth } from "../../utils/auth";
 
+import Messages from "../../helpers/Messages";
+
 function Login() {
   const auth=useAuth();
   const navigate =useNavigate();
@@ -43,30 +45,37 @@ function Login() {
         const response = await AuthServices.login({ username, password });
         console.log("response - 2", response);
         if (response.status === 200) {
-          toast.success("Login Successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          // toast.success("Login Successfully", {
+          //   position: "top-center",
+          //   autoClose: 5000,
+          //   hideProgressBar: false,
+          //   closeOnClick: true,
+          //   pauseOnHover: true,
+          //   draggable: true,
+          //   progress: undefined,
+          // });
+          Messages.SuccessMessage("Successfully Logged In.");
+
           auth.login(username);
           // navigate(redirectPath,{replace:true})
           navigate('/dashboard');
 
         }
       } catch (error) {
-        console.log(error.message);
-        toast.error(error.message, {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
+        // console.log("error response : ",error.response.data.message);
+        // console.log(error.response);
+        // toast.error(error.message, {
+        //   position: "top-center",
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        // });
+        Messages.ErrorMessage({
+          error :error,
+          main_part: "LOGIN FAILED",
         });
       }
     }
