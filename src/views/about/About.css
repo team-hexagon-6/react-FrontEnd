@@ -1,14 +1,10 @@
-.row {
-    margin: 10px;
-}
-
 .about_card {
     overflow: hidden;
     /* margin: 5px; */
     /* padding: 5px; */
 }
 
-.container {
+.cont {
     text-align: center;
 }
 
@@ -27,7 +23,7 @@ img {
     text-align: center;
 }
 
-h6 {
+.h_6 {
     font-family: Arial, Helvetica, sans-serif;
 }
 

@@ -66,7 +66,7 @@ const RegisterUser = () => {
                         draggable: true,
                         progress: undefined,
                         });
-                    setTimeout(navigate('/login?registration=successful'), 3000);
+                    setTimeout(navigate('/dashboard'), 3000);
                 }
                 
 

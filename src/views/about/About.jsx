@@ -10,14 +10,14 @@ const About = () => {
 
             <h1 className="about_header">About Us...</h1>
 
-            <div className="container justify-content-center">
+            <div className="container cont justify-content-center">
 
                 <div className="row">
                     <div className="about_card col-lg-3 clo-md-6">
                         <div className="image">
                             <img src="../../public/doc_ex.png" alt="" />
                         </div>
-                        <h6>Register as a Doctor or an Examiner</h6>
+                        <h6 className="h_6">Register as a Doctor or an Examiner</h6>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
 
@@ -25,7 +25,7 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/about.png" alt="" />
                         </div>
-                        <h6>Add Patients for Tests</h6>
+                        <h6 className="h_6">Add Patients for Tests</h6>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
 
@@ -33,7 +33,7 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/test.png" alt="" />
                         </div>
-                        <h6>Spiral & Wave Testing</h6>
+                        <h6 className="h_6">Spiral & Wave Testing</h6>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
 
@@ -41,14 +41,14 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/report.png" alt="" />
                         </div>
-                        <h6>Save and View Test Records</h6>
+                        <h6 className="h_6">Save and View Test Records</h6>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
                 </div>
 
             </div>
 
-            <div className="container footer justify-content-center">
+            <div className="container cont footer justify-content-center">
 
                 <div className="row">
                     <div className="col-lg-3">
