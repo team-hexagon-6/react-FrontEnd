@@ -1,7 +1,7 @@
 import config from "../../config.json";
 import axios from "axios";
 import token from "../Token";
-import { genderTypes } from './../../../../node-server/prisma/seed/genderTypes';
+// import { genderTypes } from './../../../../node-server/prisma/seed/genderTypes';
 
 //API endpoint
 const APIEndpoint = config.DOMAIN_NAME + "/api";
@@ -18,7 +18,7 @@ const addPatient = (data) => {
     method: "post",
     url: APIEndpoint + "/patient/add-new-patient",
     data: {
-      patient_id:"P211269",
+      patient_id: "P211269",
       firstname: data["First Name"],
       lastname: data["Last Name"],
       nic: data["NIC"],
@@ -110,24 +110,24 @@ const confirmtest = (test_id, patient_id) => {
   });
 };
 
-const getPatients =(skip,take)=>{
+const getPatients = (skip, take) => {
   return axios({
     method: "get",
     url: APIEndpoint + `/patient/get-all-patients?skip=${skip}&take=${take}`,
-    headers: {Authorization: `Bearer ${token.getAccessToken()}`}
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` }
   });
 
 }
 
-export default{
-   getpatientdetails,
-   dotest,
-   gettesttypes,
-   getpatienttestdetails,
-   getpatienttestrecordsforatest,
-   createtest,
-   confirmtest,
-   getPatients,
-   addPatient,
-   getgendertypes
+export default {
+  getpatientdetails,
+  dotest,
+  gettesttypes,
+  getpatienttestdetails,
+  getpatienttestrecordsforatest,
+  createtest,
+  confirmtest,
+  getPatients,
+  addPatient,
+  getgendertypes
 }
