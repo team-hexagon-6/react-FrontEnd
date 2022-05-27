@@ -5,6 +5,8 @@ import ExaminerServices from "../../services/API/ExaminerServices";
 import "./AddPatient.css";
 import Validation from "../../Validation";
 import { Form, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddPatient() {
   const formValues = {
@@ -23,6 +25,7 @@ function AddPatient() {
   const [errorData, setErrorData] = useState(formValues);
   const [genderTypes, setgenderTypes] = useState([])
   const errors = {};
+  const navigate = useNavigate();
 
   useEffect(()=>{
     getGenderTypes();
@@ -70,8 +73,29 @@ function AddPatient() {
         console.log(state);
         const response = await ExaminerServices.addPatient(state);
         console.log(response);
+        if (response.status === 201) {
+          toast.success("Patient Added Successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        navigate('/dashboard');
+        }
       } catch (error) {
         console.log(error.message);
+        toast.error("Couldn't add patient", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     }
     setErrorData(errors);
@@ -83,7 +107,7 @@ function AddPatient() {
     <div>
       <HeaderOne />
       <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
-        <h3 className="header">Add Patient</h3>
+        <h3 className="fs-1 text-primary mt-4">Add Patient</h3>
         <div className="form1">
           <div className="justify-content-center row g-3 align-items-center">
             <div className="col-3 text-center">
@@ -254,12 +278,12 @@ function AddPatient() {
             </p>
           )} */}
           <div className="flex justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <Form.Label className="col-form-label" style={{ margin: " 0px  20px" }} >
+            <div className="col-1 text-center">
+              <Form.Label className="col-form-label" style={{ margin: " 0px  15px" }} >
                 Gender
               </Form.Label>
             </div>
-            <div className="col-6">
+            <div className="col-7">
               
                 <DropdownButton
                   bsPrefix="button1"
