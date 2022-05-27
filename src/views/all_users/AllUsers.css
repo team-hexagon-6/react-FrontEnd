@@ -12,11 +12,11 @@
     padding: 5px;
     width: fit-content;
     color: white;
-    background: #9ac7c1;
+    background: #1376BD;
     border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .card_title {
@@ -30,3 +30,7 @@
     margin: 20px;
 }
 
+.paginate_div {
+    justify-content: center;
+    display: flex;
+}

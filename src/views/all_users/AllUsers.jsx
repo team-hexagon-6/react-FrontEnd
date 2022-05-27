@@ -5,47 +5,67 @@ import { Card, Form, Button, Table, FormControl, InputGroup, DropdownButton, Dro
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AdminServices from "../../services/API/AdminServices";
+import Paginate from "../../components/pagination/paginate";
 
 const AllUsers = () => {
+  
+  //For Pagination
+  const [skip,setSkip] = useState(0);
+  const [take,setTake] = useState(10);
+  const [totalItems,setTotalItems] = useState(0);
+  const changePage = async (skip_value) => {
+    console.log(skip_value);
+    // setSkip(skip_value);
+    getUsers(usertype, skip_value, take);
+  }
 
-  const [usertype, setusertype] = useState('Doctors');
+  const [usertype, setusertype] = useState('doctor');
   //When Doctor or Examiner is clicked
   const displayDoctors = () => {
-    getUsers("doctor");
-    setusertype('Doctors');
+    // setSkip(0);
+    getUsers("doctor", 0, take);
+    setusertype('doctor');
   }
   const displayExaminers = () => {
-    getUsers("examiner");
-    setusertype('Examiners');
+    // setSkip(0);
+    getUsers("examiner", 0, take);
+    setusertype('examiner');
   }
 
   // When update button is clicked
   const navigate = useNavigate();
   const params = useParams();
   const updateUser = (user_id) => {
-
     navigate(`/updateUser/${user_id}`);
+  };
+
+  const deactivateUser = (user_id) => {
+  /////
   };
 
   // Search term
   const [search, setSearch] = useState("");
 
   const [users, setUsers] = useState([]);
-
   useEffect(() => {
-    getUsers("doctor");
+    getUsers("doctor", skip, take);
   }, []);
 
-  const getUsers = async (usertype) => {
+  const getUsers = async (usertype, skip_value, take) => {
+    console.log(skip_value, take, usertype);
     try {
+      let response = null;
       if (usertype === "doctor") {
-        const response = await AdminServices.getDoctors(0, 50);
-        setUsers(response.data.data);
+        response = await AdminServices.getDoctors(skip_value, take);
       }
       else if (usertype === "examiner") {
-        const response = await AdminServices.getExaminers(0, 50);
-        setUsers(response.data.data);
+        response = await AdminServices.getExaminers(skip_value, take);
+        
       }
+      setSkip(skip_value);
+      setUsers(response.data.data);
+      setTotalItems(response.data.total_items);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +81,7 @@ const AllUsers = () => {
 
         <div className="d-flex form">
           <div className="row">
-            <DropdownButton title={usertype} placeholder="&#xf2c2;" id="bg-vertical-dropdown-3" style={{ color: "black" }}>
+            <DropdownButton title={usertype.charAt(0).toUpperCase() + usertype.slice(1)} placeholder="&#xf2c2;" id="bg-vertical-dropdown-3" style={{ color: "black" }}>
               <Dropdown.Item eventKey="1" onClick={displayDoctors}>Doctors</Dropdown.Item>
               <Dropdown.Item eventKey="2" onClick={displayExaminers}>Examiners</Dropdown.Item>
             </DropdownButton>
@@ -69,10 +89,11 @@ const AllUsers = () => {
         </div>
 
         <div className="title_search">
-          <h4 className="category">{usertype}</h4>
-          <input
+          {usertype === 'doctor' && <h4 className="category">Doctors</h4>}
+          {usertype === 'examiner' && <h4 className="category">Examiners</h4>}
+          {/* <input
             type="search"
-            placeholder="  Search a user"
+            placeholder={"   Search " + usertype}
             style={{
               borderRadius: "20px",
               border: "2px solid #1376BD",
@@ -84,7 +105,7 @@ const AllUsers = () => {
               marginTop: "20px",
             }}
             onChange={(event) => setSearch(event.target.value)}
-          />
+          /> */}
         </div>
 
         <div className="user_display">
@@ -95,7 +116,7 @@ const AllUsers = () => {
               </div>
             </div>}
           {users.length !== 0 &&
-            <Table style={{ color: "#1376BD", tableLayout: "fixed", width: "100%" }}>
+            <Table style={{ color: "#1376BD", width: "100%" }}>
               <thead>
                 <tr>
                   <th>User ID</th>
@@ -135,15 +156,27 @@ const AllUsers = () => {
                         <td>{value.nic}</td>
                         <td>{value.contact_no}</td>
                         <td>{value.email}</td>
-                        <td>{value.birthday.slice(0, 10)}</td>
+                        <td>{value.birthday && value.birthday.slice(0, 10)}</td>
                         <td>
-                          <Button className="btn-primary" style={{ borderRadius: "20px" }} onClick={() => updateUser(value.auth.id)}>Update</Button>
+                          <Button variant="outline-primary" className="" style={{ borderRadius: "20px" }} onClick={() => updateUser(value.auth.id)}>Update</Button>
+                        </td>
+                        <td>
+                          <Button variant="outline-danger" className="" style={{ borderRadius: "20px" }} onClick={() => deactivateUser(value.auth.id)}>Delete</Button>
                         </td>
                       </tr>
                     );
                   })}
               </tbody>
             </Table>}
+
+            <div className="container paginate_div text-center">
+                <Paginate
+                    skip={skip}
+                    take={take}
+                    setSkip={changePage}
+                    totalItems={totalItems}
+                />
+            </div>
         </div>
 
       </div>

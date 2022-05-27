@@ -1,9 +1,10 @@
 import React,{ useEffect,useState} from 'react';
+import Loader from '../../components/loader/loader';
 import Paginate from '../../components/pagination/paginate';
 
 const TestingPage =()=>{
     const [skip,setSkip] = useState(0);
-    const [take,setTake] = useState(10);
+    const [take,setTake] = useState(2);
     const [totalItems,setTotalItems] = useState(24);
     
 
@@ -19,12 +20,13 @@ const TestingPage =()=>{
             </div>
 
             <div>
-                <Paginate
+                {/* <Paginate
                     skip={skip}
                     take={take}
                     setSkip={setSkip}
                     totalItems={totalItems}
-                />
+                /> */}
+                <Loader/>
             </div>
         </div>
         </>
