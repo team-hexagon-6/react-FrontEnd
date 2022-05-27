@@ -84,7 +84,7 @@ function Login() {
   return (
     <div className="login">
       <HeaderOne />
-      <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
+      <div className="container  d-flex flex-column col-4 justify-content-center " style={{border: "1px solid #1376BD", borderLeft: "10px solid #1376BD"}}>
       <div className="image">
                 <img src="../../public/login.png" alt=""/>
             </div>
@@ -100,6 +100,7 @@ function Login() {
               <input
                 type="text"
                 className="form-control"
+                style={{borderRadius: "20px"}}
                 aria-describedby="passwordHelpInline"
                 value={username}
                 onChange={(e) => {
@@ -127,6 +128,7 @@ function Login() {
                 type="password"
                 id="inputPassword"
                 className="form-control"
+                style={{borderRadius: "20px"}}
                 aria-describedby="passwordHelpInline"
                 value={password}
                 onChange={(e) => {

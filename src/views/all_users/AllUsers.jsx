@@ -5,11 +5,13 @@ import { Card, Form, Button, Table, FormControl, InputGroup, DropdownButton, Dro
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import AdminServices from "../../services/API/AdminServices";
+import UserServices from "../../services/API/UserServices";
 import Paginate from "../../components/pagination/paginate";
+import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 
 const AllUsers = () => {
-  
+
   //For Pagination
   const [skip,setSkip] = useState(0);
   const [take,setTake] = useState(10);
@@ -20,20 +22,20 @@ const AllUsers = () => {
   const changePage = async (skip_value) => {
     console.log(skip_value);
     // setSkip(skip_value);
-    getUsers(usertype, skip_value, take);
+    getUsers(usertype, skip_value, take, '');
   }
 
   const [usertype, setusertype] = useState('doctor');
   //When Doctor or Examiner is clicked
   const displayDoctors = () => {
     // setSkip(0);
-    getUsers("doctor", 0, take);
-    setusertype('doctor');
+    getUsers("doctor", 0, take, '');
+
   }
   const displayExaminers = () => {
     // setSkip(0);
-    getUsers("examiner", 0, take);
-    setusertype('examiner');
+    getUsers("examiner", 0, take, '');
+
   }
 
   // When update button is clicked
@@ -43,30 +45,62 @@ const AllUsers = () => {
     navigate(`/updateUser/${user_id}`);
   };
 
-  const deactivateUser = (user_id) => {
-  /////
+  // When activate/deactivate is clicked
+  const changeActivation = async (user_id) => {
+    console.log("Inside activate changing");
+    try {
+      const response = await UserServices.changeActivation({ user_id });
+      console.log(response);
+      if (response.status === 200) {
+        toast.success('Changed activation successfully', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        navigate(0);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(`Activation change failed: ${error.message}`, {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
   };
 
   // Search term
   const [search, setSearch] = useState("");
+  const searchUser = () => {
+    getUsers(usertype, 0, take, search);
+  }
 
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    getUsers("doctor", skip, take);
+    getUsers("doctor", skip, take, search);
   }, []);
 
-  const getUsers = async (usertype, skip_value, take) => {
-    console.log(skip_value, take, usertype);
+  const getUsers = async (usertype, skip_value, take, search) => {
     setLoader(true);
     try {
       let response = null;
       if (usertype === "doctor") {
-        response = await AdminServices.getDoctors(skip_value, take);
+        response = await AdminServices.getDoctors(skip_value, take, search);
+        setusertype('doctor');
       }
       else if (usertype === "examiner") {
-        response = await AdminServices.getExaminers(skip_value, take);
-        
+        response = await AdminServices.getExaminers(skip_value, take, search);
+        setusertype('examiner');
       }
+      setSearch(search);
       setSkip(skip_value);
       setUsers(response.data.data);
       setTotalItems(response.data.total_items);
