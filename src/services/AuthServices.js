@@ -45,9 +45,17 @@ const login = async (data) => {
   return response;
 };
 
+const logout = async (data) => {
+  return axios({
+    method: "get",
+    url: APIEndpoint + '/logout',
+  });
+}
+
 export default {
   register,
   login,
-  getusertypes
+  getusertypes,
+  logout,
 }
 

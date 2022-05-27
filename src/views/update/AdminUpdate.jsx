@@ -83,7 +83,7 @@ const AdminUpdate = () => {
 
                         <div className="justify-content-center row g-3 align-items-center">
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Default Password</Form.Label>
+                                <Form.Label>New Password</Form.Label>
                                 <Form.Control
                                     type="password"
                                     name="password"
@@ -97,7 +97,7 @@ const AdminUpdate = () => {
 
                         <div className="justify-content-center row g-3 align-items-center">
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Re-enter Default Password</Form.Label>
+                                <Form.Label>Re-enter New Password</Form.Label>
                                 <Form.Control
                                     type="password"
                                     name="re_password"

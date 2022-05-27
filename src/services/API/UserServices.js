@@ -29,7 +29,19 @@ const getUser = () => {
     });
 }
 
+const changeActivation = (data) => {
+  return axios({
+    method: "post",
+    url: APIEndpoint + "/user/change-active",
+    data: {
+      user_id: data["user_id"],
+    },
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+}
+
 export default{
     updateprofile,
     getUser,
+    changeActivation,
 }
