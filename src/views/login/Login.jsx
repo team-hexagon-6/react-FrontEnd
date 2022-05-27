@@ -4,17 +4,18 @@ import "./Login.css";
 import { Link } from "react-router-dom";
 import AuthServices from "../../services/AuthServices";
 import Validation from "../../Validation";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import { useAuth } from "../../utils/auth";
 
 import Messages from "../../helpers/Messages";
+import Loader from "../../components/loader/Loader";
 
 function Login() {
-  const auth=useAuth();
-  const navigate =useNavigate();
-  const location =useLocation();
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const redirectPath = location.state?.path || '/'
   const [username, setUsername] = useState("");
@@ -23,7 +24,10 @@ function Login() {
   const [usernameError, setUsernameError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
+  const [loader, setLoader] = useState(false);
+
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
     const { value, error } = Validation.login({
       username,
@@ -74,94 +78,103 @@ function Login() {
         //   progress: undefined,
         // });
         Messages.ErrorMessage({
-          error :error,
+          error: error,
           main_part: "LOGIN FAILED",
         });
       }
     }
+    setTimeout(() => {
+      setLoader(false);
+    }, 200);
   };
 
-  return (
-    <div className="login">
-      <HeaderOne />
-      <div className="container  d-flex flex-column col-4 justify-content-center " style={{border: "1px solid #1376BD", borderLeft: "10px solid #1376BD"}}>
-      <div className="image">
-                <img src="../../public/login.png" alt=""/>
+  if (loader) {
+    return <Loader />
+  } else {
+
+    return (
+      <div className="login">
+        <HeaderOne />
+        <div className="container  d-flex flex-column col-4 justify-content-center " style={{ border: "1px solid #1376BD", borderLeft: "10px solid #1376BD" }}>
+          <div className="image">
+            <img src="../../public/login.png" alt="" />
+          </div>
+          <h3 className="header">Login</h3>
+          <div className="form1">
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-auto">
+                <label htmlFor="Username" className="col-form-label">
+                  Username
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="text"
+                  className="form-control"
+                  style={{ borderRadius: "20px" }}
+                  aria-describedby="passwordHelpInline"
+                  value={username}
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-        <h3 className="header">Login</h3>
-        <div className="form1">
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-auto">
-              <label htmlFor="Username" className="col-form-label">
-                Username
-              </label>
+            {usernameError && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {usernameError}
+              </p>
+            )}
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-auto">
+                <label htmlFor="Password" className="col-form-label">
+                  Password
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="password"
+                  id="inputPassword"
+                  className="form-control"
+                  style={{ borderRadius: "20px" }}
+                  aria-describedby="passwordHelpInline"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+              </div>
             </div>
-            <div className="col-auto">
-              <input
-                type="text"
-                className="form-control"
-                style={{borderRadius: "20px"}}
-                aria-describedby="passwordHelpInline"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-              />
+            {passwordError && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {passwordError}
+              </p>
+            )}
+            <div className="btn-container d-flex justify-content-center ">
+              <button
+                type="submit"
+                className="btn btn-primary w-50"
+                onClick={handleSubmit}
+                style={{ borderRadius: "20px" }}
+              >
+                Submit
+              </button>
             </div>
           </div>
-          {usernameError && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {usernameError}
-            </p>
-          )}
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-auto">
-              <label htmlFor="Password" className="col-form-label">
-                Password
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                type="password"
-                id="inputPassword"
-                className="form-control"
-                style={{borderRadius: "20px"}}
-                aria-describedby="passwordHelpInline"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-            </div>
-          </div>
-          {passwordError && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {passwordError}
-            </p>
-          )}
-          <div className="btn-container d-flex justify-content-center ">
-            <button
-              type="submit"
-              className="btn btn-primary w-50"
-              onClick={handleSubmit}
-              style={{borderRadius: "20px"}}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-        {/* <Link to="" className="d-flex forgetPass justify-content-center">
+          {/* <Link to="" className="d-flex forgetPass justify-content-center">
           Forget Password?
         </Link> */}
+        </div>
       </div>
-    </div>
-  );
+    );
+
+  }
 }
 
 export default Login;

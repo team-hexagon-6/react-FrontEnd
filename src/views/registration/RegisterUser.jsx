@@ -6,8 +6,8 @@ import AuthServices from '../../services/AuthServices';
 import "./RegisterUser.css";
 import HeaderOne from "../../components/headers/HeaderOne";
 import _503 from "../not_found/_503";
-import {toast} from 'react-toastify';
-
+import { toast } from 'react-toastify';
+import Loader from "../../components/loader/Loader";
 
 const RegisterUser = () => {
 
@@ -25,8 +25,10 @@ const RegisterUser = () => {
     const [type_err, setTypeErr] = useState('');
     const [pwd_err, setPwdErr] = useState('');
     const [userTypes, setUserTypes] = useState([]);
-    
+
     const navigate = useNavigate();
+
+    const [loader, setLoader] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -51,12 +53,13 @@ const RegisterUser = () => {
             if (errors.re_password)
                 setPwdErr('Two passwords do not match');
 
-        } 
+        }
         else {
             try {
+                setLoader(true);
                 console.log(user_type);
                 const response = await AuthServices.register({ user_id, user_type, password });
-                if(response.status===201){
+                if (response.status === 201) {
                     toast.success('Registration Successfull', {
                         position: "top-center",
                         autoClose: 5000,
@@ -65,10 +68,13 @@ const RegisterUser = () => {
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        });
+                    });
+                    setTimeout(() => {
+                        setLoader(false);
+                    }, 200);
                     setTimeout(navigate('/dashboard'), 3000);
                 }
-                
+
 
             } catch (error) {
                 toast.error(`Registration Failed`, {
@@ -79,124 +85,131 @@ const RegisterUser = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
+                });
             }
         }
     }
 
-    useEffect(()=>{
-       getUserTypes();
-    },[])
+    useEffect(() => {
+        getUserTypes();
+    }, [])
 
-    const getUserTypes=async()=>{
-        try{
-            const userType= await AuthServices.getusertypes();
-            setUserTypes( userType.data.data);
+    const getUserTypes = async () => {
+        try {
+            const userType = await AuthServices.getusertypes();
+            setUserTypes(userType.data.data);
 
         }
-        catch(err){
+        catch (err) {
             // console.log(err);
-            
+
         }
     }
     // console.log(userTypes);
-           
-    if (userTypes){
-    return (
-        <div className="register_user">
 
-            <HeaderOne />
-
-            <div className="col-sm-4 reg">
-
-                <h1 className="reg_header">Register a User</h1>
-
-                <div className="container reg_form justify-content-center">
-
-                    <Form onSubmit={handleSubmit}>
-
-                        <div className="justify-content-center row g-3 align-items-center">
-                            <Form.Group className="mb-3">
-                                <Form.Label>User ID</Form.Label>
-                                <Form.Control
-                                    placeholder="User ID"
-                                    style={{ borderRadius: "20px" }}
-                                    value={user_id}
-                                    onChange={(e) => setUserID(e.target.value)}
-                                />
-                                {id_err != '' && <p className="error">{id_err}</p>}
-                            </Form.Group>
-                        </div>
-
-                        <div className="justify-content-center row g-3 align-items-center">
-                            <Form.Group className="mb-3">
-                                <Form.Label>User type</Form.Label><br />
-                                <div className="row">
-                                    {userTypes && userTypes.map((userType)=>
-                                        <div className="col-md-3" key={userType.slug}>
-                                            <input type="radio" value={userType.slug} name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
-                                        </div>
-                                    )}
+    if (loader) {
+        return <Loader />
+    } 
+    else {
+        
+        if (userTypes) {
+            return (
+                <div className="register_user">
+    
+                    <HeaderOne />
+    
+                    <div className="col-sm-4 reg">
+    
+                        <h1 className="reg_header">Register a User</h1>
+    
+                        <div className="container reg_form justify-content-center">
+    
+                            <Form onSubmit={handleSubmit}>
+    
+                                <div className="justify-content-center row g-3 align-items-center">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>User ID</Form.Label>
+                                        <Form.Control
+                                            placeholder="User ID"
+                                            style={{ borderRadius: "20px" }}
+                                            value={user_id}
+                                            onChange={(e) => setUserID(e.target.value)}
+                                        />
+                                        {id_err != '' && <p className="error">{id_err}</p>}
+                                    </Form.Group>
                                 </div>
-                                {type_err != '' && <p className="error">{type_err}</p>}
-                            </Form.Group>
+    
+                                <div className="justify-content-center row g-3 align-items-center">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>User type</Form.Label><br />
+                                        <div className="row">
+                                            {userTypes && userTypes.map((userType) =>
+                                                <div className="col-md-3" key={userType.slug}>
+                                                    <input type="radio" value={userType.slug} name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
+                                                </div>
+                                            )}
+                                        </div>
+                                        {type_err != '' && <p className="error">{type_err}</p>}
+                                    </Form.Group>
+                                </div>
+    
+                                <div className="justify-content-center row g-3 align-items-center">
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label>Default Password</Form.Label>
+                                        <Form.Control
+                                            type="password"
+                                            name="password"
+                                            placeholder="Password"
+                                            style={{ borderRadius: "20px" }}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                        />
+                                        {pwd_err != '' && <p className="error">{pwd_err}</p>}
+                                    </Form.Group>
+                                </div>
+    
+                                <div className="justify-content-center row g-3 align-items-center">
+                                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                                        <Form.Label>Re-enter Default Password</Form.Label>
+                                        <Form.Control
+                                            type="password"
+                                            name="re_password"
+                                            placeholder="Password"
+                                            style={{ borderRadius: "20px" }}
+                                            value={re_password}
+                                            onChange={(e) => setRePassword(e.target.value)}
+                                        />
+                                    </Form.Group>
+                                </div>
+    
+                                <div className="row required"><label>All fields are required</label></div>
+    
+                                <div className="btn-container d-flex justify-content-center ">
+                                    <Button type="submit" className="reg_button" style={{ borderRadius: "20px" }}>
+                                        Register
+                                    </Button>
+                                </div>
+    
+                            </Form>
+    
                         </div>
-
-                        <div className="justify-content-center row g-3 align-items-center">
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Default Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    style={{ borderRadius: "20px" }}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                                {pwd_err != '' && <p className="error">{pwd_err}</p>}
-                            </Form.Group>
-                        </div>
-
-                        <div className="justify-content-center row g-3 align-items-center">
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Re-enter Default Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="re_password"
-                                    placeholder="Password"
-                                    style={{ borderRadius: "20px" }}
-                                    value={re_password}
-                                    onChange={(e) => setRePassword(e.target.value)}
-                                />
-                            </Form.Group>
-                        </div>
-
-                        <div className="row required"><label>All fields are required</label></div>
-
-                        <div className="btn-container d-flex justify-content-center ">
-                            <Button type="submit" className="reg_button" style={{ borderRadius: "20px" }}>
-                                Register
-                            </Button>
-                        </div>
-
-                    </Form>
-
+    
+                    </div>
+    
+    
                 </div>
-
-            </div>
-
-
-        </div>
-    );
+            );
+        }
+        else {
+            return (
+                <div>
+                    <_503 />
+                </div>
+    
+            );
+        }
     }
-    else{
-        return(
-            <div>
-                <_503/>
-            </div>
 
-        );
-    }
 
 }
 
