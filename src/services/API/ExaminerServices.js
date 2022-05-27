@@ -18,7 +18,7 @@ const addPatient = (data) => {
     method: "post",
     url: APIEndpoint + "/patient/add-new-patient",
     data: {
-      patient_id:"P1234566669",
+      patient_id:"P211269",
       firstname: data["First Name"],
       lastname: data["Last Name"],
       nic: data["NIC"],
