@@ -15,18 +15,22 @@ const Dashboard = () => {
     const getUser = async (usertype) => {
         try {
             const response = await UserServices.getUser();
-            switch (response.data.data.auth.usertype.name) {
-                case 'admin':
-                    navigate('/adminDashboard');
-                    break;
-                case 'doctor':
-                    navigate('/doctor');
-                    break
-                case 'examiner':
-                    navigate('/examiner');
-                    break
-                default:
-                    break;
+            if(response.data.data.auth.complete_profile){
+                switch (response.data.data.auth.usertype.name) {
+                    case 'admin':
+                        navigate('/adminDashboard');
+                        break;
+                    case 'doctor':
+                        navigate('/doctor');
+                        break
+                    case 'examiner':
+                        navigate('/examiner');
+                        break
+                    default:
+                        break;
+                }
+            }else{
+                navigate('/updateProfile');
             }
         } catch (error) {
             console.log(error);

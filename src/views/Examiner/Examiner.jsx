@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import './Examiner.css'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderOne from '../../components/headers/HeaderOne';
 import { Button, ButtonGroup } from 'react-bootstrap';
-
+import UserServices from '../../services/API/UserServices';
 
 const Examiner = () => {
   let navigate = useNavigate();
   const [patient_id, setPatientId] = useState('');
+  const [user, setUser] = useState([])
 
   // handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -46,6 +47,22 @@ const Examiner = () => {
 
   // };
 
+  useEffect(()=>{
+    getUser();
+ },[])
+
+ const getUser=async()=>{
+     try{
+         const getuser= await UserServices.getUser();
+         setUser( getuser.data.data);
+
+     }
+     catch(err){
+         // console.log(err);
+         
+     }
+ }
+
 
 
   return (
@@ -57,7 +74,7 @@ const Examiner = () => {
 
         <h1 className="admindash_header">Examiner Dashboard</h1>
         {/* <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6> */}
-        <h6 className="admindash_header">Welcome, username!</h6>
+        <h6 className="admindash_header">{user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
 
         <div className="image" style={{ marginBottom: "0px" }}>
           <img src="../../public/dashboard.png" alt="" />
