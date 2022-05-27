@@ -1,12 +1,13 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Button, ButtonGroup, Card, Form, ToggleButton } from "react-bootstrap";
 import HeaderOne from "../../components/headers/HeaderOne";
 import "./NewTest.css"
 import Validation from '../../Validation';
 import ExaminerServices from "../../services/API/ExaminerServices";
 import _503 from "../not_found/_503";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
+import Loader from "../../components/loader/Loader";
 
 
 const NewTest = () => {
@@ -18,10 +19,10 @@ const NewTest = () => {
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
     const [testTypes, setTestTypes] = useState([]);
-    const params=useParams();
+    const params = useParams();
     console.log(params);
 
-
+    const [loader, setLoader] = useState(false);
 
     const [id_err, setIdErr] = useState('');
     const [type_err, setTypeErr] = useState('');
@@ -84,9 +85,10 @@ const NewTest = () => {
                 setDateErr(errors.date.replace('"date"', 'Date'));
         } else {
             window.alert(`Please confirm test details\n\nPatient ID: ${patient_id}\nTest type: ${test_type}\nDate: ${date}\n\n\Click OK to start the test.`);
-            try{
-                const response = await ExaminerServices.dotest({ patient_id, test_type, date,base64_img });
-                if(response.status===201){
+            setLoader(true);
+            try {
+                const response = await ExaminerServices.dotest({ patient_id, test_type, date, base64_img });
+                if (response.status === 201) {
                     toast.success('Start test Successfull', {
                         position: "top-center",
                         autoClose: 5000,
@@ -95,10 +97,13 @@ const NewTest = () => {
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        });
+                    });
+                    setTimeout(() => {
+                        setLoader(false);
+                    }, 200);
                     setTimeout(navigate('/login?registration=successful'), 3000);
                 }
-                
+
 
             } catch (error) {
                 console.log(error);
@@ -110,136 +115,140 @@ const NewTest = () => {
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
+                });
             }
-            
-            
+
+
         }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         getTestTypes();
-     },[])
- 
-     const getTestTypes=async()=>{
-         try{
-             const testType= await ExaminerServices.gettesttypes();
-             console.log(testType.data.testTypes);
-             setTestTypes(testType.data.testTypes);
-            
-         }
-         catch(err){
-             console.log(err);
-             
-         }
-         
-     }
+    }, [])
 
-    
-    if(testTypes){
-    return (
+    const getTestTypes = async () => {
+        try {
+            const testType = await ExaminerServices.gettesttypes();
+            console.log(testType.data.testTypes);
+            setTestTypes(testType.data.testTypes);
 
-        <div className="new_test">
+        }
+        catch (err) {
+            console.log(err);
 
-            <HeaderOne />
-            <h1 className="test_header">New Test</h1>
+        }
 
-            <div className="container test_form justify-content-center">
-                <Form onSubmit={handleSubmit}>
+    }
 
-                    <div className="row">
-                        <div className="col-md-6">
-                            <Form.Group className="mb-3">
-                                <Form.Label>Patient ID</Form.Label>
-                                <Form.Control
-                                    className="fa"
-                                    style={{ borderRadius: "20px" }}
-                                    placeholder="&#xf2c2; Patient id"
-                                    value={params.patientid}
-                                    // onChange={(e) => setPatientID(e.target.value)}
-                                disabled/>
-                                {id_err != '' && <p className="error">{id_err}</p>}
-                            </Form.Group>
-                        </div>
-          
-                        <div className="col-md-6">
-                            <Form.Group className="mb-3">
-                                <Form.Label>Type of The Test</Form.Label>
+    if (loader) {
+        return <Loader />
+    } else {
 
-                                <div className="col-md-3">
-                                    <ButtonGroup className="mb-12">
-                                        {testTypes.map((radio, idx) => (
-                                            <ToggleButton
-                                                key={idx}
-                                                id={`radio-${idx}`}
-                                                type="radio"
-                                                variant={idx % 2 ? 'outline-primary' : 'outline-primary'}
-                                                name="radio"
-                                                value={radio.slug}
-                                                checked={test_type === radio.value}
-                                                onChange={(e) => setTestType(e.currentTarget.value)}
-                                            >
-                                                {radio.name}
-                                            </ToggleButton>
-                                        ))}
-                                    </ButtonGroup>
+        if (testTypes) {
+            return (
+
+                <div className="new_test">
+
+                    <HeaderOne />
+                    <h1 className="test_header">New Test</h1>
+
+                    <div className="container test_form justify-content-center">
+                        <Form onSubmit={handleSubmit}>
+
+                            <div className="row">
+                                <div className="col-md-6">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Patient ID</Form.Label>
+                                        <Form.Control
+                                            className="fa"
+                                            style={{ borderRadius: "20px" }}
+                                            placeholder="&#xf2c2; Patient id"
+                                            value={params.patientid}
+                                            // onChange={(e) => setPatientID(e.target.value)}
+                                            disabled />
+                                        {id_err != '' && <p className="error">{id_err}</p>}
+                                    </Form.Group>
                                 </div>
 
-                                {type_err != '' && <p className="error">{type_err}</p>}
-                            </Form.Group>
+                                <div className="col-md-6">
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Type of The Test</Form.Label>
 
-                        </div>
-                    </div>
+                                        <div className="col-md-3">
+                                            <ButtonGroup className="mb-12">
+                                                {testTypes.map((radio, idx) => (
+                                                    <ToggleButton
+                                                        key={idx}
+                                                        id={`radio-${idx}`}
+                                                        type="radio"
+                                                        variant={idx % 2 ? 'outline-primary' : 'outline-primary'}
+                                                        name="radio"
+                                                        value={radio.slug}
+                                                        checked={test_type === radio.value}
+                                                        onChange={(e) => setTestType(e.currentTarget.value)}
+                                                    >
+                                                        {radio.name}
+                                                    </ToggleButton>
+                                                ))}
+                                            </ButtonGroup>
+                                        </div>
 
-                    <div className="row upload">
-                        <div className="col-md-3"></div>
-                        <div className="col-md-6">
-                            <Form.Group className="mb-3">
-                                <br /><p style={{ textAlign: "center" }}>Upload test image sample of the patient here</p>
+                                        {type_err != '' && <p className="error">{type_err}</p>}
+                                    </Form.Group>
 
-                                <div className="container upload_preview">
-                                    <Form.Control type="file" id="file" onChange={fileValidation} />
-                                    {img_err != '' && <p className="error">{img_err}</p>}
-                                    <div className="preview" id="imagePreview"><img src="../../public/No_Preview.png" alt=""/></div>
                                 </div>
+                            </div>
 
-                            </Form.Group>
-                        </div>
-                        <div className="col-md-3"></div>
+                            <div className="row upload">
+                                <div className="col-md-3"></div>
+                                <div className="col-md-6">
+                                    <Form.Group className="mb-3">
+                                        <br /><p style={{ textAlign: "center" }}>Upload test image sample of the patient here</p>
+
+                                        <div className="container upload_preview">
+                                            <Form.Control type="file" id="file" onChange={fileValidation} />
+                                            {img_err != '' && <p className="error">{img_err}</p>}
+                                            <div className="preview" id="imagePreview"><img src="../../public/No_Preview.png" alt="" /></div>
+                                        </div>
+
+                                    </Form.Group>
+                                </div>
+                                <div className="col-md-3"></div>
+                            </div>
+
+                            <div className=" container row bottom_div justify-content-center">
+                                <div className="col-md-6">
+                                    <Form.Label>Date</Form.Label>
+                                    <Form.Control
+                                        style={{ borderRadius: "20px", width: "50%" }}
+                                        type="date" name='date'
+                                        placeholder='&#xf1fd; Date'
+                                        onChange={(e) => setDate(e.target.value)}
+                                    />
+                                    {date_err != '' && <p className="error">{date_err}</p>}
+                                </div>
+                                <div className="col-md-6">
+                                    <br />
+                                    <Button type="submit" className="test_button" style={{ borderRadius: "20px" }}>
+                                        Do Test
+                                    </Button>
+                                </div>
+                            </div>
+
+                        </Form>
                     </div>
 
-                    <div className=" container row bottom_div justify-content-center">
-                        <div className="col-md-6">
-                            <Form.Label>Date</Form.Label>
-                            <Form.Control
-                                style={{ borderRadius: "20px", width: "50%" }}
-                                type="date" name='date'
-                                placeholder='&#xf1fd; Date'
-                                onChange={(e) => setDate(e.target.value)}
-                            />
-                            {date_err != '' && <p className="error">{date_err}</p>}
-                        </div>
-                        <div className="col-md-6">
-                            <br />
-                            <Button type="submit" className="test_button" style={{ borderRadius: "20px" }}>
-                                Do Test
-                            </Button>
-                        </div>
-                    </div>
 
-                </Form>
-            </div>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <_503 />
+                </div>
 
-
-        </div>
-    );
-    }else{
-        return(
-            <div>
-                <_503/>
-            </div>
-
-        );
+            );
+        }
     }
 }
 

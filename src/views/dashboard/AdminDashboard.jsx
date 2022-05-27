@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import 'font-awesome/css/font-awesome.css';
 import UserServices from "../../services/API/UserServices";
 import { useEffect, useState } from "react";
+import Loader from "../../components/loader/Loader";
 
 const AdminDashboard = () => {
 
@@ -12,59 +13,74 @@ const AdminDashboard = () => {
 
     const [user, setUser] = useState([]);
 
+    const [loader, setLoader] = useState(false);
+
     useEffect(() => {
         getUser();
     }, []);
 
     const getUser = async (usertype) => {
+        setLoader(true);
         try {
             const response = await UserServices.getUser();
             setUser(response.data.data);
         } catch (error) {
             console.log(error);
         }
+        setTimeout(() => {
+            setLoader(false);
+          }, 200);
     };
 
-    return (
+    if (loader) {
+        return (
+            <Loader />
+        )
+    } 
+    else {
 
-        <div className="admin_dash">
+        return (
 
-            <HeaderOne />
+            <div className="admin_dash">
 
-            <div className="col-sm-4 reg">
+                <HeaderOne />
 
-                <h1 className="admindash_header">Admin Dashboard</h1>
+                <div className="col-sm-4 reg">
 
-                <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
+                    <h1 className="admindash_header">Admin Dashboard</h1>
 
-                <div className="container dashboard justify-content-center text-center">
+                    <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
 
-                    <div className="image" style={{ marginBottom: "0px" }}>
-                        <img src="../../public/dashboard.png" alt="" />
+                    <div className="container dashboard justify-content-center text-center">
+
+                        <div className="image" style={{ marginBottom: "0px" }}>
+                            <img src="../../public/dashboard.png" alt="" />
+                        </div>
+
+                        <ButtonGroup vertical className="d-flex">
+                            <Button
+                                className="dash_btn"
+                                style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+                                onClick={() => { navigate('/registerUser') }}>
+                                Register A New User
+                            </Button>
+                            <Button
+                                className="dash_btn"
+                                style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+                                onClick={() => { navigate('/allUsers') }}>
+                                View All Users
+                            </Button>
+                        </ButtonGroup>
+
                     </div>
-
-                    <ButtonGroup vertical className="d-flex">
-                        <Button
-                            className="dash_btn"
-                            style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-                            onClick={() => { navigate('/registerUser') }}>
-                            Register A New User
-                        </Button>
-                        <Button
-                            className="dash_btn"
-                            style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-                            onClick={() => { navigate('/allUsers') }}>
-                            View All Users
-                        </Button>
-                    </ButtonGroup>
 
                 </div>
 
             </div>
 
-        </div>
+        );
+    }
 
-    );
 }
 
 export default AdminDashboard;

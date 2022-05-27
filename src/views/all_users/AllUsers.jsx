@@ -47,6 +47,7 @@ const AllUsers = () => {
 
   // When activate/deactivate is clicked
   const changeActivation = async (user_id) => {
+    setLoader(true);
     console.log("Inside activate changing");
     try {
       const response = await UserServices.changeActivation({ user_id });
@@ -75,6 +76,9 @@ const AllUsers = () => {
         progress: undefined,
       });
     }
+    setTimeout(() => {
+      setLoader(false);
+    }, 200);
   };
 
   // Search term

@@ -5,11 +5,14 @@ import "./AdminUpdate.css";
 import AdminServices from "../../services/API/AdminServices";
 import Validation from '../../Validation';
 import { useNavigate, useParams } from "react-router-dom";
-import {toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+import Loader from "../../components/loader/Loader";
 
 const AdminUpdate = () => {
     const params = useParams();
     const navigate = useNavigate();
+
+    const [loader, setLoader] = useState(false);
 
     const [password, setPassword] = useState('');
     const [re_password, setRePassword] = useState('');
@@ -17,6 +20,7 @@ const AdminUpdate = () => {
     const [pwd_err, setPwdErr] = useState('');
 
     const handleSubmit = async (e) => {
+        setLoader(true);
         e.preventDefault();
 
         setPwdErr('');
@@ -62,69 +66,76 @@ const AdminUpdate = () => {
                 });
             }
         }
+        setTimeout(() => {
+            setLoader(false);
+        }, 200);
     }
 
-    return (
-        <div className="update_pwd">
+    if (loader) {
+        return <Loader />
+    } else {
+        return (
+            <div className="update_pwd">
 
-            <HeaderOne />
+                <HeaderOne />
 
-            <div className="col-sm-4 reg">
+                <div className="col-sm-4 reg">
 
-                <h1 className="update_header">Update Password</h1>
+                    <h1 className="update_header">Update Password</h1>
 
-                <div className="image">
-                    <img src="../../public/pwd.png" alt="" />
+                    <div className="image">
+                        <img src="../../public/pwd.png" alt="" />
+                    </div>
+
+                    <div className="container reg_form justify-content-center">
+
+                        <Form onSubmit={handleSubmit}>
+
+                            <div className="justify-content-center row g-3 align-items-center">
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>New Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        name="password"
+                                        placeholder="Password"
+                                        style={{ borderRadius: "20px" }}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </div>
+
+                            <div className="justify-content-center row g-3 align-items-center">
+                                <Form.Group className="mb-3" controlId="formBasicPassword">
+                                    <Form.Label>Re-enter New Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        name="re_password"
+                                        placeholder="Password"
+                                        style={{ borderRadius: "20px" }}
+                                        value={re_password}
+                                        onChange={(e) => setRePassword(e.target.value)}
+                                    />
+                                    {pwd_err != '' && <p className="error">{pwd_err}</p>}
+                                </Form.Group>
+                            </div>
+
+                            <div className="d-flex justify-content-center ">
+                                <Button type="submit" className="reg_button" style={{ borderRadius: "20px", marginTop: "10px" }}>
+                                    Update
+                                </Button>
+                            </div>
+
+                        </Form>
+
+                    </div>
+
                 </div>
 
-                <div className="container reg_form justify-content-center">
-
-                    <Form onSubmit={handleSubmit}>
-
-                        <div className="justify-content-center row g-3 align-items-center">
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>New Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="password"
-                                    placeholder="Password"
-                                    style={{ borderRadius: "20px" }}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </Form.Group>
-                        </div>
-
-                        <div className="justify-content-center row g-3 align-items-center">
-                            <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Re-enter New Password</Form.Label>
-                                <Form.Control
-                                    type="password"
-                                    name="re_password"
-                                    placeholder="Password"
-                                    style={{ borderRadius: "20px" }}
-                                    value={re_password}
-                                    onChange={(e) => setRePassword(e.target.value)}
-                                />
-                                {pwd_err != '' && <p className="error">{pwd_err}</p>}
-                            </Form.Group>
-                        </div>
-
-                        <div className="d-flex justify-content-center ">
-                            <Button type="submit" className="reg_button" style={{ borderRadius: "20px", marginTop: "10px"}}>
-                                Update
-                            </Button>
-                        </div>
-
-                    </Form>
-
-                </div>
 
             </div>
-
-
-        </div>
-    );
+        );
+    }
 }
 
 export default AdminUpdate;
