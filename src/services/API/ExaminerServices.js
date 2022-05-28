@@ -31,13 +31,13 @@ const addPatient = (data) => {
   });
 };
 
-const updatePatientProfile = (data,patient_id) => {
-  console.log("id is", patient_id);
+const updatePatientProfile = (data) => {
+  // console.log("id is", patient_id);
   return axios({
     method: "post",
     url: APIEndpoint + "/patient/update-patient",
     data: {
-      patient_id: patient_id,
+      patient_id: "P233344335",
       firstname: data["First Name"],
       lastname: data["Last Name"],
       nic: data["NIC"],

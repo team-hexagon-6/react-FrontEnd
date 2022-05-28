@@ -11,7 +11,7 @@ import HeaderTwo from "../../components/headers/HeaderTwo";
 function UpdatePatientProfile() {
   const params = useParams();
   const navigate = useNavigate();
-  const patientID = "P233344335";
+  // const patientID = "P233344335";
   const formValues = {
     "First Name": "",
     "Last Name": "",
@@ -69,10 +69,7 @@ function UpdatePatientProfile() {
       try {
         // const patient_id = params.patient_id;
         console.log("State:", state);
-        const response = await ExaminerServices.updatePatientProfile(
-          state,
-          patientID
-        );
+        const response = await ExaminerServices.updatePatientProfile(state);
         console.log(response);
       } catch (error) {
         console.log(error.message);
