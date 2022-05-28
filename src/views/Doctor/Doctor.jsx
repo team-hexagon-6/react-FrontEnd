@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 // import './doctor.css'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import UserServices from '../../services/API/UserServices';
 import Loader from '../../components/loader/Loader';
 
 const Doctor = () => {
-  const [patient_id, setPatientId] = useState('');
+  const [patient_id, setPatientId] = useState("");
   let navigate = useNavigate();
   const [user, setUser] = useState([])
 
@@ -81,8 +81,16 @@ const Doctor = () => {
             </Button>
             {/* <Button
             className="dash_btn"
-            style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-            onClick={() => { navigate('/viewPatient') }}>
+            style={{
+              borderRadius: "20px",
+              margin: "20px",
+              width: "100%",
+              marginLeft: "auto",
+            }}
+            onClick={() => {
+              navigate("/viewPatient");
+            }}
+          >
             View Patient
           </Button> */}
             <div className="input-group mb-3">

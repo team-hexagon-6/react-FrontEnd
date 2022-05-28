@@ -5,6 +5,7 @@ import ExaminerServices from "../../services/API/ExaminerServices";
 import "./AddPatient.css";
 import Validation from "../../Validation";
 import { Form, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
@@ -21,10 +22,9 @@ function AddPatient() {
     GenderValue: "",
   };
 
-
   const [state, setState] = useState(formValues);
   const [errorData, setErrorData] = useState(formValues);
-  const [genderTypes, setgenderTypes] = useState([])
+  const [genderTypes, setgenderTypes] = useState([]);
   const errors = {};
   const navigate = useNavigate();
 
@@ -32,7 +32,7 @@ function AddPatient() {
 
   useEffect(() => {
     getGenderTypes();
-  }, [])
+  }, []);
 
   const getGenderTypes = async () => {
     setLoader(true);
@@ -40,15 +40,13 @@ function AddPatient() {
       const genderType = await ExaminerServices.getgendertypes();
       console.log(genderType.data.data);
       setgenderTypes(genderType.data.data);
-
-    }
-    catch (err) {
+    } catch (err) {
       // console.log(err);
     }
     setTimeout(() => {
       setLoader(false);
     }, 200);
-  }
+  };
 
   const handleValidity = (e) => {
     setState({
@@ -57,12 +55,11 @@ function AddPatient() {
     });
   };
   const handleSelect = (event) => {
-
-    console.log("event is", event.split(',')[0]);
+    console.log("event is", event.split(",")[0]);
     setState({
       ...state,
-      GenderName: event.split(',')[0],
-      GenderValue: event.split(',')[1]
+      GenderName: event.split(",")[0],
+      GenderValue: event.split(",")[1],
     });
   };
 
@@ -70,11 +67,12 @@ function AddPatient() {
     setLoader(true);
     e.preventDefault();
     const { value, error } = Validation.addPatient(state);
-    // console.log(state);
+    console.log(state);
     if (error) {
       error.details.map((item) => {
         errors[item.path[0]] = item.message;
       });
+      console.log(errors);
     } else {
       try {
         console.log(state);
@@ -93,7 +91,7 @@ function AddPatient() {
           setTimeout(() => {
             setLoader(false);
           }, 200);
-          navigate('/dashboard');
+          navigate("/dashboard");
         }
       } catch (error) {
         console.log(error.message);
@@ -115,9 +113,8 @@ function AddPatient() {
   };
 
   if (loader) {
-    return <Loader />
+    return <Loader />;
   } else {
-
     return (
       <div>
         <HeaderOne />
@@ -257,8 +254,7 @@ function AddPatient() {
                   className="form-control"
                   aria-describedby="passwordHelpInline"
                   onChange={handleValidity}
-                  style={{ width: '204px' }}
-
+                  style={{ width: "204px" }}
                 />
               </div>
             </div>
@@ -294,34 +290,40 @@ function AddPatient() {
           )} */}
             <div className="flex justify-content-center row g-3 align-items-center">
               <div className="col-1 text-center">
-                <Form.Label className="col-form-label" style={{ margin: " 0px  15px" }} >
+                <Form.Label
+                  className="col-form-label"
+                  style={{ margin: " 0px  15px" }}
+                >
                   Gender
                 </Form.Label>
               </div>
               <div className="col-7">
-
                 <DropdownButton
                   bsPrefix="button1"
                   id="dropdown-basic-button"
                   title={state.GenderName == "" ? "Gender" : state.GenderName}
                   onSelect={handleSelect}
-                > {genderTypes.map((row) => (
-
-                  <Dropdown.Item eventKey={[row.name, row.slug]}>{row.name}</Dropdown.Item>
-
-                ))}
+                >
+                  {" "}
+                  {genderTypes.map((row) => (
+                    <Dropdown.Item eventKey={[row.name, row.slug]}>
+                      {row.name}
+                    </Dropdown.Item>
+                  ))}
                 </DropdownButton>
-
               </div>
               <Row>
-                <Col >
+                <Col>
                   {errorData["GenderName"] !== "" && (
-                    <p className="d-flex justify-content-center"
-                      style={{ color: "red" }}>{errorData["GenderName"]}</p>
+                    <p
+                      className="d-flex justify-content-center"
+                      style={{ color: "red" }}
+                    >
+                      {errorData["GenderName"]}
+                    </p>
                   )}
                 </Col>
               </Row>
-
             </div>
             <div className="btn-container d-flex justify-content-center ">
               <button
@@ -336,9 +338,7 @@ function AddPatient() {
         </div>
       </div>
     );
-
   }
-
 }
 
 export default AddPatient;

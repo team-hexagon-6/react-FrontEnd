@@ -1,42 +1,35 @@
-.logo>img {
+.logo>img{
     width: 130px;
     object-fit: contain;
-
+    
+}
+.logo{
+   margin-top: -120px;
+   margin-bottom: -120px;
 }
 
-.logo {
-    margin-top: -120px;
-    margin-bottom: -120px;
-}
-
-.NAV {
+.NAV{
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
 }
-
-.contents {
+.contents{
     margin-right: 5%;
 }
 
-.navlink {
+.navlink{
     color: #000 !important;
     font-size: 1.2rem !important;
     border-radius: 5px;
     margin-left: 3% !important;
-    border-style: solid;
+    border-style: solid ;
     border-color: #69adde;
-
+    
 }
-
-.Link {
+.Link{
     text-decoration: none !important;
 }
 
-.navlink:hover {
+.navlink:hover{
     background-color: gray !important;
-}
-
-.navBtn{
-    border: none !important;
 }

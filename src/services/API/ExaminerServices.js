@@ -1,5 +1,5 @@
 import config from "../../config.json";
-import axios from "axios";
+import axios from "../HttpServices";
 import token from "../Token";
 // import { genderTypes } from './../../../../node-server/prisma/seed/genderTypes';
 
@@ -18,7 +18,7 @@ const addPatient = (data) => {
     method: "post",
     url: APIEndpoint + "/patient/add-new-patient",
     data: {
-      patient_id: "P211269",
+      patient_id: "P1234566669",
       firstname: data["First Name"],
       lastname: data["Last Name"],
       nic: data["NIC"],
@@ -27,6 +27,26 @@ const addPatient = (data) => {
       birthday: data["Birthday"],
       gender_type: data["GenderValue"],
     },
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
+
+const updatePatientProfile = (data) => {
+  // console.log("id is", patient_id);
+  return axios({
+    method: "post",
+    url: APIEndpoint + "/patient/update-patient",
+    data: {
+      patient_id: "P233344335",
+      firstname: data["First Name"],
+      lastname: data["Last Name"],
+      nic: data["NIC"],
+      contact_no: data["Contact Number"],
+      email: data["Email"],
+      birthday: data["Birthday"],
+      gender_type: data["GenderValue"],
+    },
+
     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
@@ -56,7 +76,6 @@ const getgendertypes = () => {
     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
-
 
 const getpatienttestrecordsforatest = (testid) => {
   return axios({
@@ -97,6 +116,13 @@ const gettesttypes = () => {
     headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
+const getGenderTypes = () => {
+  return axios({
+    method: "get",
+    url: APIEndpoint + "/patient/gender-types",
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+};
 
 const confirmtest = (test_id, patient_id) => {
   return axios({
@@ -114,10 +140,9 @@ const getPatients = (skip, take) => {
   return axios({
     method: "get",
     url: APIEndpoint + `/patient/get-all-patients?skip=${skip}&take=${take}`,
-    headers: { Authorization: `Bearer ${token.getAccessToken()}` }
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
-
-}
+};
 
 export default {
   getpatientdetails,
@@ -129,5 +154,7 @@ export default {
   confirmtest,
   getPatients,
   addPatient,
-  getgendertypes
-}
+  getGenderTypes,
+  getgendertypes,
+  updatePatientProfile,
+};

@@ -6,6 +6,7 @@ import HeaderOne from '../../components/headers/HeaderOne';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import UserServices from '../../services/API/UserServices';
 import Loader from '../../components/loader/Loader';
+import HeaderTwo from '../../components/headers/HeaderTwo';
 
 const Examiner = () => {
   let navigate = useNavigate();
@@ -76,7 +77,7 @@ const Examiner = () => {
     return (
 
       <div>
-        <HeaderOne />
+        <HeaderTwo />
 
         <div className='col-sm-4 reg optionss justify-content-center'>
 

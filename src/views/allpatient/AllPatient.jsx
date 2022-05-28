@@ -13,6 +13,7 @@ import {
 
 import './allpatients.css'
 import ExaminerServices from '../../services/API/ExaminerServices';
+import HeaderTwo from '../../components/headers/HeaderTwo';
 import Loader from '../../components/loader/Loader';
 
 const AllPatient = () => {
