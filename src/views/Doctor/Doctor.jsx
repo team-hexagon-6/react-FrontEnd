@@ -41,7 +41,7 @@ const Doctor = () => {
     return (
       <div>
 
-        <HeaderOne />
+        <HeaderTwo/>
 
         <div className='col-sm-4 reg justify-content-center'>
 

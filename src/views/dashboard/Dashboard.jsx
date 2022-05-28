@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 import "./AdminDashboard.css"
 import 'font-awesome/css/font-awesome.css';
 import UserServices from "../../services/API/UserServices";
 import Loader from "../../components/loader/Loader";
-
+import Token from '../../services/Token'
+import jwtDecode from "jwt-decode";
 const Dashboard = () => {
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
     const [loader, setLoader] = useState(false);
 
@@ -18,16 +21,21 @@ const Dashboard = () => {
     const getUser = async (usertype) => {
         setLoader(true);
         try {
-            const response = await UserServices.getUser();
-            if (response.data.data.auth.complete_profile) {
-                switch (response.data.data.auth.usertype.name) {
-                    case 'admin':
+            // const response = await UserServices.getUser();
+            
+            // setAuth({usertype:response.data.data.auth.usertype.name})
+            const user=jwtDecode(Token.getAccessToken())
+            navigate(from, { replace: true })
+            // console.log("usertype",response.data.data.auth.usertype.name);
+            if (user.profile_complete) {
+                switch (user.role) {
+                    case '_32345':
                         navigate('/adminDashboard');
                         break;
-                    case 'doctor':
+                    case '_32446':
                         navigate('/doctor');
                         break
-                    case 'examiner':
+                    case '_32247':
                         navigate('/examiner');
                         break
                     default:

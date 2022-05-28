@@ -6,18 +6,17 @@ import AuthServices from "../../services/AuthServices";
 import Validation from "../../Validation";
 import { useNavigate, useLocation } from "react-router-dom";
 
+
 import { toast } from "react-toastify";
-import { useAuth } from "../../utils/auth";
+
+
 
 import Messages from "../../helpers/Messages";
 import Loader from "../../components/loader/Loader";
 
 function Login() {
-  const auth = useAuth();
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const redirectPath = location.state?.path || '/'
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -59,9 +58,11 @@ function Login() {
           //   progress: undefined,
           // });
           Messages.SuccessMessage("Successfully Logged In.");
-
-          auth.login(username);
           // navigate(redirectPath,{replace:true})
+          // const user=jwtDecode(Token.getAccessToken())
+          // console.log(user);
+          // setAuth({userRole:user.role,profile_complete:user.profile_complete})
+          // navigate(from, { replace: true })
           navigate('/dashboard');
 
         }

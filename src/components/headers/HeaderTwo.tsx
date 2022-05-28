@@ -1,17 +1,20 @@
 import React from 'react'
 import { Navbar, Nav, Container, NavLink } from "react-bootstrap";
 import Logo from "../../assets/images/logo.svg";
-import { useAuth } from "../../utils/auth";
 import { Link } from "react-router-dom";
 import "./HeaderTwo.css"
+import Token from '../../services/Token'
+import jwtDecode from "jwt-decode";
+
 
 
 function HeaderTwo() {
-    const auth = useAuth();
     const logout=()=>{
         localStorage.clear();
         window.location.href="/login";
     }
+  const user=jwtDecode(Token.getAccessToken())
+
   return (
     <div className='headerTwo'>
       <Navbar className="NAV" bg="light">
@@ -24,7 +27,7 @@ function HeaderTwo() {
               <NavLink className="navlink">
                 <Link to="/">Home </Link>
               </NavLink>
-              {auth.user && (
+              {user && (
                 <NavLink className="navlink">
                     <Link to='' onClick={logout}>Logout</Link>
               </NavLink>
