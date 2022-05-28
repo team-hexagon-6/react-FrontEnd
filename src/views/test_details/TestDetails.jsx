@@ -8,14 +8,12 @@ import Form from 'react-bootstrap/Form';
 import ExaminerServices from '../../services/API/ExaminerServices';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from "../../components/loader/Loader";
-
-
-
+import NotFound from './../not_found/NotFound';
 
 const TestDetails = () => {
 
     const [reportdetails, setReportDetails] = useState({
-        details: {},
+        details: [],
         testdetails: []
     });
     let navigate = useNavigate();
@@ -55,6 +53,7 @@ const TestDetails = () => {
 
     }
     const handleActive = async (event) => {
+        window.alert(`Please confirm test deactivation\n\nPatient ID: ${params.patientid}\n\This cannot be undone.`);
         setLoader(true);
         try {
             console.log(event)
@@ -79,7 +78,7 @@ const TestDetails = () => {
 
             const patientDetails = await ExaminerServices.getpatientdetails(params.patientid);
             const patienttestDetails = await ExaminerServices.getpatienttestdetails(0, 10, params.patientid);
-            console.log(patienttestDetails);
+        
             setReportDetails({
                 ...reportdetails,
                 details: patientDetails.data.data,
@@ -109,7 +108,7 @@ const TestDetails = () => {
 
     if (loader) {
         return <Loader />
-    } else {
+    } else if(reportdetails?.details.length!=0) {
 
         return (
             <div>
@@ -144,13 +143,16 @@ const TestDetails = () => {
                     <div className='b'>
                         <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
                     </div>
-                    {console.log(reportdetails.testdetails)}
+                    {console.log(reportdetails.details)}
+                    {console.log(reportdetails?.details.length==0)}
 
                     {/* {storedbuttons.map((row, index)=> row.props.children)} */}
                     {reportdetails.testdetails.map((row, index) => (
                         <div>
-                            <div className="test_ids" style={{margin: "10px"}}>
-                                {row.id}
+                            
+                            <div className="test_ids" style={{margin: "10px"}}>Test {index+1}
+                            <div> {row.id}</div>
+                               
 
                                 <div className="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
@@ -162,16 +164,20 @@ const TestDetails = () => {
                         </div>
 
                     ))
-                    }
-
-
-
-
+    }
 
                 </div>
             </div>
         )
 
+    }
+    else if(reportdetails?.details.length==0){
+        return (
+            <div>
+                <NotFound/>
+            </div>
+
+        );
     }
 
 }
