@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { useNavigate, Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import HeaderOne from "../../components/headers/HeaderOne";
 import { useEffect, useState } from "react";
 import {
@@ -180,10 +180,8 @@ const AllPatient = () => {
                         </td>
                         <td>
                           <Link
-                            to={{
-                              pathname: "/updatePatientProfile",
-                              state: { patient_id: name.id },
-                            }}
+                            to={"/updatePatientProfile"}
+                            state={{ patient_id: name.id }}
                           >
                             <Button
                               className="btn-primary"
