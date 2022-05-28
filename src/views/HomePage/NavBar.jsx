@@ -27,6 +27,11 @@ function NavBar() {
                   <Link to="/login">Login </Link>
                 </NavLink>
               )}
+              {auth.user && (
+                <NavLink className="navlink" to="/login">
+                  <Link to="/dashboard">Dashboard </Link>
+                </NavLink>
+              )}
             </Nav>
           </Container>
         </div>

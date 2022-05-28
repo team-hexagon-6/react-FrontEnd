@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import './Examiner.css'
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import HeaderOne from '../../components/headers/HeaderOne';
-import { Button, ButtonGroup } from 'react-bootstrap';
-
+import React, { Component } from "react";
+import "./Examiner.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import HeaderOne from "../../components/headers/HeaderOne";
+import { Button, ButtonGroup } from "react-bootstrap";
+import HeaderTwo from '../../components/headers/HeaderTwo';
 
 const Examiner = () => {
   let navigate = useNavigate();
-  const [patient_id, setPatientId] = useState('');
+  const [patient_id, setPatientId] = useState("");
 
   // handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -46,15 +46,11 @@ const Examiner = () => {
 
   // };
 
-
-
   return (
-
     <div>
-      <HeaderOne />
+      <HeaderTwo />
 
-      <div className='col-sm-4 reg optionss justify-content-center'>
-
+      <div className="col-sm-4 reg optionss justify-content-center">
         <h1 className="admindash_header">Examiner Dashboard</h1>
         {/* <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6> */}
         <h6 className="admindash_header">Welcome, username!</h6>
@@ -66,14 +62,30 @@ const Examiner = () => {
         <ButtonGroup vertical className="d-flex">
           <Button
             className=""
-            style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-            onClick={() => { navigate("/addPatient") }}>
+            style={{
+              borderRadius: "20px",
+              margin: "20px",
+              width: "100%",
+              marginLeft: "auto",
+            }}
+            onClick={() => {
+              navigate("/addPatient");
+            }}
+          >
             Add Patient
           </Button>
           <Button
             className=""
-            style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-            onClick={() => { navigate('/allpatients') }}>
+            style={{
+              borderRadius: "20px",
+              margin: "20px",
+              width: "100%",
+              marginLeft: "auto",
+            }}
+            onClick={() => {
+              navigate("/allpatients");
+            }}
+          >
             View All Patients
           </Button>
         </ButtonGroup>
@@ -85,7 +97,7 @@ const Examiner = () => {
         {/* <button className='butts' onClick={() => { navigate('/allpatients') }}>View All Patients</button>
         <br></br>
         <br></br> */}
-        <br></br> 
+        <br></br>
         {/* <button className='butts' onClick={()=>{ navigate('/viewPatient')}}>View Patient</button> */}
         <div className="input-group mb-3">
           <input
@@ -97,24 +109,36 @@ const Examiner = () => {
             onChange={(event) => setPatientId(event.target.value)}
             required
           />
-          <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => { navigate(`/testDetails/${patient_id}`) }}>Search Patient</Button>
-
+          <Button
+            className=""
+            style={{ borderRadius: "0 20px 20px 0" }}
+            onClick={() => {
+              navigate(`/testDetails/${patient_id}`);
+            }}
+          >
+            Search Patient
+          </Button>
         </div>
         {/* <Button className='butts' id='update' onClick={() => { }}>Update Account</Button> */}
         <ButtonGroup vertical className="d-flex">
           <Button
             className=""
-            style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-            onClick={() => { navigate('/updateProfile') }}>
+            style={{
+              borderRadius: "20px",
+              margin: "20px",
+              width: "100%",
+              marginLeft: "auto",
+            }}
+            onClick={() => {
+              navigate("/updateProfile");
+            }}
+          >
             Update Account
           </Button>
         </ButtonGroup>
       </div>
-
-
     </div>
-  )
-}
-
+  );
+};
 
 export default Examiner;
