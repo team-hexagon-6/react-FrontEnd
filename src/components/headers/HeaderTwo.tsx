@@ -13,7 +13,12 @@ function HeaderTwo() {
         localStorage.clear();
         window.location.href="/login";
     }
-  const user=jwtDecode(Token.getAccessToken())
+    try{
+      var user=jwtDecode(Token.getAccessToken())
+     }
+     catch(err){
+       user=null
+     }
 
   return (
     <div className='headerTwo'>

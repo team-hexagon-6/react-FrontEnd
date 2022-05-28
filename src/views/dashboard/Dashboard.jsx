@@ -26,7 +26,12 @@ const Dashboard = () => {
             // const response = await UserServices.getUser();
             
             // setAuth({usertype:response.data.data.auth.usertype.name})
-            const user=jwtDecode(Token.getAccessToken())
+            try{
+                var user=jwtDecode(Token.getAccessToken())
+               }
+            catch(err){
+                user=null
+            }
             // console.log(from)
             // navigate(from, { replace: true })
             // console.log("usertype",response.data.data.auth.usertype.name);

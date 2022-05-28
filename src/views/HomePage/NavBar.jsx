@@ -3,8 +3,16 @@ import { Navbar, Nav, Container, NavLink } from "react-bootstrap";
 import Logo from "../../assets/images/logo.svg";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import Token from '../../services/Token'
+import jwtDecode from "jwt-decode";
 
 function NavBar() {
+  try{
+    var user=jwtDecode(Token.getAccessToken())
+   }
+   catch(err){
+     user=null
+   }
   return (
     <div className="Navigation">
       <Navbar className="NAV" bg="light">
@@ -20,16 +28,16 @@ function NavBar() {
               <NavLink className="navlink" to="/about">
                 <Link to="/about">About </Link>
               </NavLink>
-              {/* {!auth.user && (
+              {!user && (
                 <NavLink className="navlink" to="/login">
                   <Link to="/login">Login </Link>
                 </NavLink>
               )}
-              {auth.user && (
+              {user && (
                 <NavLink className="navlink" to="/login">
                   <Link to="/dashboard">Dashboard </Link>
                 </NavLink>
-              )} */}
+              )}
             </Nav>
           </Container>
         </div>
