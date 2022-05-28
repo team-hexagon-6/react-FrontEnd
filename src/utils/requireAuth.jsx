@@ -20,8 +20,7 @@ export const RequireAuth = ({ children,allowedRoles }) => {
      user=null
    }
   
-  
-    
+ 
 
   return (
     allowedRoles?.find(role => user?.role?.includes(role))

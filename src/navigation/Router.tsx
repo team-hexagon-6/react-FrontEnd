@@ -21,7 +21,7 @@ import AdminUpdate from "../views/update/AdminUpdate";
 import UpdatePatientProfile from "../views/updatePatientprofile/UpdatePatientProfile";
 import About from "../views/about/About";
 import ViewPatient from "../views/View_patient/view_patient";
-import Unauthorized from "../views/unAuthorized/Unauthorized";
+import Unauthorized from "../views/not_found/Unauthorized";
 
 
 // FIXME: This is a temporary solution to get the pagination working.
