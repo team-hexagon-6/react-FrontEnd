@@ -6,6 +6,9 @@ import "./AddPatient.css";
 import Validation from "../../Validation";
 import { Form, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import HeaderTwo from "../../components/headers/HeaderTwo";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Loader from "../../components/loader/Loader";
 
 function AddPatient() {
   const formValues = {
@@ -23,12 +26,16 @@ function AddPatient() {
   const [errorData, setErrorData] = useState(formValues);
   const [genderTypes, setgenderTypes] = useState([]);
   const errors = {};
+  const navigate = useNavigate();
+
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     getGenderTypes();
   }, []);
 
   const getGenderTypes = async () => {
+    setLoader(true);
     try {
       const genderType = await ExaminerServices.getgendertypes();
       console.log(genderType.data.data);
@@ -36,6 +43,9 @@ function AddPatient() {
     } catch (err) {
       // console.log(err);
     }
+    setTimeout(() => {
+      setLoader(false);
+    }, 200);
   };
 
   const handleValidity = (e) => {
@@ -54,6 +64,7 @@ function AddPatient() {
   };
 
   const handleSubmit = async (e) => {
+    setLoader(true);
     e.preventDefault();
     const { value, error } = Validation.addPatient(state);
     console.log(state);
@@ -67,165 +78,195 @@ function AddPatient() {
         console.log(state);
         const response = await ExaminerServices.addPatient(state);
         console.log(response);
+        if (response.status === 201) {
+          toast.success("Patient Added Successfully", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setTimeout(() => {
+            setLoader(false);
+          }, 200);
+          navigate("/dashboard");
+        }
       } catch (error) {
         console.log(error.message);
+        toast.error("Couldn't add patient", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     }
     setErrorData(errors);
+    setTimeout(() => {
+      setLoader(false);
+    }, 200);
   };
 
-  return (
-    <div>
-      <HeaderTwo />
-      <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
-        <h3 className="header">Add Patient</h3>
-        <div className="form1">
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <label htmlFor="" className="col-form-label">
-                First Name
-              </label>
+  if (loader) {
+    return <Loader />;
+  } else {
+    return (
+      <div>
+        <HeaderOne />
+        <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
+          <h3 className="fs-1 text-primary mt-4">Add Patient</h3>
+          <div className="form1">
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center">
+                <label htmlFor="" className="col-form-label">
+                  First Name
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="First Name"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                />
+              </div>
             </div>
-            <div className="col-auto">
-              <input
-                type="text"
-                className="form-control"
-                name="First Name"
-                aria-describedby="passwordHelpInline"
-                onChange={handleValidity}
-              />
+            {errorData["First Name"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["First Name"]}
+              </p>
+            )}
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center">
+                <label htmlFor="" className="col-form-label">
+                  Last Name
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="text"
+                  name="Last Name"
+                  className="form-control"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                />
+              </div>
             </div>
-          </div>
-          {errorData["First Name"] !== "" && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {errorData["First Name"]}
-            </p>
-          )}
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <label htmlFor="" className="col-form-label">
-                Last Name
-              </label>
+            {errorData["Last Name"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["Last Name"]}
+              </p>
+            )}
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center ">
+                <label htmlFor="" className="col-form-label">
+                  NIC
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="text"
+                  name="NIC"
+                  className="form-control"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                />
+              </div>
             </div>
-            <div className="col-auto">
-              <input
-                type="text"
-                name="Last Name"
-                className="form-control"
-                aria-describedby="passwordHelpInline"
-                onChange={handleValidity}
-              />
+            {errorData["NIC"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["NIC"]}
+              </p>
+            )}
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center">
+                <label htmlFor="" className="col-form-label">
+                  Contact Number
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="text"
+                  name="Contact Number"
+                  className="form-control"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                />
+              </div>
             </div>
-          </div>
-          {errorData["Last Name"] !== "" && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {errorData["Last Name"]}
-            </p>
-          )}
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center ">
-              <label htmlFor="" className="col-form-label">
-                NIC
-              </label>
+            {errorData["Contact Number"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["Contact Number"]}
+              </p>
+            )}
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center">
+                <label htmlFor="" className="col-form-label">
+                  Email
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="Email"
+                  name="Email"
+                  className="form-control"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                />
+              </div>
             </div>
-            <div className="col-auto">
-              <input
-                type="text"
-                name="NIC"
-                className="form-control"
-                aria-describedby="passwordHelpInline"
-                onChange={handleValidity}
-              />
+            {errorData["Email"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["Email"]}
+              </p>
+            )}
+            <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center">
+                <label htmlFor="" className="col-form-label">
+                  Birthday
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="date"
+                  name="Birthday"
+                  className="form-control"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                  style={{ width: "204px" }}
+                />
+              </div>
             </div>
-          </div>
-          {errorData["NIC"] !== "" && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {errorData["NIC"]}
-            </p>
-          )}
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <label htmlFor="" className="col-form-label">
-                Contact Number
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                type="text"
-                name="Contact Number"
-                className="form-control"
-                aria-describedby="passwordHelpInline"
-                onChange={handleValidity}
-              />
-            </div>
-          </div>
-          {errorData["Contact Number"] !== "" && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {errorData["Contact Number"]}
-            </p>
-          )}
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <label htmlFor="" className="col-form-label">
-                Email
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                type="Email"
-                name="Email"
-                className="form-control"
-                aria-describedby="passwordHelpInline"
-                onChange={handleValidity}
-              />
-            </div>
-          </div>
-          {errorData["Email"] !== "" && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {errorData["Email"]}
-            </p>
-          )}
-          <div className="justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <label htmlFor="" className="col-form-label">
-                Birthday
-              </label>
-            </div>
-            <div className="col-auto">
-              <input
-                type="date"
-                name="Birthday"
-                className="form-control"
-                aria-describedby="passwordHelpInline"
-                onChange={handleValidity}
-                style={{ width: "204px" }}
-              />
-            </div>
-          </div>
-          {errorData["Birthday"] !== "" && (
-            <p
-              className="d-flex justify-content-center"
-              style={{ color: "red" }}
-            >
-              {errorData["Birthday"]}
-            </p>
-          )}
-          {/* <div className="flex justify-content-center row g-3 align-items-center">
+            {errorData["Birthday"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["Birthday"]}
+              </p>
+            )}
+            {/* <div className="flex justify-content-center row g-3 align-items-center">
             <div className="col-3 text-center">
               <label htmlFor="" className="col-form-label">
                 Gender
@@ -247,56 +288,57 @@ function AddPatient() {
               {errorData["Gender"]}
             </p>
           )} */}
-          <div className="flex justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
-              <Form.Label
-                className="col-form-label"
-                style={{ margin: " 0px  20px" }}
-              >
-                Gender
-              </Form.Label>
+            <div className="flex justify-content-center row g-3 align-items-center">
+              <div className="col-1 text-center">
+                <Form.Label
+                  className="col-form-label"
+                  style={{ margin: " 0px  15px" }}
+                >
+                  Gender
+                </Form.Label>
+              </div>
+              <div className="col-7">
+                <DropdownButton
+                  bsPrefix="button1"
+                  id="dropdown-basic-button"
+                  title={state.GenderName == "" ? "Gender" : state.GenderName}
+                  onSelect={handleSelect}
+                >
+                  {" "}
+                  {genderTypes.map((row) => (
+                    <Dropdown.Item eventKey={[row.name, row.slug]}>
+                      {row.name}
+                    </Dropdown.Item>
+                  ))}
+                </DropdownButton>
+              </div>
+              <Row>
+                <Col>
+                  {errorData["GenderName"] !== "" && (
+                    <p
+                      className="d-flex justify-content-center"
+                      style={{ color: "red" }}
+                    >
+                      {errorData["GenderName"]}
+                    </p>
+                  )}
+                </Col>
+              </Row>
             </div>
-            <div className="col-6">
-              <DropdownButton
-                bsPrefix="button1"
-                id="dropdown-basic-button"
-                title={state.GenderName == "" ? "Gender" : state.GenderName}
-                onSelect={handleSelect}
+            <div className="btn-container d-flex justify-content-center ">
+              <button
+                type="submit"
+                className="btn btn-primary w-50"
+                onClick={handleSubmit}
               >
-                {" "}
-                {genderTypes.map((row) => (
-                  <Dropdown.Item eventKey={[row.name, row.slug]}>
-                    {row.name}
-                  </Dropdown.Item>
-                ))}
-              </DropdownButton>
+                Submit
+              </button>
             </div>
-            <Row>
-              <Col>
-                {errorData["GenderName"] !== "" && (
-                  <p
-                    className="d-flex justify-content-center"
-                    style={{ color: "red" }}
-                  >
-                    {errorData["GenderName"]}
-                  </p>
-                )}
-              </Col>
-            </Row>
-          </div>
-          <div className="btn-container d-flex justify-content-center ">
-            <button
-              type="submit"
-              className="btn btn-primary w-50"
-              onClick={handleSubmit}
-            >
-              Submit
-            </button>
           </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default AddPatient;

@@ -1,7 +1,7 @@
 import config from "../../config.json";
-import axios from "axios";
+import axios from "../HttpServices";
 import token from "../Token";
-import { genderTypes } from "./../../../../node-server/prisma/seed/genderTypes";
+// import { genderTypes } from './../../../../node-server/prisma/seed/genderTypes';
 
 //API endpoint
 const APIEndpoint = config.DOMAIN_NAME + "/api";
@@ -154,6 +154,7 @@ export default {
   confirmtest,
   getPatients,
   addPatient,
+  getGenderTypes,
   getgendertypes,
   updatePatientProfile,
 };

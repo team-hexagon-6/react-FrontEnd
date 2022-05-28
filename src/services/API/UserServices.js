@@ -1,5 +1,5 @@
 import config from "../../config.json";
-import axios from "axios";
+import axios from "../HttpServices";
 import token from "../Token";
 
 //API endpoint
@@ -22,14 +22,26 @@ const updateprofile = (data) => {
 };
 
 const getUser = () => {
-    return axios({
-        method: 'get',
-        url: APIEndpoint + '/user/user',
-        headers: { Authorization: `Bearer ${token.getAccessToken()}` }
-    });
+  return axios({
+    method: 'get',
+    url: APIEndpoint + '/user/user',
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` }
+  });
 }
 
-export default{
-    updateprofile,
-    getUser,
+const changeActivation = (data) => {
+  return axios({
+    method: "post",
+    url: APIEndpoint + "/user/change-active",
+    data: {
+      user_id: data["user_id"],
+    },
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+}
+
+export default {
+  updateprofile,
+  getUser,
+  changeActivation,
 }
