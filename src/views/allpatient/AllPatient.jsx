@@ -60,7 +60,7 @@ const AllPatient = () => {
               <div className="fetch">
                 <div className="input-group mb-3">
                   <input
-                    placeholder="Search Patient ID"
+                    placeholder="Patient ID"
                     type="text"
                     className="form-control"
                     aria-describedby="passwordHelpInline"
@@ -76,7 +76,7 @@ const AllPatient = () => {
                     type="button"
                     id="button-addon2"
                   >
-                    Filter
+                    Search
                   </button>
                 </div>
               </div>
