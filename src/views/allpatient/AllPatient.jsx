@@ -17,7 +17,7 @@ import Loader from '../../components/loader/Loader';
 
 const AllPatient = () => {
 
-  const [names, setnames] = useState(['Bruce', 'Clark', 'Diana', 'Bruce1', 'Clark1', 'Diana1', 'Bruce2', 'Clark2', 'Diana2']);
+  // const [names, setnames] = useState(['Bruce', 'Clark', 'Diana', 'Bruce1', 'Clark1', 'Diana1', 'Bruce2', 'Clark2', 'Diana2']);
   const [filter, setfilter] = useState('');
   const [patient_id, setPatientId] = useState('');
 
@@ -52,8 +52,8 @@ const AllPatient = () => {
   };
 
   if (loader) {
-    return <Loader/>
-  } else{
+    return <Loader />
+  } else {
 
     return (
       <div>
@@ -70,16 +70,17 @@ const AllPatient = () => {
                     aria-describedby="passwordHelpInline"
                     value={filter}
                     onChange={(event) => { setfilter(event.target.value) }}
+                    style={{ borderRadius: "20px 0 0 20px" }}
                   />
-                  <button className="btn btn-outline-secondary" type="button" id="button-addon2">Filter</button>
-  
-  
+                  <button className="btn btn-outline-primary" style={{ borderRadius: "0 20px 20px 0" }} type="button" id="button-addon2">Filter</button>
+
+
                 </div>
               </div>
             </div>
             <div className="float-child-element">
               <div className="search">
-  
+
                 <div className="input-group mb-3">
                   <input
                     type="text"
@@ -87,9 +88,10 @@ const AllPatient = () => {
                     aria-describedby="passwordHelpInline"
                     value={patient_id}
                     onChange={(event) => { setPatientId(event.target.value) }}
+                    style={{ borderRadius: "20px 0 0 20px" }}
                   />
-                  <button onClick={() => { navigateMe() }} className="btn btn-outline-secondary" type="button" id="button-addon2">Show Patient</button>
-  
+                  <button onClick={() => navigateMe(patient_id)} className="btn btn-outline-primary" style={{ borderRadius: "0 20px 20px 0" }} type="button" id="button-addon2">Show Patient</button>
+
                 </div>
               </div>
             </div>
@@ -122,10 +124,10 @@ const AllPatient = () => {
                   }
                 }).map((name) => {
                   // Tables should come here
-  
+
                   return (
                     <tr key={name}>
-                      <td></td>
+                      <td>{name.id}</td>
                       <td>{name.firstname}</td>
                       <td>{name.lastname}</td>
                       <td></td>
@@ -138,8 +140,8 @@ const AllPatient = () => {
                         <Button
                           className="btn-primary"
                           style={{ borderRadius: "20px" }}
-                        // data-id={name.patient_id}
-                        // onClick={(event)=>{navigate(`/testDetails/${event.currentTarget.getAttribute("data-id")}`)}}
+                          // data-id={name.patient_id}
+                          onClick={() => { navigate(`/testDetails/${name.id}`) }}
                         >
                           View
                         </Button>
@@ -149,7 +151,7 @@ const AllPatient = () => {
                           className="btn-primary"
                           style={{ borderRadius: "20px" }}
                         // data-id={name.patient_id}
-                        // onClick={(event)=>{navigate(`/testDetails/${event.currentTarget.getAttribute("data-id")}`)}}
+                        onClick={()=>{navigate(`/testDetails/${name.id}`)}}
                         >
                           Do Test
                         </Button></td>
@@ -158,7 +160,7 @@ const AllPatient = () => {
                           className="btn-primary"
                           style={{ borderRadius: "20px" }}
                         // data-id={name.patient_id}
-                        // onClick={(event)=>{navigate(`/testDetails/${event.currentTarget.getAttribute("data-id")}`)}}
+                        onClick={()=>{navigate(`/testDetails/${name.id}`)}}
                         >
                           Update
                         </Button>
