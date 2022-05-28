@@ -16,7 +16,7 @@ const UpdateProfile = () => {
 
     const navigate = useNavigate();
 
-    const [loader, setLoader] = useState(flase);
+    const [loader, setLoader] = useState(false);
 
     const formValues = {
         'First Name': '',
