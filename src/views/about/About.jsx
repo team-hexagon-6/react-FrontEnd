@@ -17,7 +17,7 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/doc_ex.png" alt="" />
                         </div>
-                        <h6 className="h_6">Register as a Doctor or an Examiner</h6>
+                        <h5 className="h_6">Register as a Doctor or an Examiner</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
 
@@ -25,7 +25,7 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/about.png" alt="" />
                         </div>
-                        <h6 className="h_6">Add Patients for Tests</h6>
+                        <h5 className="h_6">Add Patients for Tests</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
 
@@ -33,7 +33,7 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/test.png" alt="" />
                         </div>
-                        <h6 className="h_6">Spiral & Wave Testing</h6>
+                        <h5 className="h_6">Spiral & Wave Testing</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
 
@@ -41,7 +41,7 @@ const About = () => {
                         <div className="image">
                             <img src="../../public/report.png" alt="" />
                         </div>
-                        <h6 className="h_6">Save and View Test Records</h6>
+                        <h5 className="h_6">Save and View Test Records</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
                     </div>
                 </div>
