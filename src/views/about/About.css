@@ -23,10 +23,6 @@ img {
     text-align: center;
 }
 
-.h_6 {
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .des {
     /* font-family: Arial, Helvetica, sans-serif; */
     font-weight: lighter;
@@ -38,4 +34,5 @@ img {
     display: flex;
     vertical-align: middle;
     align-items: center;
+    font-size: larger;
 }
