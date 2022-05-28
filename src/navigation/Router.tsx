@@ -19,7 +19,7 @@ import TestRecords from "../views/test_records/TestRecords";
 import { AuthProvider } from "../utils/auth";
 import HomePage from './../views/HomePage/HomePage';
 import AdminUpdate from "../views/update/AdminUpdate";
-import UpdatePatientProfile from "../views/updatePatientprofile/UpdateProfile";
+import UpdatePatientProfile from "../views/updatePatientprofile/UpdatePatientProfile";
 import About from "../views/about/About";
 import ViewPatient from "../views/View_patient/view_patient";
 
@@ -55,7 +55,7 @@ const  Router =() =>{
         <Route path="/testRecords/:testid" element ={<TestRecords/>}></Route>
         <Route path="/addPatient" element={<AddPatient/>}></Route>
         <Route path="/updateUser/:user_id" element ={<AdminUpdate/>}></Route>
-        <Route path="/updatePatient/:patient_id" element ={<UpdatePatientProfile/>}></Route>
+        <Route path="/updatePatientProfile" element ={<UpdatePatientProfile/>}></Route>
 
         {/* FIXME: this is testing route just for testing remove when the deploying */}
         <Route path="/testing" element ={<TestingPage/>}></Route>
