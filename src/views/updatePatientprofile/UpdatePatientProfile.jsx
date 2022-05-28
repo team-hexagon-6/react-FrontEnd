@@ -4,15 +4,19 @@ import "font-awesome/css/font-awesome.css";
 import HeaderOne from "../../components/headers/HeaderOne";
 import ExaminerServices from "../../services/API/ExaminerServices";
 import Validation from "../../Validation";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Form, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import HeaderTwo from "../../components/headers/HeaderTwo";
 
 function UpdatePatientProfile() {
   const params = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const patient_id = location.state.patient_id;
+  console.log("Patient ID  ", patient_id);
   // const patientID = "P233344335";
   const formValues = {
+    patient_id: patient_id,
     "First Name": "",
     "Last Name": "",
     NIC: "",
@@ -46,6 +50,7 @@ function UpdatePatientProfile() {
       ...state,
       [event.target.name]: event.target.value,
     });
+    console.log("Current state", state);
   };
   const handleSelect = (event) => {
     console.log("event is", event.split(",")[0]);
@@ -199,7 +204,7 @@ function UpdatePatientProfile() {
                 Gender
               </Form.Label>
             </div>
-            <div className="col-6">
+            <div className="col-7">
               <DropdownButton
                 bsPrefix="button1"
                 id="dropdown-basic-button"

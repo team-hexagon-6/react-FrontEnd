@@ -1,6 +1,5 @@
 import Joi from "joi";
 
-
 const registration = (data) => {
   const reg_schema = Joi.object({
     user_id: Joi.string().alphanum().min(3).max(30).required(),
@@ -113,7 +112,7 @@ const addPatient = (data) => {
       })
       .required(),
     GenderName: Joi.string().required(),
-    GenderValue: Joi.string().required()
+    GenderValue: Joi.string().required(),
   });
   const { error, value } = addPatientSchema.validate(data, {
     abortEarly: false,
@@ -121,7 +120,7 @@ const addPatient = (data) => {
   return { value, error };
 };
 
-const updatePatientProfile=(data)=>{
+const updatePatientProfile = (data) => {
   const addPatientSchema = Joi.object({
     "First Name": Joi.string()
       .regex(/^[A-Z][a-z0-9_-]{2,}$/)
@@ -165,12 +164,13 @@ const updatePatientProfile=(data)=>{
       .required(),
     GenderName: Joi.string().required(),
     GenderValue: Joi.string().required(),
+    patient_id: Joi.string().required(),
   });
   const { error, value } = addPatientSchema.validate(data, {
     abortEarly: false,
   });
   return { value, error };
-}
+};
 
 const new_test = (data) => {
   const reg_schema = Joi.object({
