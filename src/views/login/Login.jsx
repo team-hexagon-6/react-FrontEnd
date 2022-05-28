@@ -16,6 +16,9 @@ import Loader from "../../components/loader/Loader";
 
 function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from || "/dashboard";
+  
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +49,7 @@ function Login() {
     } else {
       try {
         const response = await AuthServices.login({ username, password });
-        console.log("response - 2", response);
+        // console.log("response - 2", response);
         if (response.status === 200) {
           // toast.success("Login Successfully", {
           //   position: "top-center",
@@ -62,8 +65,8 @@ function Login() {
           // const user=jwtDecode(Token.getAccessToken())
           // console.log(user);
           // setAuth({userRole:user.role,profile_complete:user.profile_complete})
-          // navigate(from, { replace: true })
-          navigate('/dashboard');
+          navigate(from, { replace: true })
+          
 
         }
       } catch (error) {
