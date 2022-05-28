@@ -103,11 +103,11 @@ function Login() {
           <div className="image">
             <img src="../../public/login.png" alt="" />
           </div>
-          <h3 className="header">Login</h3>
+          <h3 className="fa header">Login</h3>
           <div className="form1">
             <div className="justify-content-center row g-3 align-items-center">
               <div className="col-auto">
-                <label htmlFor="Username" className="col-form-label">
+                <label htmlFor="Username" className="col-form-label fa">
                   Username
                 </label>
               </div>
@@ -134,7 +134,7 @@ function Login() {
             )}
             <div className="justify-content-center row g-3 align-items-center">
               <div className="col-auto">
-                <label htmlFor="Password" className="col-form-label">
+                <label htmlFor="Password" className="col-form-label fa">
                   Password
                 </label>
               </div>
@@ -163,7 +163,7 @@ function Login() {
             <div className="btn-container d-flex justify-content-center ">
               <button
                 type="submit"
-                className="btn btn-primary w-50"
+                className="fa btn btn-primary w-50"
                 onClick={handleSubmit}
                 style={{ borderRadius: "20px" }}
               >
