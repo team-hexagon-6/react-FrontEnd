@@ -5,7 +5,7 @@ import jwtDecode from "jwt-decode";
 import dayJS from "dayjs";
 import Messages from "../helpers/Messages";
 
-
+Axios.defaults.withCredentials = true;
 let bearer_token = Token.getAccessToken();
 const axiosInstance = Axios.create({
     withCredentials: true,
