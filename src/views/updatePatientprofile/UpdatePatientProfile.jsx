@@ -27,7 +27,7 @@ function UpdatePatientProfile() {
     GenderValue: "",
   };
 
-  const [state, setState] = useState(formValues);
+  var [state, setState] = useState(formValues);
   const [errorData, setError] = useState(formValues);
   const [genderTypes, setgenderTypes] = useState([]);
 
@@ -40,9 +40,27 @@ function UpdatePatientProfile() {
       // console.log(err);
     }
   };
+  const getPatientDetails = async () => {
+    try {
+      const getPatient = await ExaminerServices.getpatientdetails(patient_id);
+      state = {
+        patient_id:patient_id,
+        "First Name": getPatient.data.data.firstname,
+        "Last Name": getPatient.data.data.lastname,
+        NIC: getPatient.data.data.nic,
+        "Contact Number": getPatient.data.data.contact_no,
+        Email: getPatient.data.data.email,
+        Birthday: getPatient.data.data.birthday.split("T")[0],
+        GenderValue: getPatient.data.data.gender_type_id===1?genderTypes.Male: genderTypes.Female,
+        GenderName:getPatient.data.data.gender_type_id===1?"Male":"Female",
+      };
+      setState(state);
+    } catch (error) {}
+  };
 
   useEffect(() => {
     getGenderTypes();
+    getPatientDetails();
   }, []);
 
   const handleUser = (event) => {
@@ -102,6 +120,7 @@ function UpdatePatientProfile() {
                 type="text"
                 name="First Name"
                 onChange={handleUser}
+                value={state["First Name"]}
               />
               {errorData["First Name"] !== "" && (
                 <p className="error">{errorData["First Name"]}</p>
@@ -121,6 +140,7 @@ function UpdatePatientProfile() {
               <Form.Control
                 type="text"
                 name="Last Name"
+                value={state["Last Name"]}
                 onChange={handleUser}
               />
               {errorData["Last Name"] !== "" && (
@@ -138,7 +158,12 @@ function UpdatePatientProfile() {
               NIC
             </Form.Label>
             <Col sm={6}>
-              <Form.Control type="text" name="NIC" onChange={handleUser} />
+              <Form.Control
+                type="text"
+                name="NIC"
+                value={state["NIC"]}
+                onChange={handleUser}
+              />
               {errorData.NIC !== "" && <p className="error">{errorData.NIC}</p>}
             </Col>
           </Form.Group>
@@ -155,6 +180,7 @@ function UpdatePatientProfile() {
               <Form.Control
                 type="text"
                 name="Contact Number"
+                value={state["Contact Number"]}
                 onChange={handleUser}
               />
               {errorData["Contact Number"] !== "" && (
@@ -172,7 +198,12 @@ function UpdatePatientProfile() {
               Email
             </Form.Label>
             <Col sm={6}>
-              <Form.Control type="text" name="Email" onChange={handleUser} />
+              <Form.Control
+                type="text"
+                name="Email"
+                value={state["Email"]}
+                onChange={handleUser}
+              />
               {errorData.Email !== "" && (
                 <p className="error">{errorData.Email}</p>
               )}
@@ -188,7 +219,12 @@ function UpdatePatientProfile() {
               Birthday
             </Form.Label>
             <Col sm={6}>
-              <Form.Control type="date" name="Birthday" onChange={handleUser} />
+              <Form.Control
+                type="date"
+                name="Birthday"
+                value={state["Birthday"]}
+                onChange={handleUser}
+              />
               {errorData.Birthday !== "" && (
                 <p className="error">{errorData.Birthday}</p>
               )}
