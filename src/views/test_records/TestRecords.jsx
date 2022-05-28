@@ -15,7 +15,7 @@ const TestRecords = () => {
     const [testrecords, settestrecords] = useState([])
     let navigate = useNavigate();
 
-    const [loader, setLoader] = useState(flase);
+    const [loader, setLoader] = useState(false);
 
     const params = useParams();
 
