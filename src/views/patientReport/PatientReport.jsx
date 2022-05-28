@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import "./PatientReport.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row, Col } from 'react-bootstrap';
@@ -52,7 +53,7 @@ const PatientReport = () => {
 
         return (
             <div>
-                <HeaderOne />
+                <HeaderTwo />
                 {console.log(reportdetails.testrecords)}
                 <div className='form-container col-xl-5 mx-auto '>
                     <h1 className='fs-1 fw-bold mb-0'>Report</h1>

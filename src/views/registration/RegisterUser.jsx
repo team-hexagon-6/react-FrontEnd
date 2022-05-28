@@ -4,7 +4,7 @@ import { Form, Button } from "react-bootstrap";
 import Validation from '../../Validation';
 import AuthServices from '../../services/AuthServices';
 import "./RegisterUser.css";
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import _503 from "../not_found/_503";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
@@ -116,7 +116,7 @@ const RegisterUser = () => {
             return (
                 <div className="register_user">
     
-                    <HeaderOne />
+                    <HeaderTwo />
     
                     <div className="col-sm-4 reg">
     

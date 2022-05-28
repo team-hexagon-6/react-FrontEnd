@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import HeaderOne from "../../components/headers/HeaderOne";
+import React, { Component } from 'react';
+import { useNavigate } from "react-router-dom";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -11,10 +11,9 @@ import {
   InputGroup,
 } from "react-bootstrap";
 
-import "./allpatients.css";
-import ExaminerServices from "../../services/API/ExaminerServices";
-import HeaderTwo from "../../components/headers/HeaderTwo";
-import Loader from "../../components/loader/Loader";
+import './allpatients.css'
+import ExaminerServices from '../../services/API/ExaminerServices';
+import Loader from '../../components/loader/Loader';
 
 const AllPatient = () => {
   // const [names, setnames] = useState(['Bruce', 'Clark', 'Diana', 'Bruce1', 'Clark1', 'Diana1', 'Bruce2', 'Clark2', 'Diana2']);
@@ -54,8 +53,8 @@ const AllPatient = () => {
   } else {
     return (
       <div>
-        <HeaderOne />
-        <div className="out_layouts">
+        <HeaderTwo />
+        <div className='out_layouts'>
           <div className="float-parent-element">
             <div className="float-child-element">
               <div className="fetch">
