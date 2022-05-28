@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap";
 import HeaderOne from "../../components/headers/HeaderOne";
 import "./AdminUpdate.css";
 import AdminServices from "../../services/API/AdminServices";
-import Validation from '../../Validation';
+import Validation from "../../Validation";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
@@ -70,6 +70,7 @@ const AdminUpdate = () => {
             setLoader(false);
         }, 200);
     }
+  
 
     if (loader) {
         return <Loader />
@@ -133,9 +134,31 @@ const AdminUpdate = () => {
                 </div>
 
 
+            <div className="container reg_form justify-content-center">
+              <Form onSubmit={handleSubmit}>
+                <div className="justify-content-center row g-3 align-items-center">
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Default Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      style={{ borderRadius: "20px" }}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </Form.Group>
+                </div>
+              </Form>
             </div>
+          </div>
         );
     }
-}
+  }
+      
+
+
+    
+
 
 export default AdminUpdate;
