@@ -1,11 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "../../utils/auth";
 import NavBar from "./NavBar";
 import "./HomePage.css";
 import Image from "../../assets/images/image1.jpg";
 export default function HomePage() {
-  const auth = useAuth();
   return (
     <div>
       <NavBar />

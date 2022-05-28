@@ -21,7 +21,7 @@ const TestDetails = () => {
     let navigate = useNavigate();
     const params = useParams();
 
-    const [loader, setLoader] = useState(flase);
+    const [loader, setLoader] = useState(false);
 
     // var today = new Date();
     // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -142,19 +142,23 @@ const TestDetails = () => {
 
                     </Form>
                     <div className='b'>
-                        <Button type="submit" style={{ "borderRadius": "5px", "margin": "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
+                        <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
                     </div>
                     {console.log(reportdetails.testdetails)}
 
                     {/* {storedbuttons.map((row, index)=> row.props.children)} */}
                     {reportdetails.testdetails.map((row, index) => (
                         <div>
-                            {row.id}
-                            <div className="btn-group" role="group" aria-label="Basic example">
-                                <button type="button" className="btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
-                                <button type="button" className="btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button>
-                                <button type="button" className="btn btn-secondary" onClick={handleActive} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
-                            </div> <br />
+                            <div className="test_ids" style={{margin: "10px"}}>
+                                {row.id}
+
+                                <div className="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
+                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button>
+                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleActive} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
+                                </div>
+
+                            </div>
                         </div>
 
                     ))
