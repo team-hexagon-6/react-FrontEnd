@@ -10,7 +10,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <NavBar />
+      <NavBar site={'About'} />
       <div className="homepage">
 
         <div className="container cont footer justify-content-center">

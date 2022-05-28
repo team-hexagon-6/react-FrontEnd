@@ -7,6 +7,7 @@ import RegisterUser from "../views/registration/RegisterUser";
 import UpdateProfile from "../views/UpdateProfile/UpdateProfile";
 import PatientReport from './../views/patientReport/PatientReport';
 import { RequireAuth } from "../utils/requireAuth";
+import Logout from "../components/logout"
 
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
@@ -45,6 +46,7 @@ const  Router =() =>{
 
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/registerUser" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><RegisterUser/></RequireAuth>}></Route>
         <Route path="/updateProfile" element ={<RequireAuth allowedRoles={[ROLES.Doctor,ROLES.Examiner]}><UpdateProfile/></RequireAuth>}></Route>
         <Route path="/newTest/:patientid" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><NewTest/></RequireAuth>}></Route>

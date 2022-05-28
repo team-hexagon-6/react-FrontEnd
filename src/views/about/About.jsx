@@ -1,12 +1,13 @@
 import HeaderOne from "../../components/headers/HeaderOne";
 import './About.css';
+import NavBar from "../HomePage/NavBar";
 
 const About = () => {
     return (
 
         <div className="about">
 
-            <HeaderOne />
+            <NavBar page={'Home'}/>
 
             <h1 className="about_header">About Us...</h1>
 
