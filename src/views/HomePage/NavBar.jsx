@@ -6,7 +6,7 @@ import "./NavBar.css";
 import Token from "../../services/Token";
 import jwtDecode from "jwt-decode";
 
-function NavBar() {
+function NavBar({site}) {
   try {
     var user = jwtDecode(Token.getAccessToken());
   } catch (err) {
@@ -21,11 +21,9 @@ function NavBar() {
         <div className="contents">
           <Container>
             <Nav className="me-auto">
-              <NavLink className="navlink">
-                <Link to="/">Home </Link>
-              </NavLink>
               <NavLink className="navlink" to="/about">
-                <Link to="/about">About </Link>
+                {site=='About'?<Link to="/about">About </Link>:<Link to="/">Home </Link>}
+                
               </NavLink>
               {!user && (
                 <NavLink className="navlink" to="/login">
@@ -35,6 +33,11 @@ function NavBar() {
               {user && (
                 <NavLink className="navlink" to="/login">
                   <Link to="/dashboard">Dashboard </Link>
+                </NavLink>
+              )}
+              {user && (
+                <NavLink className="navlink" to="/logout">
+                  <Link to="/logout">Logout </Link>
                 </NavLink>
               )}
             </Nav>
