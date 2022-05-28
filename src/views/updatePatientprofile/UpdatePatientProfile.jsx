@@ -199,7 +199,7 @@ function UpdatePatientProfile() {
                 Gender
               </Form.Label>
             </div>
-            <div className="col-6">
+            <div className="col-7">
               <DropdownButton
                 bsPrefix="button1"
                 id="dropdown-basic-button"
