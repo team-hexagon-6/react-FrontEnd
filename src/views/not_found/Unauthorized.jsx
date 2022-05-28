@@ -20,7 +20,7 @@ const NotFound = () => {
             <p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, You don't have permisson to access this page</p>
 
             <div className="image">
-                <img src="../../public/404.png" alt=""/>
+                <img src="../../public/unauthorized.png" alt=""/>
             </div>
 
             <div className="back_button">        

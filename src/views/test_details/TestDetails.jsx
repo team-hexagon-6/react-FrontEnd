@@ -1,4 +1,4 @@
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import React, { useEffect, useState } from 'react';
 import "./TestDetails.css";
 import 'font-awesome/css/font-awesome.css';
@@ -112,7 +112,7 @@ const TestDetails = () => {
 
         return (
             <div>
-                <HeaderOne />
+                <HeaderTwo />
                 <div className='form-container col-xl-6 mx-auto '>
                     <h1 className='fs-1 fw-bold mb-0'>Start Test</h1>
 

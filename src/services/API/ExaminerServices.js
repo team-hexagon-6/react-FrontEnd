@@ -37,7 +37,7 @@ const updatePatientProfile = (data) => {
     method: "post",
     url: APIEndpoint + "/patient/update-patient",
     data: {
-      patient_id: "P233344335",
+      patient_id: data["patient_id"],
       firstname: data["First Name"],
       lastname: data["Last Name"],
       nic: data["NIC"],

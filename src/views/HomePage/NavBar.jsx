@@ -3,16 +3,15 @@ import { Navbar, Nav, Container, NavLink } from "react-bootstrap";
 import Logo from "../../assets/images/logo.svg";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import Token from '../../services/Token'
+import Token from "../../services/Token";
 import jwtDecode from "jwt-decode";
 
 function NavBar() {
-  try{
-    var user=jwtDecode(Token.getAccessToken())
-   }
-   catch(err){
-     user=null
-   }
+  try {
+    var user = jwtDecode(Token.getAccessToken());
+  } catch (err) {
+    user = null;
+  }
   return (
     <div className="Navigation">
       <Navbar className="NAV" bg="light">

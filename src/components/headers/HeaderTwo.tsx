@@ -5,14 +5,23 @@ import { Link } from "react-router-dom";
 import "./HeaderTwo.css"
 import Token from '../../services/Token'
 import jwtDecode from "jwt-decode";
-
-
+import AuthServices from '../../services/AuthServices';
 
 function HeaderTwo() {
-    const logout=()=>{
+    // const logout=()=>{
+    //     localStorage.clear();
+    //     window.location.href="/login";
+    // }
+    const logout = async () => {
+      try {
+        const response = await AuthServices.logout();
         localStorage.clear();
         window.location.href="/login";
+      } catch (error) {
+        console.log(error);
+      }
     }
+
     try{
       var user=jwtDecode(Token.getAccessToken())
      }
@@ -22,19 +31,19 @@ function HeaderTwo() {
 
   return (
     <div className='headerTwo'>
-      <Navbar className="NAV" bg="light">
+      <Navbar fluid className="NAV" bg="light">
         <div className="logo">
           <img src={Logo} alt="" />
         </div>
         <div className="contents">
           <Container>
             <Nav className="me-auto">
-              <NavLink className="navlink">
-                <Link to="/">Home </Link>
+              <NavLink className="navlink" style={{borderRadius: "30px"}}>
+                <Link to="/" style={{textDecoration: "none", color: "#1376BD"}}>Home </Link>
               </NavLink>
               {user && (
-                <NavLink className="navlink">
-                    <Link to='' onClick={logout}>Logout</Link>
+                <NavLink className="navlink" style={{borderRadius: "30px"}}>
+                    <Link to='' onClick={logout} style={{textDecoration: "none", color: "#1376BD"}}>Logout</Link>
               </NavLink>
               )}
             </Nav>

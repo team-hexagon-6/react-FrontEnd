@@ -20,7 +20,7 @@ const _503= () => {
             <p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't give the service</p>
 
             <div className="image">
-                <img src="../../public/404.png" alt=""/>
+                <img src="../../public/503.png" alt=""/>
             </div>
 
             <div className="back_button">        

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, ButtonGroup, Card, Form, ToggleButton } from "react-bootstrap";
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import "./NewTest.css"
 import Validation from '../../Validation';
 import ExaminerServices from "../../services/API/ExaminerServices";
@@ -149,7 +149,7 @@ const NewTest = () => {
 
                 <div className="new_test">
 
-                    <HeaderOne />
+                    <HeaderTwo />
                     <h1 className="test_header">New Test</h1>
 
                     <div className="container test_form justify-content-center">
