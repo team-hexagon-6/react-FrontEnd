@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import "./AdminUpdate.css";
 import AdminServices from "../../services/API/AdminServices";
 import Validation from "../../Validation";
@@ -78,7 +78,7 @@ const AdminUpdate = () => {
         return (
             <div className="update_pwd">
 
-                <HeaderOne />
+                <HeaderTwo />
 
                 <div className="col-sm-4 reg">
 

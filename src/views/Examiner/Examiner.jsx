@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import './Examiner.css'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeaderOne from '../../components/headers/HeaderOne';
+import HeaderTwo from '../../components/headers/HeaderTwo';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import UserServices from '../../services/API/UserServices';
 import Loader from '../../components/loader/Loader';
-import HeaderTwo from '../../components/headers/HeaderTwo';
 
 const Examiner = () => {
   let navigate = useNavigate();

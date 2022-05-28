@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import './view_patient.css'
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 
 const ViewPatient =()=> {
   const [patient_id, setPatientId] = useState('');
@@ -9,6 +10,7 @@ const ViewPatient =()=> {
 
     return (
       <div>
+        <HeaderTwo />
           <div className='options'>
           <div className="input-group mb-3">
               <input

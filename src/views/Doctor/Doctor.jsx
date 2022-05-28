@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import './doctor.css'
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import HeaderOne from '../../components/headers/HeaderOne';
+import HeaderTwo from '../../components/headers/HeaderTwo';
 import { Button, ButtonGroup } from 'react-bootstrap';
 import UserServices from '../../services/API/UserServices';
 import Loader from '../../components/loader/Loader';

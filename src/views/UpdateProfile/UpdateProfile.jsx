@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import "./UpdateProfile.css";
 import 'font-awesome/css/font-awesome.css';
 import { Row, Col } from 'react-bootstrap';
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import UserServices from '../../services/API/UserServices';
 import Validation from '../../Validation';
 import { useState, useEffect } from 'react';
@@ -103,7 +103,7 @@ const UpdateProfile = () => {
 
         return (
             <div>
-                <HeaderOne />
+                <HeaderTwo />
                 <div className='form-container col-xl-5 mt-2 pt-5 mx-auto ' style={{ background: 'none' }}>
                     <h1 className='fs-1 text-primary mb-5'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
                     <Form onSubmit={handleSubmit} >

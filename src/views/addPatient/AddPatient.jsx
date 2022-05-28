@@ -117,7 +117,7 @@ function AddPatient() {
   } else {
     return (
       <div>
-        <HeaderOne />
+        <HeaderTwo />
         <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
           <h3 className="fs-1 text-primary mt-4">Add Patient</h3>
           <div className="form1">

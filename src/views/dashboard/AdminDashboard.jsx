@@ -1,11 +1,10 @@
 import "./AdminDashboard.css"
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import 'font-awesome/css/font-awesome.css';
 import UserServices from "../../services/API/UserServices";
 import { useEffect, useState } from "react";
-import HeaderTwo from "../../components/headers/HeaderTwo";
 import Loader from "../../components/loader/Loader";
 
 const AdminDashboard = () => {
@@ -44,7 +43,7 @@ const AdminDashboard = () => {
 
             <div className="admin_dash">
 
-                <HeaderOne />
+                <HeaderTwo />
 
                 <div className="col-sm-4 reg">
 

@@ -1,5 +1,5 @@
 import "./AllUsers.css";
-import HeaderOne from "../../components/headers/HeaderOne";
+import HeaderTwo from "../../components/headers/HeaderTwo";
 import Searchbar from "../../components/Searchbar/Searchbar";
 import { Card, Form, Button, Table, FormControl, InputGroup, DropdownButton, Dropdown, Pagination, } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
@@ -122,7 +122,7 @@ const AllUsers = () => {
   } else {
     return (
       <div className="all_users">
-        <HeaderOne />
+        <HeaderTwo />
 
         <h1 className="alluser_header">All Users</h1>
 
