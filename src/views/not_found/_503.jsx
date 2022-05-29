@@ -3,7 +3,7 @@ import "./NotFound.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const _503= () => {
+const _503= ({Error}) => {
 
     const navigate = useNavigate();
     const goBack = () => {
@@ -14,7 +14,7 @@ const _503= () => {
         <div className="not_found">
 
             <HeaderOne />
-
+            
             <h1 className="notfound_header">503 Error - Service Unavailable</h1>
 
             <p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't give the service</p>

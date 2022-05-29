@@ -32,6 +32,9 @@ function HeaderTwo() {
               <NavLink className="navlink" style={{borderRadius: "30px"}}>
                 <Link to="/" style={{textDecoration: "none", color: "#1376BD"}}>Home </Link>
               </NavLink>
+              <NavLink className="navlink" style={{borderRadius: "30px"}}>
+                <Link to="/dashboard" style={{textDecoration: "none", color: "#1376BD"}}>Dashboard </Link>
+              </NavLink>
               {user && (
                 <NavLink className="navlink" style={{borderRadius: "30px"}}>
                     <Link to='/logout' style={{textDecoration: "none", color: "#1376BD"}}>Logout</Link>

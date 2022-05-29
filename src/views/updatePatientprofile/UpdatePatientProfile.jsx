@@ -7,6 +7,8 @@ import Validation from "../../Validation";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Form, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import HeaderTwo from "../../components/headers/HeaderTwo";
+import "./Updateprofile.css"
+
 
 function UpdatePatientProfile() {
   const params = useParams();
@@ -104,8 +106,8 @@ function UpdatePatientProfile() {
   return (
     <div>
       <HeaderTwo />
-      <div className="form-container col-xl-5 mt-2 pt-5 mx-auto ">
-        <h1 className="fs-1 text-primary mb-5">Update Profile</h1>
+      <div className="form-container col-xl-5 mt-5 pt-5 mx-auto ">
+        <h1 className="fs-1 text-primary mb-5">Update Patient</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group
             as={Row}
@@ -231,21 +233,22 @@ function UpdatePatientProfile() {
             </Col>
           </Form.Group>
 
-          <div className="flex justify-content-center row g-3 align-items-center">
-            <div className="col-3 text-center">
+          <div className="flex justify-content-center fw-bold col-12 row g-3 align-items-center">
+            <div className="col-1 text-center">
               <Form.Label
                 className="col-form-label"
-                style={{ margin: " 0px  20px" }}
+                style={{ margin: " 0px  0px 0px 50px" }}
               >
                 Gender
               </Form.Label>
             </div>
-            <div className="col-7">
+            <div className="col-10">
               <DropdownButton
                 bsPrefix="button1"
                 id="dropdown-basic-button"
                 title={state.GenderName == "" ? "Gender" : state.GenderName}
                 onSelect={handleSelect}
+                style={{ margin: " 0px  110px 0px 0px" }}
               >
                 {" "}
                 {genderTypes.map((row) => (
@@ -269,10 +272,11 @@ function UpdatePatientProfile() {
             </Row>
           </div>
           <Button
-            className="btn btn-primary button"
+            className="btn btn-primary button w-50"
             size="lg"
             block="block"
             type="submit"
+            style={{}}
           >
             Update
           </Button>

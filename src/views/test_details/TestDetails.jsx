@@ -9,6 +9,10 @@ import ExaminerServices from '../../services/API/ExaminerServices';
 import { useParams, useNavigate } from 'react-router-dom';
 import Loader from "../../components/loader/Loader";
 import NotFound from './../not_found/NotFound';
+import {confirm} from "react-confirm-box"
+import Token from '../../services/Token'
+import jwtDecode from "jwt-decode";
+
 
 const TestDetails = () => {
 
@@ -16,10 +20,22 @@ const TestDetails = () => {
         details: [],
         testdetails: []
     });
+    const ROLES ={
+        'Examiner':'_32247',
+        'Doctor':'_32446',
+        'Admin':'_32345'
+      }
     let navigate = useNavigate();
     const params = useParams();
 
     const [loader, setLoader] = useState(false);
+    try{
+        var user=jwtDecode(Token.getAccessToken())
+       }
+       catch(err){
+         user=null
+       }
+  
 
     // var today = new Date();
     // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -52,20 +68,28 @@ const TestDetails = () => {
         navigate(`/newTest/${params.patientid}`)
 
     }
-    const handleActive = async (event) => {
-        window.alert(`Please confirm test deactivation\n\nPatient ID: ${params.patientid}\n\This cannot be undone.`);
-        setLoader(true);
-        try {
-            console.log(event)
-            const respone = await ExaminerServices.confirmtest(event.currentTarget.getAttribute("data-id"), params.patientid);
-            getPatientDetails();
+    const handleActive = async (testid) => {
+        const result=await confirm(`Please confirm test deactivation\n\nPatient ID: ${params.patientid}\n\This cannot be undone.`);
+        console.log('result',result)
+        if (result){
+            console.log("You click yes!");
+            setLoader(true);
+            try {
+              
+                const respone = await ExaminerServices.confirmtest(testid, params.patientid);
+                getPatientDetails();
+            }
+            catch (err) {
+                console.log(err);
+            }
+            setTimeout(() => {
+                setLoader(false);
+            }, 200);
+            
         }
-        catch (err) {
-            console.log(err);
-        }
-        setTimeout(() => {
-            setLoader(false);
-        }, 200);
+        console.log("You click NO!");
+        
+      
     }
 
     useEffect(() => {
@@ -140,9 +164,11 @@ const TestDetails = () => {
                         </Form.Group>
 
                     </Form>
+                    {user.role==ROLES.Examiner?
                     <div className='b'>
                         <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
-                    </div>
+                    </div> :""
+                    }
                     {console.log(reportdetails.details)}
                     {console.log(reportdetails?.details.length==0)}
 
@@ -156,8 +182,10 @@ const TestDetails = () => {
 
                                 <div className="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
+                                    {user.role==ROLES.Examiner? <>
                                     <button type="button" className="opt_btn btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button>
-                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleActive} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
+                                    <button type="button" className="opt_btn btn btn-secondary" onClick={()=>handleActive(row.id)} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
+                                    </>:''}
                                 </div>
 
                             </div>
@@ -174,7 +202,7 @@ const TestDetails = () => {
     else if(reportdetails?.details.length==0){
         return (
             <div>
-                <NotFound/>
+                <NotFound content=""/>
             </div>
 
         );

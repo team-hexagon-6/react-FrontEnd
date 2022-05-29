@@ -118,7 +118,7 @@ function AddPatient() {
     return (
       <div>
         <HeaderTwo />
-        <div className="container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
+        <div className="mt-3 container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
           <h3 className="fs-1 text-primary mt-4">Add Patient</h3>
           <div className="form1">
             <div className="justify-content-center row g-3 align-items-center">
@@ -288,11 +288,11 @@ function AddPatient() {
               {errorData["Gender"]}
             </p>
           )} */}
-            <div className="flex justify-content-center row g-3 align-items-center">
-              <div className="col-1 text-center">
+            <div className="flex justify-content-center col-12 row g-3 align-items-center">
+              <div className="col-5 text-center">
                 <Form.Label
                   className="col-form-label"
-                  style={{ margin: " 0px  15px" }}
+                  style={{ margin: " 0px  00px 0px 50px" }}
                 >
                   Gender
                 </Form.Label>

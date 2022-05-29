@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ExaminerServices from '../../services/API/ExaminerServices';
 import { useParams, useNavigate } from 'react-router-dom';
-import _503 from "../not_found/_503";
 import Loader from "../../components/loader/Loader";
+import NotFound from "../not_found/NotFound";
 
 
 const TestRecords = () => {
@@ -89,7 +89,7 @@ const TestRecords = () => {
         else {
             return (
                 <div>
-                    <_503 />
+                    <NotFound content="NoRecords"/>
                 </div>
             );
         }
