@@ -11,6 +11,10 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Dashboard from './../dashboard/Dashboard';
 import Loader from '../../components/loader/Loader';
+import moment from 'moment';
+
+
+import Messages from "../../helpers/Messages";
 
 const UpdateProfile = () => {
 
@@ -37,6 +41,7 @@ const UpdateProfile = () => {
             ...state,
             [event.target.name]: event.target.value
         })
+        console.log(moment(state['Birthday']).format("MM-DD-YYYY"))
     }
 
     const errors = {};
@@ -75,7 +80,7 @@ const UpdateProfile = () => {
     const handleSubmit = async (event) => {
         setLoader(true);
         console.log(state);
-        const { value, error } = Validation.validateupdateprofile(state)
+        const { value, error } = Validation.validateupdateprofile({...state,'Birthday':moment(state['Birthday']).format("MM-DD-YYYY")})
         event.preventDefault();
         if (error) {
             error.details.map(item => {
@@ -84,11 +89,15 @@ const UpdateProfile = () => {
         }
         else {
             try {
-                const response = await UserServices.updateprofile(state);
-                navigate('/dashboard')
+                const response = await UserServices.updateprofile({...state,'Birthday':moment(state['Birthday']).format("MM-DD-YYYY")});
+                navigate('/logout')
                 console.log(response)
             } catch (error) {
                 console.log(error.message);
+                Messages.ErrorMessage({
+                    error: error,
+                    main_part: "UPDATE FAILED",
+                  });
             }
         }
         setError(errors);

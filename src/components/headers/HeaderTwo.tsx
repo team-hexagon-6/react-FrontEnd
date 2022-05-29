@@ -22,7 +22,7 @@ function HeaderTwo() {
 
   return (
     <div className='headerTwo'>
-      <Navbar fluid className="NAV" bg="light">
+      <Navbar className="NAV" bg="light">
         <div className="logo">
           <img src={Logo} alt="" />
         </div>

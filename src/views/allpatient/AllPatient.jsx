@@ -35,7 +35,12 @@ const AllPatient = () => {
   const navigate = useNavigate();
   const navigateMe = () => {
     // console.log("delete user fn");
-    navigate(`/testDetails/${patient_id}`);
+    if(patient_id){
+      navigate(`/testDetails/${patient_id}`);
+    }else{
+      window.alert(`Please insert patient id`);
+    }
+
   };
   try{
     var user=jwtDecode(Token.getAccessToken())
@@ -75,7 +80,7 @@ const AllPatient = () => {
               <div className="fetch">
                 <div className="input-group mb-3">
                   <input
-                    placeholder="Patient ID"
+                    placeholder="Filter Patient"
                     type="text"
                     className="form-control"
                     aria-describedby="passwordHelpInline"
@@ -85,14 +90,7 @@ const AllPatient = () => {
                     }}
                     style={{ borderRadius: "20px 0 0 20px" }}
                   />
-                  <button
-                    className="btn btn-outline-primary"
-                    style={{ borderRadius: "0 20px 20px 0" }}
-                    type="button"
-                    id="button-addon2"
-                  >
-                    Search
-                  </button>
+                 
                 </div>
               </div>
             </div>
@@ -101,6 +99,7 @@ const AllPatient = () => {
                 <div className="input-group mb-3">
                   <input
                     type="text"
+                    placeholder="Patient ID"
                     className="form-control"
                     aria-describedby="passwordHelpInline"
                     value={patient_id}
@@ -116,14 +115,14 @@ const AllPatient = () => {
                     type="button"
                     id="button-addon2"
                   >
-                    Show Patient
+                    Search Patient
                   </button>
                 </div>
               </div>
             </div>
           </div>
           <div className="user_display">
-            <Table style={{ color: "#1376BD" }}>
+            <Table responsive="sm" hover style={{ color: "#1376BD", width: "100%" }}>
               <thead>
                 <tr>
                   <th>Patient ID</th>
@@ -182,7 +181,7 @@ const AllPatient = () => {
                         </td>
                         
                         {user.role==ROLES.Examiner? 
-                        <div>
+                        <>
                       
                         <td>
                          
@@ -197,7 +196,7 @@ const AllPatient = () => {
                             Do Test
                           </Button>
                         </td>
-                       
+                
                         <td>
                           <Link
                             to={"/updatePatientProfile"}
@@ -213,7 +212,7 @@ const AllPatient = () => {
                             </Button>
                           </Link>
                         </td>
-                        </div>
+                        </>
                          :''
                         }
                  

@@ -169,29 +169,31 @@ const TestDetails = () => {
                         <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
                     </div> :""
                     }
-                    {console.log(reportdetails.details)}
-                    {console.log(reportdetails?.details.length==0)}
+                    {console.log(reportdetails.testdetails.length)}
+                   
 
                     {/* {storedbuttons.map((row, index)=> row.props.children)} */}
-                    {reportdetails.testdetails.map((row, index) => (
+                    {(reportdetails.testdetails.length!==0 && reportdetails.testdetails.map((row, index) => (
                         <div>
                             
                             <div className="test_ids" style={{margin: "10px"}}>Test {index+1}
-                            <div> {row.id}</div>
-                               
+                                <div> {row.id}</div>
+                                
 
-                                <div className="btn-group" role="group" aria-label="Basic example">
-                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
-                                    {user.role==ROLES.Examiner? <>
-                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button>
-                                    <button type="button" className="opt_btn btn btn-secondary" onClick={()=>handleActive(row.id)} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
-                                    </>:''}
-                                </div>
+                                    <div className="btn-group" role="group" aria-label="Basic example">
+                                        <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
+                                        {user.role==ROLES.Examiner? <>
+                                        <button type="button" className="opt_btn btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button>
+                                        <button type="button" className="opt_btn btn btn-secondary" onClick={()=>handleActive(row.id)} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
+                                        </>:''}
+                                    </div>
 
                             </div>
                         </div>
+                        
 
-                    ))
+                    ))) || (reportdetails.testdetails.length === 0 && <h4 className="mb-5">No Tests Found</h4>)
+                    
     }
 
                 </div>
@@ -202,7 +204,7 @@ const TestDetails = () => {
     else if(reportdetails?.details.length==0){
         return (
             <div>
-                <NotFound content=""/>
+                <NotFound content="NoPatient"/>
             </div>
 
         );
