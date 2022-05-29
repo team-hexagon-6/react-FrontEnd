@@ -51,7 +51,7 @@ const AllUsers = () => {
     setLoader(true);
     console.log("Inside activate changing");
     try {
-      const response = await UserServices.changeActivation( user_id );
+      const response = await UserServices.changeActivation( {user_id} );
       console.log(response);
       if (response.status === 200) {
         Messages.SuccessMessage("Changed activation successfully");
