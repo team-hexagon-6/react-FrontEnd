@@ -121,25 +121,6 @@ const AdminUpdate = () => {
                     </div>
 
                 </div>
-
-
-            <div className="container reg_form justify-content-center">
-              <Form onSubmit={handleSubmit}>
-                <div className="justify-content-center row g-3 align-items-center">
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Default Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      style={{ borderRadius: "20px" }}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </Form.Group>
-                </div>
-              </Form>
-            </div>
           </div>
         );
     }
