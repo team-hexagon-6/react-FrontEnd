@@ -14,11 +14,19 @@ import {
 import './allpatients.css'
 import ExaminerServices from '../../services/API/ExaminerServices';
 import Loader from '../../components/loader/Loader';
+import Token from '../../services/Token'
+import jwtDecode from "jwt-decode";
 
 const AllPatient = () => {
   // const [names, setnames] = useState(['Bruce', 'Clark', 'Diana', 'Bruce1', 'Clark1', 'Diana1', 'Bruce2', 'Clark2', 'Diana2']);
   const [filter, setfilter] = useState("");
   const [patient_id, setPatientId] = useState("");
+  const ROLES ={
+    'Examiner':'_32247',
+    'Doctor':'_32446',
+    'Admin':'_32345'
+  }
+  
 
   const [loader, setLoader] = useState(false);
 
@@ -29,6 +37,13 @@ const AllPatient = () => {
     // console.log("delete user fn");
     navigate(`/testDetails/${patient_id}`);
   };
+  try{
+    var user=jwtDecode(Token.getAccessToken())
+   }
+   catch(err){
+     user=null
+   }
+
 
   useEffect(() => {
     getPatients();
@@ -132,7 +147,7 @@ const AllPatient = () => {
                     if (filter == "") {
                       return name;
                     } else if (
-                      (name.firstname + name.lastname)
+                      (name.id+name.firstname + name.lastname)
                         .toLocaleLowerCase()
                         .includes(filter.toLocaleLowerCase())
                     ) {
@@ -165,7 +180,12 @@ const AllPatient = () => {
                             View
                           </Button>
                         </td>
+                        
+                        {user.role==ROLES.Examiner? 
+                        <div>
+                      
                         <td>
+                         
                           <Button
                             className="btn-primary"
                             style={{ borderRadius: "20px" }}
@@ -177,6 +197,7 @@ const AllPatient = () => {
                             Do Test
                           </Button>
                         </td>
+                       
                         <td>
                           <Link
                             to={"/updatePatientProfile"}
@@ -192,6 +213,10 @@ const AllPatient = () => {
                             </Button>
                           </Link>
                         </td>
+                        </div>
+                         :''
+                        }
+                 
                       </tr>
                     );
                   })}

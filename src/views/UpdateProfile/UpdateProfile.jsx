@@ -104,7 +104,7 @@ const UpdateProfile = () => {
         return (
             <div>
                 <HeaderTwo />
-                <div className='form-container col-xl-5 mt-2 pt-5 mx-auto ' style={{ background: 'none' }}>
+                <div className='form-container col-xl-5 mt-5 pt-5 mx-auto ' style={{ background: 'none' }}>
                     <h1 className='fs-1 text-primary mb-5'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
                     <Form onSubmit={handleSubmit} >
                         <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='First Name'>
@@ -160,7 +160,7 @@ const UpdateProfile = () => {
                             </Col>
 
                         </Form.Group>
-                        <Button className='btn btn-primary button' size="lg" block="block" type="submit">Update</Button>
+                        <Button className='btn btn-primary button w-50' size="lg" block="block" type="submit">Update</Button>
                     </Form>
 
                 </div>

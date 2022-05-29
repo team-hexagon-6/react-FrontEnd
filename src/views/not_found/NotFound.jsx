@@ -3,7 +3,7 @@ import "./NotFound.css";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const NotFound = () => {
+const NotFound = (props) => {
 
     const navigate = useNavigate();
     const goBack = () => {
@@ -14,10 +14,12 @@ const NotFound = () => {
         <div className="not_found">
 
             <HeaderOne />
+            {props.content=="NoRecords"?<div> <h1 className="notfound_header">404 Error - No Test Records</h1>
 
-            <h1 className="notfound_header">404 Error - Page Not Found</h1>
+<p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find records you requested.</p></div> :<div> <h1 className="notfound_header">404 Error - Page Not Found</h1>
 
-            <p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find the page you requested.</p>
+<p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find the page you requested.</p></div> }
+    
 
             <div className="image">
                 <img src="../../public/404.png" alt=""/>
