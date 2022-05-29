@@ -47,7 +47,7 @@ const Doctor = () => {
 
           <h1 className="admindash_header">Doctor Dashboard</h1>
 
-          <h6 className="admindash_header">Welcome,{user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
+          <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
 
           <div className="image" style={{ marginBottom: "0px" }}>
             <img src="../../public/dashboard.png" alt="" />

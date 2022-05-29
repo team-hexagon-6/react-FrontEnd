@@ -22,7 +22,7 @@ const PatientReport = () => {
     var today = new Date();
     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
-    const [loader, setLoader] = useState(flase);
+    const [loader, setLoader] = useState(false);
 
     useEffect(() => {
         getPatientDetails();
@@ -55,7 +55,7 @@ const PatientReport = () => {
             <div>
                 <HeaderTwo />
                 {console.log(reportdetails.testrecords)}
-                <div className='form-container col-xl-5 mx-auto '>
+                <div className='form-container mt-5 col-xl-5 mx-auto '>
                     <h1 className='fs-1 fw-bold mb-0'>Report</h1>
                     <Row>
                         <Col>
@@ -106,7 +106,7 @@ const PatientReport = () => {
                             </Col>
                             <Col align='left' sm={6}>
                                 <Form.Label sm={4} >Test Start At</Form.Label>
-                                <Form.Control type="text" size='sm' value={reportdetails?.testrecords?.created_at || ''} name='Last Name' disabled />
+                                <Form.Control type="text" size='sm' value={reportdetails?.testrecords?.created_at.split('T')[0]+"/ "+reportdetails?.testrecords?.created_at.split('T')[1].split('Z')[0] || ''} name='Last Name' disabled />
 
                             </Col>
                         </Form.Group>

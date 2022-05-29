@@ -9,16 +9,14 @@ const NotFound = (props) => {
     const goBack = () => {
         navigate(-1);
     }
+    
 
     return (
         <div className="not_found">
 
             <HeaderOne />
-            {props.content=="NoRecords"?<div> <h1 className="notfound_header">404 Error - No Test Records</h1>
-
-<p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find records you requested.</p></div> :<div> <h1 className="notfound_header">404 Error - Page Not Found</h1>
-
-<p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find the page you requested.</p></div> }
+            {(props.content==="NoRecords" &&  <><h1 className="notfound_header">404 Error - No Test Records</h1><p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find records you requested.</p></>) || 
+             (props.content==="NoPatient" && <><h1 className="notfound_header">404 Error - No Patient Found</h1><p style={{color: "black", textAlign: "center", margin: "10px"}}>Sorry, we couldn't find the patient you requested.</p></>)}
     
 
             <div className="image">
