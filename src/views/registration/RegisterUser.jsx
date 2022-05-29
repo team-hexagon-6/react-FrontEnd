@@ -20,12 +20,12 @@ const RegisterUser = () => {
 
     const [user_id, setUserID] = useState('');
     const [user_type, setUserType] = useState('');
-    const [password, setPassword] = useState('');
-    const [re_password, setRePassword] = useState('');
+    // const [password, setPassword] = useState('');
+    // const [re_password, setRePassword] = useState('');
 
     const [id_err, setIdErr] = useState('');
     const [type_err, setTypeErr] = useState('');
-    const [pwd_err, setPwdErr] = useState('');
+    // const [pwd_err, setPwdErr] = useState('');
     const [userTypes, setUserTypes] = useState([]);
 
     const navigate = useNavigate();
@@ -37,9 +37,9 @@ const RegisterUser = () => {
 
         setIdErr('');
         setTypeErr('');
-        setPwdErr('');
+        // setPwdErr('');
 
-        const { value, error } = Validation.registration({ user_id, user_type, password, re_password });
+        const { value, error } = Validation.registration({ user_id, user_type});
         if (error) {
             const errors = {};
             error.details.map(item => {
@@ -50,17 +50,17 @@ const RegisterUser = () => {
                 setIdErr(errors.user_id.replace('"user_id"', 'User ID'));
             if (errors.user_type)
                 setTypeErr(errors.user_type.replace('"user_type"', 'User Type'));
-            if (errors.password)
-                setPwdErr('Password you entered does not match');
-            if (errors.re_password)
-                setPwdErr('Two passwords do not match');
+            // if (errors.password)
+            //     setPwdErr('Password you entered does not match');
+            // if (errors.re_password)
+            //     setPwdErr('Two passwords do not match');
 
         }
         else {
             try {
                 setLoader(true);
                 console.log(user_type);
-                const response = await AuthServices.register({ user_id, user_type, password });
+                const response = await AuthServices.register({ user_id, user_type });
                 if (response.status === 201) {
                     Messages.SuccessMessage("Registration Successfull");
                     setTimeout(() => {
