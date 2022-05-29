@@ -90,7 +90,11 @@ const UpdateProfile = () => {
         else {
             try {
                 const response = await UserServices.updateprofile({...state,'Birthday':moment(state['Birthday']).format("MM-DD-YYYY")});
-                navigate('/logout')
+                if (response.status === 200) {            
+                    Messages.SuccessMessage("User Updated Successfully");
+                    navigate('/logout')
+                }
+                
                 console.log(response)
             } catch (error) {
                 console.log(error.message);

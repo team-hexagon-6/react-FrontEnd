@@ -96,8 +96,15 @@ function UpdatePatientProfile() {
         console.log("State:", state);
         const response = await ExaminerServices.updatePatientProfile(state);
         console.log(response);
+        if (response.status === 200) {            
+          Messages.SuccessMessage("Patient Updated Successfully");
+      }
       } catch (error) {
         console.log(error.message);
+        Messages.ErrorMessage({
+          error: error,
+          custom_message: `Patient update failed`,
+        });
       }
     }
     setError(errors);

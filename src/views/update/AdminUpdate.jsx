@@ -8,6 +8,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 
+import Messages from "../../helpers/Messages";
+
 const AdminUpdate = () => {
     const params = useParams();
     const navigate = useNavigate();
@@ -41,29 +43,16 @@ const AdminUpdate = () => {
             try {
                 const user_id = params.user_id;
                 const response = await AdminServices.updatePassword({ password, user_id });
-                if (response.status === 200) {
-                    toast.success('Password Updated Successfully', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                if (response.status === 200) {            
+                    Messages.SuccessMessage("Password Updated Successfully");
                     setTimeout(navigate('/allUsers'), 3000);
                 }
 
             } catch (error) {
-                toast.error(`Password update failed`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                Messages.ErrorMessage({
+                    error: error,
+                    custom_message: `Password update failed`,
+                  });
             }
         }
         setTimeout(() => {
