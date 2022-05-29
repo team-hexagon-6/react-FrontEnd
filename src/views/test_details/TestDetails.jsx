@@ -138,7 +138,7 @@ const TestDetails = () => {
             <div>
                 <HeaderTwo />
                 <div className='form-container col-xl-6 mx-auto '>
-                    <h1 className='fs-1 fw-bold mb-0'>Start Test</h1>
+                    <h1 className='fs-1 fw-bold mb-0 reg_header' >{user.role==ROLES.Examiner ? 'Start Test' : 'Patient Information'}</h1>
 
                     <hr style={{ margin: '1px 3px' }} />
 
