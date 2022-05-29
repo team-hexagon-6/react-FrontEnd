@@ -21,23 +21,23 @@ function NavBar({site}) {
         <div className="contents">
           <Container>
             <Nav className="me-auto">
-              <NavLink className="navlink" to="/about">
-                {site=='About'?<Link to="/about">About </Link>:<Link to="/">Home </Link>}
+              <NavLink className="navlink" to="/about" style={{borderRadius: "30px"}}>
+                {site=='About'?<Link to="/about" style={{textDecoration: "none", color: "#1376BD"}}>About </Link>:<Link to="/" style={{textDecoration: "none", color: "#1376BD"}}>Home </Link>}
                 
               </NavLink>
               {!user && (
-                <NavLink className="navlink" to="/login">
-                  <Link to="/login">Login </Link>
+                <NavLink className="navlink" to="/login" style={{borderRadius: "30px"}}>
+                  <Link to="/login" style={{textDecoration: "none", color: "#1376BD"}}>Login </Link>
                 </NavLink>
               )}
               {user && (
-                <NavLink className="navlink" to="/login">
-                  <Link to="/dashboard">Dashboard </Link>
+                <NavLink className="navlink" to="/login" style={{borderRadius: "30px"}}>
+                  <Link to="/dashboard" style={{textDecoration: "none", color: "#1376BD"}}>Dashboard </Link>
                 </NavLink>
               )}
               {user && (
-                <NavLink className="navlink" to="/logout">
-                  <Link to="/logout">Logout </Link>
+                <NavLink className="navlink" to="/logout" style={{borderRadius: "30px"}}>
+                  <Link to="/logout" style={{textDecoration: "none", color: "#1376BD"}}>Logout </Link>
                 </NavLink>
               )}
             </Nav>
