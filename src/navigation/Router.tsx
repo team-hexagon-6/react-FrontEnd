@@ -6,7 +6,7 @@ import NewTest from "../views/new_test/NewTest";
 import RegisterUser from "../views/registration/RegisterUser";
 import UpdateProfile from "../views/UpdateProfile/UpdateProfile";
 import PatientReport from './../views/patientReport/PatientReport';
-import { RequireAuth } from "../utils/requireAuth";
+import RequireAuth  from "../contexts/RequireAuth";
 import Logout from "../components/logout"
 
 import NotFound from "../views/not_found/NotFound"; 
@@ -23,7 +23,7 @@ import UpdatePatientProfile from "../views/updatePatientprofile/UpdatePatientPro
 import About from "../views/about/About";
 import ViewPatient from "../views/View_patient/view_patient";
 import Unauthorized from "../views/not_found/Unauthorized";
-
+import Layout from "../views/Layout";
 
 // FIXME: This is a temporary solution to get the pagination working.
 import TestingPage from "../views/testingroute/TestingPage";
@@ -38,8 +38,9 @@ const ROLES ={
 
 const  Router =() =>{
   return (
-    <BrowserRouter>
+
       <Routes>
+      <Route path="/" element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="*" element = {<NotFound/>}></Route>
         <Route path="/unauthorized" element={<Unauthorized />} />
@@ -68,9 +69,9 @@ const  Router =() =>{
 
         {/* FIXME: this is testing route just for testing remove when the deploying */}
         <Route path="/testing" element ={<TestingPage/>}></Route>
-      
+      </Route>
       </Routes>
-      </BrowserRouter>
+
     
   );
 }

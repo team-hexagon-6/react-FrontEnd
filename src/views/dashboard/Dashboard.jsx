@@ -6,12 +6,14 @@ import UserServices from "../../services/API/UserServices";
 import Loader from "../../components/loader/Loader";
 import Token from '../../services/Token'
 import jwtDecode from "jwt-decode";
+import useAuth from '../../hooks/useAuth';
 const Dashboard = () => {
 
     const navigate = useNavigate();
     // const location = useLocation();
     // console.log(location.state?.from);
     // const from = location.state?.path || "/";
+    const { setAuth } = useAuth();
     
 
     const [loader, setLoader] = useState(false);
@@ -32,6 +34,8 @@ const Dashboard = () => {
             catch(err){
                 user=null
             }
+            setAuth(user.role)
+
             // console.log(from)
             // navigate(from, { replace: true })
             // console.log("usertype",response.data.data.auth.usertype.name);
