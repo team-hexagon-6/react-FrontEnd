@@ -100,23 +100,28 @@ const RegisterUser = () => {
 
     if (loader) {
         return <Loader />
-    } 
+    }
     else {
-        
+
         if (userTypes) {
             return (
                 <div className="register_user">
-    
+
                     <HeaderTwo />
-    
+
                     <div className="col-sm-4 reg">
-    
+
                         <h1 className="reg_header">Register a User</h1>
-    
+
+                        <div className="image">
+                            <img src="../../public/register.png" alt="" />
+                        </div>
+
+
                         <div className="container reg_form justify-content-center">
-    
+
                             <Form onSubmit={handleSubmit}>
-    
+
                                 <div className="justify-content-center row g-3 align-items-center">
                                     <Form.Group className="mb-3">
                                         <Form.Label>User ID</Form.Label>
@@ -129,7 +134,7 @@ const RegisterUser = () => {
                                         {id_err != '' && <p className="error">{id_err}</p>}
                                     </Form.Group>
                                 </div>
-    
+
                                 <div className="justify-content-center row g-3 align-items-center">
                                     <Form.Group className="mb-3">
                                         <Form.Label>User type</Form.Label><br />
@@ -143,8 +148,8 @@ const RegisterUser = () => {
                                         {type_err != '' && <p className="error">{type_err}</p>}
                                     </Form.Group>
                                 </div>
-    
-                                <div className="justify-content-center row g-3 align-items-center">
+
+                                {/* <div className="justify-content-center row g-3 align-items-center">
                                     <Form.Group className="mb-3" controlId="formBasicPassword">
                                         <Form.Label>Default Password</Form.Label>
                                         <Form.Control
@@ -171,23 +176,23 @@ const RegisterUser = () => {
                                             onChange={(e) => setRePassword(e.target.value)}
                                         />
                                     </Form.Group>
-                                </div>
-    
-                                <div className="row required"><label>All fields are required</label></div>
-    
-                                <div className="btn-container d-flex justify-content-center ">
+                                </div> */}
+
+                                {/* <div className="row required"><label>All fields are required</label></div> */}
+
+                                <div className="btn-container d-flex justify-content-center " style={{marginBottom: "0"}}>
                                     <Button type="submit" className="reg_button" style={{ borderRadius: "20px" }}>
                                         Register
                                     </Button>
                                 </div>
-    
+
                             </Form>
-    
+
                         </div>
-    
+
                     </div>
-    
-    
+
+
                 </div>
             );
         }
@@ -196,7 +201,7 @@ const RegisterUser = () => {
                 <div>
                     <_503 />
                 </div>
-    
+
             );
         }
     }
