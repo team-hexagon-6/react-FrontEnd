@@ -9,6 +9,8 @@ import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import Loader from "../../components/loader/Loader";
 
+import Messages from "../../helpers/Messages";
+
 
 const NewTest = () => {
 
@@ -89,15 +91,7 @@ const NewTest = () => {
             try {
                 const response = await ExaminerServices.dotest({ patient_id, test_type, date, base64_img });
                 if (response.status === 201) {
-                    toast.success('Start test Successfull', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    Messages.SuccessMessage("Start test Successfull'");
                     setTimeout(() => {
                         setLoader(false);
                     }, 200);
@@ -107,15 +101,10 @@ const NewTest = () => {
 
             } catch (error) {
                 console.log(error);
-                toast.error(`P with ID: ${patient_id} already exists`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                Messages.ErrorMessage({
+                    error: error,
+                    custom_message: `P with ID: ${patient_id} already exists`
+                  });
             }
 
 

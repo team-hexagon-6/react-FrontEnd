@@ -9,6 +9,8 @@ import _503 from "../not_found/_503";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 
+import Messages from "../../helpers/Messages";
+
 const RegisterUser = () => {
 
     // Taking query string values from url
@@ -60,32 +62,21 @@ const RegisterUser = () => {
                 console.log(user_type);
                 const response = await AuthServices.register({ user_id, user_type, password });
                 if (response.status === 201) {
-                    toast.success('Registration Successfull', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                    Messages.SuccessMessage("Registration Successfull");
                     setTimeout(() => {
                         setLoader(false);
                     }, 200);
                     setTimeout(navigate('/dashboard'), 3000);
                 }
+                
 
 
             } catch (error) {
-                toast.error(`Registration Failed`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                
+                Messages.ErrorMessage({
+                    error: error,
+                    custom_message:`Registration Failed`
+                  });
             }
         }
     }
