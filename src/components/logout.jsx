@@ -15,7 +15,9 @@ const Logout=()=>{
       window.location.href="/";
 
     } catch (error) {
-      console.log(error);
+      localStorage.clear();
+      window.location.href="/";
+      
     }
     setLoader(false); 
     

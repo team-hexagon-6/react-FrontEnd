@@ -9,6 +9,7 @@ import UserServices from "../../services/API/UserServices";
 import Paginate from "../../components/pagination/paginate";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
+import Messages from "../../helpers/Messages";
 
 const AllUsers = () => {
 
@@ -50,32 +51,20 @@ const AllUsers = () => {
     setLoader(true);
     console.log("Inside activate changing");
     try {
-      const response = await UserServices.changeActivation({ user_id });
+      const response = await UserServices.changeActivation( user_id );
       console.log(response);
       if (response.status === 200) {
-        toast.success('Changed activation successfully', {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        navigate(0);
+        Messages.SuccessMessage("Changed activation successfully");
+        getUsers("doctor", skip, take, search);
+        
       }
     } catch (error) {
-      console.log(error);
-      toast.error(`Activation change failed: ${error.message}`, {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+      Messages.ErrorMessage({
+        error:error,
+        custom_message:'Activation change failed'
       });
-    }
+  }
+    
     setTimeout(() => {
       setLoader(false);
     }, 200);

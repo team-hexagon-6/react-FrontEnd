@@ -9,9 +9,11 @@ import HeaderTwo from "../../components/headers/HeaderTwo";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
+import Messages from "../../helpers/Messages";
 
 function AddPatient() {
   const formValues = {
+    "Patient ID":"",
     "First Name": "",
     "Last Name": "",
     NIC: "",
@@ -41,7 +43,7 @@ function AddPatient() {
       console.log(genderType.data.data);
       setgenderTypes(genderType.data.data);
     } catch (err) {
-      // console.log(err);
+      
     }
     setTimeout(() => {
       setLoader(false);
@@ -79,15 +81,7 @@ function AddPatient() {
         const response = await ExaminerServices.addPatient(state);
         console.log(response);
         if (response.status === 201) {
-          toast.success("Patient Added Successfully", {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-          });
+          Messages.SuccessMessage("Patient Added Successfully");
           setTimeout(() => {
             setLoader(false);
           }, 200);
@@ -95,15 +89,10 @@ function AddPatient() {
         }
       } catch (error) {
         console.log(error.message);
-        toast.error("Couldn't add patient", {
-          position: "top-center",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        Messages.ErrorMessage({
+            error: error,
+            main_part: "PATIENT ADDING FAILED",
+          });
       }
     }
     setErrorData(errors);
@@ -121,6 +110,30 @@ function AddPatient() {
         <div className="mt-3 container border border-1 border-primary d-flex flex-column col-4 justify-content-center ">
           <h3 className="fs-1 text-primary mt-4">Add Patient</h3>
           <div className="form1">
+          <div className="justify-content-center row g-3 align-items-center">
+              <div className="col-3 text-center">
+                <label htmlFor="" className="col-form-label">
+                  Patient ID
+                </label>
+              </div>
+              <div className="col-auto">
+                <input
+                  type="text"
+                  className="form-control"
+                  name="Patient ID"
+                  aria-describedby="passwordHelpInline"
+                  onChange={handleValidity}
+                />
+              </div>
+            </div>
+            {errorData["Patient ID"] !== "" && (
+              <p
+                className="d-flex justify-content-center"
+                style={{ color: "red" }}
+              >
+                {errorData["Patient ID"]}
+              </p>
+            )}
             <div className="justify-content-center row g-3 align-items-center">
               <div className="col-3 text-center">
                 <label htmlFor="" className="col-form-label">

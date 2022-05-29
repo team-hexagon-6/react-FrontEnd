@@ -71,6 +71,12 @@ const validateupdateprofile = (data) => {
 };
 const addPatient = (data) => {
   const addPatientSchema = Joi.object({
+    "Patient ID": Joi.string()
+      .regex(/^[A-Z][a-z0-9_-]{2,}$/)
+      .messages({ "string.pattern.base": "First letter must be a Capital" })
+      .min(3)
+      .max(15)
+      .required(),
     "First Name": Joi.string()
       .regex(/^[A-Z][a-z0-9_-]{2,}$/)
       .messages({ "string.pattern.base": "First letter must be a Capital" })
