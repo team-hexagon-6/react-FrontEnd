@@ -8,7 +8,7 @@ import HeaderTwo from "../../components/headers/HeaderTwo";
 import UserServices from '../../services/API/UserServices';
 import Validation from '../../Validation';
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Dashboard from './../dashboard/Dashboard';
 import Loader from '../../components/loader/Loader';
 import moment from 'moment';
@@ -34,6 +34,7 @@ const UpdateProfile = () => {
     var [state, setState] = useState(formValues);
     const [errordata, setError] = useState(formValues);
     const [user, setUser] = useState([])
+    const [user_id, setUserID] = useState();
 
     const handleUser = (event) => {
         console.log(event.target.value);
@@ -55,6 +56,7 @@ const UpdateProfile = () => {
         try {
             const getuser = await UserServices.getUser();
             //  setUser( getuser.data.data);
+            setUserID(getuser.data.data.user_id);
             state = {
                 'First Name': getuser.data.data.firstname,
                 'Last Name': getuser.data.data.lastname,
@@ -80,7 +82,7 @@ const UpdateProfile = () => {
     const handleSubmit = async (event) => {
         setLoader(true);
         console.log(state);
-        const { value, error } = Validation.validateupdateprofile({...state,'Birthday':moment(state['Birthday']).format("MM-DD-YYYY")})
+        const { value, error } = Validation.validateupdateprofile({ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY") })
         event.preventDefault();
         if (error) {
             error.details.map(item => {
@@ -89,19 +91,19 @@ const UpdateProfile = () => {
         }
         else {
             try {
-                const response = await UserServices.updateprofile({...state,'Birthday':moment(state['Birthday']).format("MM-DD-YYYY")});
-                if (response.status === 200) {            
+                const response = await UserServices.updateprofile({ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY") });
+                if (response.status === 200) {
                     Messages.SuccessMessage("User Updated Successfully");
                     navigate('/logout')
                 }
-                
+
                 console.log(response)
             } catch (error) {
                 console.log(error.message);
                 Messages.ErrorMessage({
                     error: error,
                     main_part: "UPDATE FAILED",
-                  });
+                });
             }
         }
         setError(errors);
@@ -117,10 +119,17 @@ const UpdateProfile = () => {
         return (
             <div>
                 <HeaderTwo />
-                <div className='form-container col-xl-5 mt-5 pt-5 mx-auto ' style={{ background: 'none' }}>
-                <div className='update_pwd_btn'> <Button variant="outline-primary" block="block" type="submit" onClick={() => {navigate('/updatePassword')}}>Update Password</Button></div>
 
-                    <h1 className='fs-1 text-primary mb-5'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
+                <div className='form-container col-xl-5 mt-5 pt-5 mx-auto ' style={{ background: 'none' }}>
+
+                    <h1 className='fs-1 text-primary'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
+
+                   
+                        <Link to={"/updatePassword"} state={{ user_id }} style={{ display: "flex", float: "right", textDecoration: "none", marginBottom: "10px", marginRight: "10px"}}>
+                            <Button className="update_pwd_btn" variant="outline-primary" type="submit">Update Password</Button>
+                        </Link>
+
+
                     <Form onSubmit={handleSubmit} >
                         <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='First Name'>
                             <Form.Label className='fa' column sm={4}>First Name</Form.Label>
@@ -175,11 +184,13 @@ const UpdateProfile = () => {
                             </Col>
 
                         </Form.Group>
-                        <Button className='btn btn-primary button w-50' size="lg" block="block" type="submit">Update</Button>
+                        <Button className='btn btn-primary button w-50' size="lg" type="submit">Update</Button>
+
                     </Form>
 
+
                 </div>
-            </div>
+            </div >
         )
 
     }

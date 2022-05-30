@@ -167,7 +167,7 @@ function Login() {
                 onClick={handleSubmit}
                 style={{ borderRadius: "20px" }}
               >
-                Submit
+                Login
               </button>
             </div>
           </div>
