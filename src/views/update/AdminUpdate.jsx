@@ -24,19 +24,24 @@ const AdminUpdate = () => {
     const handleSubmit = async (e) => {
         setLoader(true);
         e.preventDefault();
+      
+
 
         setPwdErr('');
         const { value, error } = Validation.adminUpdatePwd({ password, re_password });
+        
 
         if (error) {
             const errors = {};
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
             });
+            console.log(errors)
+            
             if (errors.password)
-                setPwdErr('Password you entered does not match. Try again');
-            if (errors.re_password)
-                setPwdErr('Two passwords do not match. Try again');
+                setPwdErr(errors.password);
+            else if (errors.re_password)
+                setPwdErr(errors.re_password);
 
         }
         else {

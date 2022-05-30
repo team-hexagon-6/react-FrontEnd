@@ -115,9 +115,7 @@ const adminUpdatePwd = (data) => {
     password: password_joi_object(),
 
     re_password: Joi.custom((value, helper) => {
-      console.log("Custom");
-      console.log(value, password);
-      if (value != password) {
+      if (value != data.password) {
         return helper.message("Two passwords does not match");
       } 
       return true;
@@ -125,7 +123,7 @@ const adminUpdatePwd = (data) => {
   });
 
   const { error, value } = admin_update_pwd_schema.validate(data, {
-    abortEarly: false,
+    abortEarly: true,
   });
 
   return { value, error };
