@@ -4,7 +4,7 @@ import HeaderTwo from "../../components/headers/HeaderTwo";
 import "./UpdatePassword.css";
 import UserServices from "../../services/API/UserServices";
 import Validation from "../../Validation";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 import Messages from "../../helpers/Messages";
@@ -12,6 +12,7 @@ import Messages from "../../helpers/Messages";
 const UpdatePassword = () => {
     const params = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [loader, setLoader] = useState(false);
 
@@ -43,7 +44,7 @@ const UpdatePassword = () => {
         else {
             try {
                 // const user_id = params.user_id;
-                const user_id = '190000009D';
+                const user_id = location.state.user_id;
                 const response = await UserServices.updatePasswordByUser({ password, old_password, user_id });
                 if (response.status === 200) {            
                     Messages.SuccessMessage("Password Updated Successfully");

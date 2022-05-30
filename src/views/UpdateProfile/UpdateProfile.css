@@ -3,7 +3,7 @@
   border: 1px solid #1376BD;
 
 }
-.button{
+/* .button{
   border-radius: 30px;
   border: none;
   color: #bc4848;
@@ -13,7 +13,7 @@
   display: inline-block;
   font-size: 25px;
   margin: 20px 0px 60px ;
-}
+} */
 
 .error {
   color: crimson;
