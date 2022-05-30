@@ -54,7 +54,6 @@ const PatientReport = () => {
         return (
             <div>
                 <HeaderTwo />
-                {console.log(reportdetails.testrecords)}
                 <div className='form-container mt-5 col-xl-5 mx-auto '>
                     <h1 className='fs-1 fw-bold mb-0'>Report</h1>
                     <Row>
@@ -78,19 +77,19 @@ const PatientReport = () => {
                     <Form >
                         <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='0th Row'>
                             <Form.Label sm={4}>Patient ID</Form.Label>
-                            <Form.Control type="text" size='sm' value={reportdetails.details.id} name='First Name' disabled />
+                            <Form.Control type="text" size='sm' value={reportdetails?.details?.id} name='First Name' disabled />
                         </Form.Group>
                         <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
 
                             <Col align='left' sm={6} >
                                 <Form.Label sm={4}>First Name</Form.Label>
-                                <Form.Control type="text" size='sm' value={reportdetails.details.firstname} name='First Name' disabled />
+                                <Form.Control type="text" size='sm' value={reportdetails?.details?.firstname} name='First Name' disabled />
                             </Col>
 
 
                             <Col align='left' sm={6}>
                                 <Form.Label sm={4} >Last Name </Form.Label>
-                                <Form.Control type="text" size='sm' value={reportdetails.details.lastname} name='Last Name' disabled />
+                                <Form.Control type="text" size='sm' value={reportdetails?.details?.lastname} name='Last Name' disabled />
 
                             </Col>
 
@@ -106,7 +105,7 @@ const PatientReport = () => {
                             </Col>
                             <Col align='left' sm={6}>
                                 <Form.Label sm={4} >Test Start At</Form.Label>
-                                <Form.Control type="text" size='sm' value={reportdetails?.testrecords?.created_at.split('T')[0]+"/ "+reportdetails?.testrecords?.created_at.split('T')[1].split('Z')[0] || ''} name='Last Name' disabled />
+                                <Form.Control type="text" size='sm' value={'Date: '+reportdetails?.testrecords?.created_at?.split('T')[0]+" / Time: "+reportdetails?.testrecords?.created_at?.split('T')[1].split('Z')[0] || ''}  name='Last Name' disabled />
 
                             </Col>
                         </Form.Group>
