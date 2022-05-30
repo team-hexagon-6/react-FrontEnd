@@ -41,9 +41,9 @@ function Login() {
         errors[item.path[0]] = item.message;
       });
       if (errors.username)
-        setUsernameError(errors.username.replace('"username"', "Username"));
+        setUsernameError(errors.username);
       if (errors.password) {
-        setPasswordError("Password you entered does not match");
+        setPasswordError(errors.password);
         console.log(passwordError);
       }
     } else {
@@ -70,7 +70,7 @@ function Login() {
 
         }
       } catch (error) {
-        // console.log("error response : ",error.response.data.message);
+        console.log("error response : ",error.response.data.message);
         // console.log(error.response);
         // toast.error(error.message, {
         //   position: "top-center",
@@ -81,9 +81,12 @@ function Login() {
         //   draggable: true,
         //   progress: undefined,
         // });
+        console.log(error.response.data.message);
+        const errormessage=error.response.data.message;
         Messages.ErrorMessage({
           error: error,
           main_part: "LOGIN FAILED",
+          custom_message:"LOGIN FAILED:- "+error.response.data.message
         });
       }
     }
