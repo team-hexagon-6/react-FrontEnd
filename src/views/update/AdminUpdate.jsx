@@ -4,15 +4,16 @@ import HeaderTwo from "../../components/headers/HeaderTwo";
 import "./AdminUpdate.css";
 import AdminServices from "../../services/API/AdminServices";
 import Validation from "../../Validation";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams ,useLocation} from "react-router-dom";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 
 import Messages from "../../helpers/Messages";
 
 const AdminUpdate = () => {
-    const params = useParams();
+    // const params = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [loader, setLoader] = useState(false);
 
@@ -20,6 +21,7 @@ const AdminUpdate = () => {
     const [re_password, setRePassword] = useState('');
 
     const [pwd_err, setPwdErr] = useState('');
+    console.log("Id ", location.state.user_id);
 
     const handleSubmit = async (e) => {
         setLoader(true);
@@ -46,7 +48,8 @@ const AdminUpdate = () => {
         }
         else {
             try {
-                const user_id = params.user_id;
+                const user_id = location.state.user_id;
+
                 const response = await AdminServices.updatePassword({ password, user_id });
                 if (response.status === 200) {            
                     Messages.SuccessMessage("Password Updated Successfully");
