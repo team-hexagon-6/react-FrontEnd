@@ -1,0 +1,29 @@
+.header{
+    align-self: center;
+    margin: 1%;
+    margin-bottom: 1%;
+    color: #1376BD;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form1 .row{
+    margin: 1%;
+}
+
+.btn-container{
+    margin-top: 9%;
+    margin-bottom: 5%;
+}
+.forgetPass{
+    margin-bottom: 10%
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    margin: 2px;
+}
+
+.input {
+    border-radius: 20px;
+}
