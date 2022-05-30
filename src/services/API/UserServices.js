@@ -40,8 +40,22 @@ const changeActivation = (data) => {
   });
 }
 
+const updatePasswordByUser = (data) => {
+  return axios({
+    method: "post",
+    url: APIEndpoint + "/user/update-password-by-user",
+    data: {
+      new_password: data["password"],
+      old_password: data["old_password"],
+      user_id: data["user_id"],
+    },
+    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
+  });
+}
+
 export default {
   updateprofile,
   getUser,
   changeActivation,
+  updatePasswordByUser,
 }

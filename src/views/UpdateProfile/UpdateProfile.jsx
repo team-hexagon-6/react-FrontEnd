@@ -118,6 +118,8 @@ const UpdateProfile = () => {
             <div>
                 <HeaderTwo />
                 <div className='form-container col-xl-5 mt-5 pt-5 mx-auto ' style={{ background: 'none' }}>
+                <div className='update_pwd_btn'> <Button variant="outline-primary" block="block" type="submit" onClick={() => {navigate('/updatePassword')}}>Update Password</Button></div>
+
                     <h1 className='fs-1 text-primary mb-5'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
                     <Form onSubmit={handleSubmit} >
                         <Form.Group as={Row} className='fa fw-bold col-xl-12 mb-2 mx-auto' controlId='First Name'>
