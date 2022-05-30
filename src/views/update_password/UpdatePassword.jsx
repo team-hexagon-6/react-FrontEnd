@@ -27,18 +27,20 @@ const UpdatePassword = () => {
         e.preventDefault();
 
         setPwdErr('');
-        const { value, error } = Validation.userUpdatePwd({ password, re_password });
+        const { value, error } = Validation.adminUpdatePwd({ password, re_password });
 
         if (error) {
-            console.log(error);
             const errors = {};
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
             });
+            console.log(errors)
+            
             if (errors.password)
                 setPwdErr(errors.password);
-            if (errors.re_password)
+            else if (errors.re_password)
                 setPwdErr(errors.re_password);
+
 
         }
         else {
@@ -48,13 +50,15 @@ const UpdatePassword = () => {
                 const response = await UserServices.updatePasswordByUser({ password, old_password, user_id });
                 if (response.status === 200) {            
                     Messages.SuccessMessage("Password Updated Successfully");
-                    setTimeout(navigate('/dashboard'), 3000);
+                    setTimeout(navigate('/updateProfile'), 3000);
                 }
 
             } catch (error) {
                 Messages.ErrorMessage({
                     error: error,
-                    custom_message: `Password update failed.`,
+                    // custom_message: `Password update failed.`,
+                    custom_message: error.response.data.message,
+
                   });
             }
         }

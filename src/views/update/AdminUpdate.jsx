@@ -27,11 +27,8 @@ const AdminUpdate = () => {
         setLoader(true);
         e.preventDefault();
       
-
-
         setPwdErr('');
         const { value, error } = Validation.adminUpdatePwd({ password, re_password });
-        
 
         if (error) {
             const errors = {};
