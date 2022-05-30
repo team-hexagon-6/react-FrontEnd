@@ -103,7 +103,8 @@ const Doctor = () => {
                 onChange={(event) => setPatientId(event.target.value)}
                 required
               />
-              <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => { navigate(`/testDetails/${patient_id}`) }}>Search Patient</Button>
+              <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => {patient_id? navigate(`/testDetails/${patient_id}`):  window.alert(`Please insert patient id`) }}>Search Patient</Button>   
+      
 
             </div>
             <Button

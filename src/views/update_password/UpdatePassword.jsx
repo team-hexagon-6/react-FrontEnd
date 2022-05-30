@@ -35,9 +35,9 @@ const UpdatePassword = () => {
                 errors[item.path[0]] = item.message;
             });
             if (errors.password)
-                setPwdErr('Password you entered does not match. Try again');
+                setPwdErr(errors.password);
             if (errors.re_password)
-                setPwdErr('Two passwords do not match. Try again');
+                setPwdErr(errors.re_password);
 
         }
         else {
