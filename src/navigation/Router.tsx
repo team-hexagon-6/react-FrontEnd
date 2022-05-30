@@ -28,6 +28,7 @@ import Unauthorized from "../views/not_found/Unauthorized";
 // FIXME: This is a temporary solution to get the pagination working.
 import TestingPage from "../views/testingroute/TestingPage";
 import Dashboard from "../views/dashboard/Dashboard";
+import UpdatePassword from "../views/update_password/UpdatePassword";
 
 const ROLES ={
   'Examiner':'_32247',
@@ -65,6 +66,7 @@ const  Router =() =>{
         <Route path="/addPatient" element={<RequireAuth allowedRoles={[ROLES.Examiner]}><AddPatient/></RequireAuth>}></Route>
         <Route path="/updateUser/:user_id" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><AdminUpdate/></RequireAuth>}></Route>
         <Route path="/updatePatientProfile" element ={<RequireAuth allowedRoles={[ROLES.Examiner]}><UpdatePatientProfile/></RequireAuth>}></Route>
+        <Route path="/updatePassword" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><UpdatePassword /></RequireAuth>}></Route>
 
         {/* FIXME: this is testing route just for testing remove when the deploying */}
         <Route path="/testing" element ={<TestingPage/>}></Route>
