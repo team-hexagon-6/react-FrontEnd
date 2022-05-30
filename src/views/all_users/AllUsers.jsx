@@ -10,6 +10,7 @@ import Paginate from "../../components/pagination/paginate";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 import Messages from "../../helpers/Messages";
+import { Link } from "react-router-dom";
 
 const AllUsers = () => {
 
@@ -42,9 +43,9 @@ const AllUsers = () => {
   // When update button is clicked
   const navigate = useNavigate();
   const params = useParams();
-  const updateUser = (user_id) => {
-    navigate(`/updateUser/${user_id}`);
-  };
+  // const updateUser = (user_id) => {
+  //   navigate(`/updateUser/${user_id}`);
+  // };
 
   // When activate/deactivate is clicked
   const changeActivation = async (user_id) => {
@@ -192,7 +193,9 @@ const AllUsers = () => {
 
                     return (
                       <tr key={key}>
-                        <td>{value.auth.active ? <p>Active</p> : <p>No Active</p>}</td>
+                        <td>
+                          {value.auth.active ? <p>Active</p> : <p>No Active</p>}
+                        </td>
                         <td>{value.auth.id}</td>
                         <td>{value.firstname}</td>
                         <td>{value.lastname}</td>
@@ -201,15 +204,36 @@ const AllUsers = () => {
                         <td>{value.email}</td>
                         <td>{value.birthday && value.birthday.slice(0, 10)}</td>
                         <td>
-                          <Button variant="outline-primary" className="" style={{ borderRadius: "20px" }} onClick={() => updateUser(value.auth.id)}>Update</Button>
+                          <Link to={"/updateUser"} state={{ user_id: value.auth.id }}>
+                            <Button
+                              variant="outline-primary"
+                              className=""
+                              style={{ borderRadius: "20px" }}
+                            >
+                              Update
+                            </Button>
+                          </Link>
                         </td>
                         <td>
-                          {
-                            value.auth.active ?
-                              <Button variant="outline-danger" className="" style={{ borderRadius: "20px" }} onClick={() => changeActivation(value.auth.id)}>Deactivate</Button>
-                              :
-                              <Button variant="outline-success" className="" style={{ borderRadius: "20px" }} onClick={() => changeActivation(value.auth.id)}>Activate</Button>
-                          }
+                          {value.auth.active ? (
+                            <Button
+                              variant="outline-danger"
+                              className=""
+                              style={{ borderRadius: "20px" }}
+                              onClick={() => changeActivation(value.auth.id)}
+                            >
+                              Deactivate
+                            </Button>
+                          ) : (
+                            <Button
+                              variant="outline-success"
+                              className=""
+                              style={{ borderRadius: "20px" }}
+                              onClick={() => changeActivation(value.auth.id)}
+                            >
+                              Activate
+                            </Button>
+                          )}
                         </td>
                       </tr>
                     );
