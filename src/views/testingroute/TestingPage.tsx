@@ -1,5 +1,5 @@
 import React,{ useEffect,useState} from 'react';
-import Loader from '../../components/loader/loader';
+import Loader from '../../components/loader/Loader';
 import Paginate from '../../components/pagination/paginate';
 
 const TestingPage =()=>{

@@ -32,7 +32,7 @@ const getDoctors = (skip, take, search) => {
         method: 'get',
         url: APIEndpoint + query,
         headers: { Authorization: `Bearer ${token.getAccessToken()}` },
-        withCredentials: true
+        // withCredentials: true
     });
 };
 
@@ -44,7 +44,7 @@ const getExaminers = (skip, take, search) => {
         method: 'get',
         url: APIEndpoint + query,
         headers: { Authorization: `Bearer ${token.getAccessToken()}` },
-        withCredentials: true
+        // withCredentials: true
     });
 };
 

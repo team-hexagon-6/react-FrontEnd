@@ -1,6 +1,6 @@
 import AuthServices from '../services/AuthServices';
 import {useEffect,useState } from 'react';
-import Loader from "../components/loader/loader";
+import Loader from "./loader/Loader";
 const Logout=()=>{
   const [loader, setLoader] = useState(false);
   useEffect(()=>{
