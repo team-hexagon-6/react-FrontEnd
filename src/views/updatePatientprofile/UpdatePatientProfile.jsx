@@ -8,6 +8,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Form, Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import HeaderTwo from "../../components/headers/HeaderTwo";
 import "./Updateprofile.css"
+import moment from 'moment';
 
 
 function UpdatePatientProfile() {
@@ -35,16 +36,20 @@ function UpdatePatientProfile() {
 
   const getGenderTypes = async () => {
     try {
-      const genderType = await ExaminerServices.getgendertypes();
-      console.log(genderType.data.data);
-      setgenderTypes(genderType.data.data);
+     
+      
     } catch (err) {
       // console.log(err);
     }
   };
   const getPatientDetails = async () => {
     try {
+      const genderType = await ExaminerServices.getgendertypes();
+      console.log(genderType.data.data);
+      setgenderTypes(genderType.data.data);
+
       const getPatient = await ExaminerServices.getpatientdetails(patient_id);
+      console.log("patient",getPatient);
       state = {
         patient_id:patient_id,
         "First Name": getPatient.data.data.firstname,
@@ -52,17 +57,19 @@ function UpdatePatientProfile() {
         NIC: getPatient.data.data.nic,
         "Contact Number": getPatient.data.data.contact_no,
         Email: getPatient.data.data.email,
-        Birthday: getPatient.data.data.birthday.split("T")[0],
-        GenderValue: getPatient.data.data.gender_type_id===1?genderTypes.Male: genderTypes.Female,
-        GenderName:getPatient.data.data.gender_type_id===1?"Male":"Female",
+      Birthday: getPatient.data.data.birthday.split("T")[0],
+        GenderValue: getPatient.data.data.gender_type_id===1?genderType.data.data[0]?.slug: genderType.data.data[1]?.slug,
+        GenderName:getPatient.data.data.gender_type_id===1?genderType.data.data[0]?.name:genderType.data.data[0]?.name,
       };
       setState(state);
+      console.log("state",state);
+      
     } catch (error) {}
   };
 
   useEffect(() => {
-    getGenderTypes();
     getPatientDetails();
+    
   }, []);
 
   const handleUser = (event) => {
@@ -70,7 +77,8 @@ function UpdatePatientProfile() {
       ...state,
       [event.target.name]: event.target.value,
     });
-    console.log("Current state", state);
+    // console.log("Current state", state);
+    // console.log(moment(state['Birthday']).format("MM-DD-YYYY"))
   };
   const handleSelect = (event) => {
     console.log("event is", event.split(",")[0]);
@@ -83,6 +91,9 @@ function UpdatePatientProfile() {
   const errors = {};
 
   const handleSubmit = async (e) => {
+  
+    state={...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY") }
+    console.log("submit",state);
     e.preventDefault();
     const { value, error } = Validation.updatePatientProfile(state);
 
@@ -93,7 +104,9 @@ function UpdatePatientProfile() {
     } else {
       try {
         // const patient_id = params.patient_id;
+        
         console.log("State:", state);
+      
         const response = await ExaminerServices.updatePatientProfile(state);
         console.log(response);
         if (response.status === 200) {            
@@ -112,6 +125,7 @@ function UpdatePatientProfile() {
 
   return (
     <div>
+  
       <HeaderTwo />
       <div className="form-container col-xl-5 mt-5 pt-5 mx-auto ">
         <h1 className="fs-1 text-primary mb-5">Update Patient</h1>

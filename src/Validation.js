@@ -55,6 +55,7 @@ const addPatient = (data) => {
 };
 
 const updatePatientProfile = (data) => {
+  console.log("hello",data)
   const addPatientSchema = Joi.object({
     "First Name": name_validation_joi_object(),
     "Last Name": name_validation_joi_object(),
@@ -66,6 +67,7 @@ const updatePatientProfile = (data) => {
     GenderValue: gender_validation_joi_object(),
     patient_id: patient_id_validation_joi_object(),
   });
+
   const { error, value } = addPatientSchema.validate(data, {
     abortEarly: false,
   });
@@ -163,6 +165,7 @@ const email_validation_joi_object = () => {
             });
 }
 const birthday_validation_joi_object = () => {
+  console.log("date")
       return Joi.date().format('MM-DD-YYYY').required().max('now').min('01-01-1900')
             .messages({
                 "date.format": "Date format should be MM-DD-YYYY",
