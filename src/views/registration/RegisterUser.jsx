@@ -34,13 +34,14 @@ const RegisterUser = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
         setIdErr('');
         setTypeErr('');
         // setPwdErr('');
-
+        
         const { value, error } = Validation.registration({ user_id, user_type});
         if (error) {
+            console.log(error);
             const errors = {};
             error.details.map(item => {
                 errors[item.path[0]] = item.message;

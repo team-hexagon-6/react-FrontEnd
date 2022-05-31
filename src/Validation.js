@@ -10,10 +10,6 @@ const registration = (data) => {
                 "string.max": `Field should have at most {#limit} characters!`,
                 "string.required": "Field is required!"
             }),
-
-    password: password_joi_object(),
-
-    re_password: Joi.ref("password"),
   });
 
   const { error, value } = reg_schema.validate(data, { abortEarly: false });
