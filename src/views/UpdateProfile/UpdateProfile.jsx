@@ -53,19 +53,22 @@ const UpdateProfile = () => {
         setLoader(true);
         try {
             const getuser = await UserServices.getUser();
+            console.log("user",getuser.data.data)
             //  setUser( getuser.data.data);
             setUserID(getuser.data.data.user_id);
+
             state = {
                 'First Name': getuser.data.data.firstname,
                 'Last Name': getuser.data.data.lastname,
                 'NIC': getuser.data.data.nic,
                 'Contact Number': getuser.data.data.contact_no,
                 'Email': getuser.data.data.email,
-                'Birthday': getuser.data.data.birthday.split('T')[0]
+                'Birthday': getuser.data.data.birthday.split('T')[0],
+                'Completed_profile':getuser.data.data.auth.complete_profile
             }
             setState(state)
 
-            //  console.log(getuser);
+            //  console.log(getuser)
         }
         catch (err) {
             // console.log(err);
@@ -120,7 +123,7 @@ const UpdateProfile = () => {
 
                 <div className='form-container col-xl-5 mt-5 pt-5 mx-auto ' style={{ background: 'none' }}>
 
-                    <h1 className='fs-1 text-primary'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
+                    <h1 className='fs-1 text-primary'>{state['Completed_profile'] ? 'Update Profile' : 'Create Profile'}</h1>
 
                    
                         <Link to={"/update-password"} state={{ user_id }} style={{ display: "flex", float: "right", textDecoration: "none", marginBottom: "10px", marginRight: "10px"}}>

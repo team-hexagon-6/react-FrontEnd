@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Loader from "../../components/loader/Loader";
 import Messages from "../../helpers/Messages";
+import moment from 'moment';
 
 function AddPatient() {
   const formValues = {
@@ -24,7 +25,7 @@ function AddPatient() {
     GenderValue: "",
   };
 
-  const [state, setState] = useState(formValues);
+  var [state, setState] = useState(formValues);
   const [errorData, setErrorData] = useState(formValues);
   const [genderTypes, setgenderTypes] = useState([]);
   const errors = {};
@@ -67,6 +68,7 @@ function AddPatient() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    state={ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY")}
     const { value, error } = Validation.addPatient(state);
     console.log(state);
     if (error) {
