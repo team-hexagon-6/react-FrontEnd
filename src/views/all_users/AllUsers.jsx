@@ -204,7 +204,7 @@ const AllUsers = () => {
                         <td>{value.email}</td>
                         <td>{value.birthday && value.birthday.slice(0, 10)}</td>
                         <td>
-                          <Link to={"/updateUser"} state={{ user_id: value.auth.id }}>
+                          <Link to={"/update-user"} state={{ user_id: value.auth.id }}>
                             <Button
                               variant="outline-primary"
                               className=""

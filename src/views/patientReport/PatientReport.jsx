@@ -101,11 +101,11 @@ const PatientReport = () => {
                         <Form.Group as={Row} className='fa fw-bold col-xl-6 mt-3 mb-3 mx-auto' controlId='4th Row'>
                             <Col align='left' sm={6} >
                                 <Form.Label sm={4}>Test ID</Form.Label>
-                                <Form.Control type="text" size='sm' value={reportdetails?.testrecords?.id || ''} name='Test ID' disabled />
+                                <Form.Control type="text"  size='sm'  value={(reportdetails?.testrecords?.id)?.length || ''} name='Test ID' disabled />
                             </Col>
                             <Col align='left' sm={6}>
                                 <Form.Label sm={4} >Test Start At</Form.Label>
-                                <Form.Control type="text" size='sm' value={'Date: '+reportdetails?.testrecords?.created_at?.split('T')[0]+" / Time: "+reportdetails?.testrecords?.created_at?.split('T')[1].split('Z')[0] || ''}  name='Last Name' disabled />
+                                <Form.Control type="text" size='sm' style={{width:'201px'}} value={('Date: '+reportdetails?.testrecords?.created_at?.split('T')[0]+" / Time: "+reportdetails?.testrecords?.created_at?.split('T')[1].split('Z')[0])|| ''}  name='Last Name' disabled />
 
                             </Col>
                         </Form.Group>

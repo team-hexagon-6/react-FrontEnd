@@ -39,7 +39,7 @@ const Dashboard = () => {
             if (user.profile_complete) {
                 switch (user.role) {
                     case '_32345':
-                        navigate('/adminDashboard');
+                        navigate('/admin');
                         break;
                     case '_32446':
                         navigate('/doctor');

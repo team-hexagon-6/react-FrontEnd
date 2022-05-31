@@ -8,7 +8,6 @@ import UpdateProfile from "../views/UpdateProfile/UpdateProfile";
 import PatientReport from './../views/patientReport/PatientReport';
 import { RequireAuth } from "../utils/requireAuth";
 import Logout from "../components/logout"
-
 import NotFound from "../views/not_found/NotFound"; 
 import AllUsers from "../views/all_users/AllUsers";
 import Examiner from "../views/Examiner/Examiner";
@@ -23,12 +22,9 @@ import UpdatePatientProfile from "../views/updatePatientprofile/UpdatePatientPro
 import About from "../views/about/About";
 import ViewPatient from "../views/View_patient/view_patient";
 import Unauthorized from "../views/not_found/Unauthorized";
-
-
-// FIXME: This is a temporary solution to get the pagination working.
-import TestingPage from "../views/testingroute/TestingPage";
 import Dashboard from "../views/dashboard/Dashboard";
 import UpdatePassword from "../views/update_password/UpdatePassword";
+
 
 const ROLES ={
   'Examiner':'_32247',
@@ -41,35 +37,41 @@ const  Router =() =>{
   return (
     <BrowserRouter>
       <Routes>
+        {/* Navigation bar routings */}
         <Route path="/" element={<HomePage />} />
-        <Route path="*" element = {<NotFound/>}></Route>
-        <Route path="/unauthorized" element={<Unauthorized />} />
-
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/registerUser" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><RegisterUser/></RequireAuth>}></Route>
-        <Route path="/updateProfile" element ={<RequireAuth allowedRoles={[ROLES.Doctor,ROLES.Examiner]}><UpdateProfile/></RequireAuth>}></Route>
-        <Route path="/newTest/:patientid" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><NewTest/></RequireAuth>}></Route>
-        <Route path="/allUsers" element = {<RequireAuth allowedRoles={[ROLES.Admin]}><AllUsers/></RequireAuth>}></Route>
-        <Route path="/examiner" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><Examiner/></RequireAuth>}></Route>
-        <Route path="/allpatients" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><AllPatient/></RequireAuth>}></Route>
-        <Route path="/viewPatient" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><ViewPatient /></RequireAuth>}></Route>
-        <Route path="/doctor" element = {<RequireAuth allowedRoles={[ROLES.Doctor]}><Doctor/></RequireAuth>}></Route>
-
-        <Route path="/patientReport/:patientid/:testid" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><PatientReport/></RequireAuth>}></Route>
-        {/* <Route path="*" element = {<NotFound/>}></Route> */}
         <Route path="/dashboard" element = {<Dashboard/>}></Route>
-        <Route path="/adminDashboard" element = {<RequireAuth allowedRoles={[ROLES.Admin]}><AdminDashboard/></RequireAuth>}></Route>
-        <Route path="/testDetails/:patientid" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><TestDetails/></RequireAuth>}></Route>
-        <Route path="/testRecords/:testid" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><TestRecords/></RequireAuth>}></Route>
-        <Route path="/addPatient" element={<RequireAuth allowedRoles={[ROLES.Examiner]}><AddPatient/></RequireAuth>}></Route>
-        <Route path="/updateUser" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><AdminUpdate/></RequireAuth>}></Route>
-        <Route path="/updatePatientProfile" element ={<RequireAuth allowedRoles={[ROLES.Examiner]}><UpdatePatientProfile/></RequireAuth>}></Route>
-        <Route path="/updatePassword" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><UpdatePassword /></RequireAuth>}></Route>
 
-        {/* FIXME: this is testing route just for testing remove when the deploying */}
-        <Route path="/testing" element ={<TestingPage/>}></Route>
+        {/* Prohibited routings */}
+        <Route path="*" element = {<NotFound/>}></Route>
+        <Route path="/unauthorized" element={<Unauthorized />} />
+
+        {/* Admin routings */}
+        <Route path="/users" element = {<RequireAuth allowedRoles={[ROLES.Admin]}><AllUsers/></RequireAuth>}></Route>
+        <Route path="/register-user" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><RegisterUser/></RequireAuth>}></Route>
+        <Route path="/admin" element = {<RequireAuth allowedRoles={[ROLES.Admin]}><AdminDashboard/></RequireAuth>}></Route>
+        <Route path="/update-user" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><AdminUpdate/></RequireAuth>}></Route>
+
+        {/* Examiner routings */}
+        <Route path="/new-test/:patientid" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><NewTest/></RequireAuth>}></Route>
+        <Route path="/examiner" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><Examiner/></RequireAuth>}></Route>
+        <Route path="/add-patient" element={<RequireAuth allowedRoles={[ROLES.Examiner]}><AddPatient/></RequireAuth>}></Route>
+        <Route path="/update-patient-profile" element ={<RequireAuth allowedRoles={[ROLES.Examiner]}><UpdatePatientProfile/></RequireAuth>}></Route>
+
+        
+        {/* Examiner and Doctor routings */}
+        <Route path="/update-profile" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><UpdateProfile/></RequireAuth>}></Route>
+        <Route path="/patients" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><AllPatient/></RequireAuth>}></Route>
+        <Route path="/view-patient" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><ViewPatient /></RequireAuth>}></Route>
+        <Route path="/patient-report/:patientid/:testid" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><PatientReport/></RequireAuth>}></Route>
+        <Route path="/test-details/:patientid" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><TestDetails/></RequireAuth>}></Route>
+        <Route path="/test-records/:testid" element ={<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><TestRecords/></RequireAuth>}></Route>
+        <Route path="/update-password" element = {<RequireAuth allowedRoles={[ROLES.Examiner,ROLES.Doctor]}><UpdatePassword /></RequireAuth>}></Route>
+
+        {/* Doctor routings */}
+        <Route path="/doctor" element = {<RequireAuth allowedRoles={[ROLES.Doctor]}><Doctor/></RequireAuth>}></Route>
       
       </Routes>
       </BrowserRouter>

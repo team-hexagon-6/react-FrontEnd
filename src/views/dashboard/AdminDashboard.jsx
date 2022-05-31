@@ -61,13 +61,13 @@ const AdminDashboard = () => {
                             <Button
                                 className="dash_btn"
                                 style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-                                onClick={() => { navigate('/registerUser') }}>
+                                onClick={() => { navigate('/register-user') }}>
                                 Register A New User
                             </Button>
                             <Button
                                 className="dash_btn"
                                 style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-                                onClick={() => { navigate('/allUsers') }}>
+                                onClick={() => { navigate('/users') }}>
                                 View All Users
                             </Button>
                         </ButtonGroup>

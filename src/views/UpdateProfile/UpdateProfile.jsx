@@ -125,7 +125,7 @@ const UpdateProfile = () => {
                     <h1 className='fs-1 text-primary'>{state['First Name'] ? 'Update Profile' : 'Create Profile'}</h1>
 
                    
-                        <Link to={"/updatePassword"} state={{ user_id }} style={{ display: "flex", float: "right", textDecoration: "none", marginBottom: "10px", marginRight: "10px"}}>
+                        <Link to={"/update-password"} state={{ user_id }} style={{ display: "flex", float: "right", textDecoration: "none", marginBottom: "10px", marginRight: "10px"}}>
                             <Button className="update_pwd_btn" variant="outline-primary" type="submit">Update Password</Button>
                         </Link>
 
