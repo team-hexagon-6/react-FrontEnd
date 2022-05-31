@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import HeaderTwo from "../../components/headers/HeaderTwo";
 import Paginate from "../../components/pagination/paginate";
 import { useEffect, useState } from "react";
@@ -22,16 +22,16 @@ const AllPatient = () => {
   // const [names, setnames] = useState(['Bruce', 'Clark', 'Diana', 'Bruce1', 'Clark1', 'Diana1', 'Bruce2', 'Clark2', 'Diana2']);
   const [filter, setfilter] = useState("");
   const [patient_id, setPatientId] = useState("");
-    //For Pagination
-    const [skip, setSkip] = useState(0);
-    const [take, setTake] = useState(1);
-    const [totalItems, setTotalItems] = useState(0);
-  const ROLES ={
-    'Examiner':'_32247',
-    'Doctor':'_32446',
-    'Admin':'_32345'
+  //For Pagination
+  const [skip, setSkip] = useState(0);
+  const [take, setTake] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const ROLES = {
+    'Examiner': '_32247',
+    'Doctor': '_32446',
+    'Admin': '_32345'
   }
-  
+
 
   const changePage = async (skip) => {
     console.log(skip);
@@ -49,30 +49,31 @@ const AllPatient = () => {
   const navigate = useNavigate();
   const navigateMe = () => {
     // console.log("delete user fn");
-    if(patient_id){
+    if (patient_id) {
       navigate(`/test-details/${patient_id}`);
-    }else{
+    } else {
       window.alert(`Please insert patient id`);
     }
 
   };
-  try{
-    var user=jwtDecode(Token.getAccessToken())
-   }
-   catch(err){
-     user=null
-   }
-  const filterpatient= async (filter)=>{
+  try {
+    var user = jwtDecode(Token.getAccessToken())
+  }
+  catch (err) {
+    user = null
+  }
+  const filterpatient = async (filter) => {
     setLoader(true);
-    
+    let response = null;
     try {
-      console.log("hereee");
-      const response = await ExaminerServices.getpatientdetails(filter);
+      response = await ExaminerServices.getpatientdetails(filter);
       console.log(response.data.data);
       setAllPatient([response.data.data]);
+      console.log("All patient details", all_ids);
       setfilter('');
     } catch (error) {
-      console.log(error);
+      if (response == null) {setAllPatient([])};
+      console.log();
     }
     setTimeout(() => {
       setLoader(false);
@@ -87,7 +88,6 @@ const AllPatient = () => {
     setLoader(true);
     console.log(take);
     try {
-      console.log("hereee");
       const response = await ExaminerServices.getPatients(skip_value, take);
       console.log(response.data.data);
       console.log(response.data.total_items);
@@ -101,7 +101,7 @@ const AllPatient = () => {
       setLoader(false);
     }, 200);
 
-    
+
   };
 
   if (loader) {
@@ -126,7 +126,7 @@ const AllPatient = () => {
                     }}
                     style={{ borderRadius: "20px 0 0 20px" }}
                   />
-                                   <button
+                  <button
                     onClick={() => filterpatient(filter)}
                     className="btn btn-outline-primary"
                     style={{ borderRadius: "0 20px 20px 0" }}
@@ -165,115 +165,123 @@ const AllPatient = () => {
               </div>
             </div>
           </div>
-          <div className="user_display">
-            <Table responsive="sm" hover style={{ color: "#1376BD", width: "100%" }}>
-              <thead>
-                <tr>
-                  <th>Patient ID</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody style={{ color: "black" }}>
-                {/* sample database result object to html convert with search enabled */}
-                {all_ids
-                  // .filter((name) => {
-                  //   if (filter == "") {
-                  //     return name;
-                  //   } else if (
-                  //     (name.id+name.firstname + name.lastname)
-                  //       .toLocaleLowerCase()
-                  //       .includes(filter.toLocaleLowerCase())
-                  //   ) {
-                  //     return name;
-                  //   }
-                  // })
-                  .map((name) => {
-                    // Tables should come here
 
-                    return (
-                      <tr key={name}>
-                        <td>{name.id}</td>
-                        <td>{name.firstname}</td>
-                        <td>{name.lastname}</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <Button
-                            className="btn-primary"
-                            style={{ borderRadius: "20px" }}
-                            // data-id={name.patient_id}
-                            onClick={() => {
-                              navigate(`/test-details/${name.id}`);
-                            }}
-                          >
-                            View
-                          </Button>
-                        </td>
-                        
-                        {user.role==ROLES.Examiner? 
-                        <>
-                      
-                        <td>
-                         
-                          <Button
-                            className="btn-primary"
-                            style={{ borderRadius: "20px" }}
-                            // data-id={name.patient_id}
-                            onClick={() => {
-                              navigate(`/test-details/${name.id}`);
-                            }}
-                          >
-                            Do Test
-                          </Button>
-                        </td>
-                
-                        <td>
-                          <Link
-                            to={"/update-patient-profile"}
-                            state={{ patient_id: name.id }}
-                          >
+          <div className="user_display">
+            {all_ids.length === 0 &&
+              <div><h5 style={{ color: "black", textAlign: "center", margin: "10px" }}>No patients to display</h5>
+                <div className="image">
+                  <img src="../../public/404.png" alt="" />
+                </div>
+              </div>}
+            {all_ids.length !== 0 &&
+              <Table hover style={{ color: "#1376BD", width: "100%" }}>
+                <thead>
+                  <tr>
+                    <th>Patient ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody style={{ color: "black" }}>
+                  {/* sample database result object to html convert with search enabled */}
+                  {all_ids
+                    // .filter((name) => {
+                    //   if (filter == "") {
+                    //     return name;
+                    //   } else if (
+                    //     (name.id+name.firstname + name.lastname)
+                    //       .toLocaleLowerCase()
+                    //       .includes(filter.toLocaleLowerCase())
+                    //   ) {
+                    //     return name;
+                    //   }
+                    // })
+                    .map((name) => {
+                      // Tables should come here
+
+                      return (
+                        <tr key={name}>
+                          <td>{name.id}</td>
+                          <td>{name.firstname}</td>
+                          <td>{name.lastname}</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td>
                             <Button
                               className="btn-primary"
                               style={{ borderRadius: "20px" }}
                               // data-id={name.patient_id}
-                              // onClick={()=>{navigate(`/testDetails/${name.id}`)}}
+                              onClick={() => {
+                                navigate(`/test-details/${name.id}`);
+                              }}
                             >
-                              Update
+                              View
                             </Button>
-                          </Link>
-                        </td>
-                        </>
-                         :''
-                        }
-                 
-                      </tr>
-                    );
-                  })}
-              </tbody>
-            </Table>
+                          </td>
+
+                          {user.role == ROLES.Examiner ?
+                            <>
+
+                              <td>
+
+                                <Button
+                                  className="btn-primary"
+                                  style={{ borderRadius: "20px" }}
+                                  // data-id={name.patient_id}
+                                  onClick={() => {
+                                    navigate(`/test-details/${name.id}`);
+                                  }}
+                                >
+                                  Do Test
+                                </Button>
+                              </td>
+
+                              <td>
+                                <Link
+                                  to={"/update-patient-profile"}
+                                  state={{ patient_id: name.id }}
+                                >
+                                  <Button
+                                    className="btn-primary"
+                                    style={{ borderRadius: "20px" }}
+                                  // data-id={name.patient_id}
+                                  // onClick={()=>{navigate(`/testDetails/${name.id}`)}}
+                                  >
+                                    Update
+                                  </Button>
+                                </Link>
+                              </td>
+                            </>
+                            : ''
+                          }
+
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </Table>}
           </div>
           <div className="container paginate_div text-center">
-              <Paginate
-                skip={skip}
-                take={take}
-                setSkip={changePage}
-                totalItems={totalItems}
-              />
-            </div>
+            <Paginate
+              skip={skip}
+              take={take}
+              setSkip={changePage}
+              totalItems={totalItems}
+            />
+          </div>
         </div>
       </div>
     );
