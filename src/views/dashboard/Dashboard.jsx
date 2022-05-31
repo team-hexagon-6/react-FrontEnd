@@ -51,7 +51,7 @@ const Dashboard = () => {
                         break;
                 }
             } else {
-                navigate('/updateProfile');
+                navigate('/update-profile');
             }
         } catch (error) {
             console.log(error);
