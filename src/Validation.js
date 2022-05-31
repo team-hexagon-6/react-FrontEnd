@@ -129,20 +129,6 @@ const adminUpdatePwd = (data) => {
   return { value, error };
 };
 
-const userUpdatePwd = (data) => {
-  const user_update_pwd_schema = Joi.object({
-    password: password_joi_object(),
-
-    re_password: Joi.ref("password"),
-  });
-
-  const { error, value } = user_update_pwd_schema.validate(data, {
-    abortEarly: false,
-  });
-
-  return { value, error };
-};
-
 const name_validation_joi_object = () => {
       return Joi.string().required().pattern(new RegExp('^[A-Z][a-z0-9_-]{2,}$'))
             .messages({
@@ -261,5 +247,4 @@ export default {
   adminUpdatePwd,
   addPatient,
   updatePatientProfile,
-  userUpdatePwd,
 };
