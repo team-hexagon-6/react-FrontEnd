@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 import Messages from "../../helpers/Messages";
 import { Link } from "react-router-dom";
+import 'font-awesome/css/font-awesome.css';
 
 const AllUsers = () => {
 
@@ -195,7 +196,8 @@ const AllUsers = () => {
                     return (
                       <tr key={key}>
                         <td>
-                          {value.auth.active ? <p>Active</p> : <p>No Active</p>}
+                          {value.auth.active ? <i class="fa fa-check-square" aria-hidden="true" style={{color: "green"}}/> : <i class="fa fa-power-off" aria-hidden="true" style={{margin: "5px", color: "crimson"}}/>}
+                          <i class=""></i>
                         </td>
                         <td>{value.auth.id}</td>
                         <td>{value.firstname}</td>
@@ -223,7 +225,7 @@ const AllUsers = () => {
                               style={{ borderRadius: "20px" }}
                               onClick={() => changeActivation(value.auth.id)}
                             >
-                              Deactivate
+                              <i class="fa fa-power-off" aria-hidden="true" style={{margin: "5px"}}></i>Deactivate
                             </Button>
                           ) : (
                             <Button
@@ -232,7 +234,7 @@ const AllUsers = () => {
                               style={{ borderRadius: "20px" }}
                               onClick={() => changeActivation(value.auth.id)}
                             >
-                              Activate
+                              <i class="fa fa-check-square" aria-hidden="true" style={{margin: "5px"}}/>Activate
                             </Button>
                           )}
                         </td>
