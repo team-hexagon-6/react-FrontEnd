@@ -9,10 +9,8 @@ import UserServices from '../../services/API/UserServices';
 import Validation from '../../Validation';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import Dashboard from './../dashboard/Dashboard';
 import Loader from '../../components/loader/Loader';
 import moment from 'moment';
-
 
 import Messages from "../../helpers/Messages";
 
@@ -68,8 +66,6 @@ const UpdateProfile = () => {
             setState(state)
 
             //  console.log(getuser);
-
-
         }
         catch (err) {
             // console.log(err);
@@ -82,19 +78,21 @@ const UpdateProfile = () => {
     const handleSubmit = async (event) => {
         setLoader(true);
         console.log(state);
-        const { value, error } = Validation.validateupdateprofile({ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY") })
+        state={ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY")}
+        const { value, error } = Validation.validateupdateprofile(state)
         event.preventDefault();
         if (error) {
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
             });
+            console.log(error);
         }
         else {
             try {
-                const response = await UserServices.updateprofile({ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY") });
+                const response = await UserServices.updateprofile(state);
                 if (response.status === 200) {
                     Messages.SuccessMessage("User Updated Successfully");
-                    navigate('/logout')
+                    navigate('/dashboard')
                 }
 
                 console.log(response)

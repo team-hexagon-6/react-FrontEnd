@@ -1,5 +1,6 @@
 import Joi from "joi";
 
+
 const registration = (data) => {
   const reg_schema = Joi.object({
     user_id: user_id_validation_joi_object(),
@@ -25,7 +26,7 @@ const validateupdateprofile = (data) => {
   const UserCompleteRegistrationValidationSchema = Joi.object({
     "First Name": name_validation_joi_object(),
     "Last Name": name_validation_joi_object(),
-    NIC: Joi.nic_validation_joi_object(),
+    NIC: nic_validation_joi_object(),
     "Contact Number": contact_number_validation_joi_object(),
     Email: email_validation_joi_object(),
     Birthday: birthday_validation_joi_object()
@@ -166,9 +167,8 @@ const email_validation_joi_object = () => {
 }
 const birthday_validation_joi_object = () => {
   console.log("date")
-      return Joi.date().format('MM-DD-YYYY').required().max('now').min('01-01-1900')
+      return Joi.date().required().max('now').min('01-01-1900')
             .messages({
-                "date.format": "Date format should be MM-DD-YYYY",
                 "date.required": "Field is required!",
                 "date.max": "Date cannot be greater that current date",
                 "date.min": "Date should be greater than 01-01-1990"
