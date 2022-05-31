@@ -72,7 +72,9 @@ const  Router =() =>{
 
         {/* Doctor routings */}
         <Route path="/doctor" element = {<RequireAuth allowedRoles={[ROLES.Doctor]}><Doctor/></RequireAuth>}></Route>
-      
+      {/* testing
+       */}
+       
       </Routes>
       </BrowserRouter>
     

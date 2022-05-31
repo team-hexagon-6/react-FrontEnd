@@ -50,7 +50,7 @@ const UpdatePassword = () => {
                 const response = await UserServices.updatePasswordByUser({ password, old_password, user_id });
                 if (response.status === 200) {            
                     Messages.SuccessMessage("Password Updated Successfully");
-                    setTimeout(navigate('/updateProfile'), 3000);
+                    setTimeout(navigate('/logout'), 3000);
                 }
 
             } catch (error) {
