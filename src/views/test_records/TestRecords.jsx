@@ -79,7 +79,7 @@ const TestRecords = () => {
 
                         </Form>
                         <div className='b'>
-                            <Button type="submit" style={{ "borderRadius": "5px", "margin": "0px 5px 20px" }} onClick={() => navigate(`/patientReport/${testrecords.patient_id}/${params.testid}`)} >See Report</Button>
+                            <Button type="submit" style={{ "borderRadius": "5px", "margin": "0px 5px 20px" }} onClick={() => navigate(`/patient-report/${testrecords.patient_id}/${params.testid}`)} >See Report</Button>
                         </div>
                     </div>
                 </div>
