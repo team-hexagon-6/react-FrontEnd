@@ -60,12 +60,12 @@ const TestDetails = () => {
     }
 
     const handleButtonTestRecords = async (event) => {
-        navigate(`/testRecords/${event.currentTarget.getAttribute("data-id")}`)
+        navigate(`/test-records/${event.currentTarget.getAttribute("data-id")}`)
 
     }
 
     const handleStartTest = () => {
-        navigate(`/newTest/${params.patientid}`)
+        navigate(`/new-test/${params.patientid}`)
 
     }
     const handleActive = async (testid) => {

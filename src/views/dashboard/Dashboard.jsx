@@ -36,10 +36,10 @@ const Dashboard = () => {
             // navigate(from, { replace: true })
             // console.log("usertype",response.data.data.auth.usertype.name);
         
-            if (user.profile_complete) {
+            if (user?.profile_complete) {
                 switch (user.role) {
                     case '_32345':
-                        navigate('/adminDashboard');
+                        navigate('/admin');
                         break;
                     case '_32446':
                         navigate('/doctor');

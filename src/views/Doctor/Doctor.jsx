@@ -76,7 +76,7 @@ const Doctor = () => {
             <Button
               className="dash_btn"
               style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-              onClick={() => { navigate('/allpatients') }}>
+              onClick={() => { navigate('/patients') }}>
               View All Patients
             </Button>
             {/* <Button
@@ -103,14 +103,14 @@ const Doctor = () => {
                 onChange={(event) => setPatientId(event.target.value)}
                 required
               />
-              <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => {patient_id? navigate(`/testDetails/${patient_id}`):  window.alert(`Please insert patient id`) }}>Search Patient</Button>   
+              <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => {patient_id? navigate(`/test-details/${patient_id}`):  window.alert(`Please insert patient id`) }}>Search Patient</Button>   
       
 
             </div>
             <Button
               className="dash_btn"
               style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-              onClick={() => { navigate('/updateProfile') }}>
+              onClick={() => { navigate('/update-profile') }}>
               Update Account
             </Button>
           </ButtonGroup>

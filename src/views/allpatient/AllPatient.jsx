@@ -36,7 +36,7 @@ const AllPatient = () => {
   const navigateMe = () => {
     // console.log("delete user fn");
     if(patient_id){
-      navigate(`/testDetails/${patient_id}`);
+      navigate(`/test-details/${patient_id}`);
     }else{
       window.alert(`Please insert patient id`);
     }
@@ -173,7 +173,7 @@ const AllPatient = () => {
                             style={{ borderRadius: "20px" }}
                             // data-id={name.patient_id}
                             onClick={() => {
-                              navigate(`/testDetails/${name.id}`);
+                              navigate(`/test-details/${name.id}`);
                             }}
                           >
                             View
@@ -190,7 +190,7 @@ const AllPatient = () => {
                             style={{ borderRadius: "20px" }}
                             // data-id={name.patient_id}
                             onClick={() => {
-                              navigate(`/testDetails/${name.id}`);
+                              navigate(`/test-details/${name.id}`);
                             }}
                           >
                             Do Test
@@ -199,7 +199,7 @@ const AllPatient = () => {
                 
                         <td>
                           <Link
-                            to={"/updatePatientProfile"}
+                            to={"/update-patient-profile"}
                             state={{ patient_id: name.id }}
                           >
                             <Button

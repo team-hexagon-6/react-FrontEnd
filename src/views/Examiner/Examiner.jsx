@@ -92,13 +92,13 @@ const Examiner = () => {
             <Button
               className=""
               style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-              onClick={() => { navigate("/addPatient") }}>
+              onClick={() => { navigate("/add-patient") }}>
               Add Patient
             </Button>
             <Button
               className=""
               style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-              onClick={() => { navigate('/allpatients') }}>
+              onClick={() => { navigate('/patients') }}>
               View All Patients
             </Button>
           </ButtonGroup>
@@ -122,7 +122,7 @@ const Examiner = () => {
               onChange={(event) => setPatientId(event.target.value)}
               required
             />
-            <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => { navigate(`/testDetails/${patient_id}`) }}>Search Patient</Button>
+            <Button className="" style={{ borderRadius: "0 20px 20px 0" }} onClick={() => {patient_id? navigate(`/test-details/${patient_id}`):  window.alert(`Please insert patient id`) } }>Search Patient</Button>
 
           </div>
           {/* <Button className='butts' id='update' onClick={() => { }}>Update Account</Button> */}
@@ -130,7 +130,7 @@ const Examiner = () => {
             <Button
               className=""
               style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-              onClick={() => { navigate('/updateProfile') }}>
+              onClick={() => { navigate('/update-profile') }}>
               Update Account
             </Button>
           </ButtonGroup>

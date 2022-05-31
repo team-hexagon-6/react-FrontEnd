@@ -45,7 +45,7 @@ const AdminDashboard = () => {
 
                 <HeaderTwo />
 
-                <div className="col-sm-4 reg">
+                <div className="col-sm-4 mt-5 reg">
 
                     <h1 className="admindash_header">Admin Dashboard</h1>
 
@@ -61,13 +61,13 @@ const AdminDashboard = () => {
                             <Button
                                 className="dash_btn"
                                 style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-                                onClick={() => { navigate('/registerUser') }}>
+                                onClick={() => { navigate('/register-user') }}>
                                 Register A New User
                             </Button>
                             <Button
                                 className="dash_btn"
                                 style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
-                                onClick={() => { navigate('/allUsers') }}>
+                                onClick={() => { navigate('/users') }}>
                                 View All Users
                             </Button>
                         </ButtonGroup>

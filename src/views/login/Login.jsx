@@ -65,6 +65,7 @@ function Login() {
           // const user=jwtDecode(Token.getAccessToken())
           // console.log(user);
           // setAuth({userRole:user.role,profile_complete:user.profile_complete})
+          console.log(from);
           navigate(from, { replace: true })
           
 
