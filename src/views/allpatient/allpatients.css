@@ -7,7 +7,7 @@
   /* border-radius: 5px; */
   margin: auto;
   width: fit-content;
-  margin-top:100px;
+  margin-top:50px;
   padding-left: 50px;
   padding-right: 50px;
   padding-top: 30px;
@@ -34,7 +34,7 @@ width: 50%;
   /* background-color: red;  */
   /* margin-left: 50%;  */
   height: 50px; 
-  width: 50%;
+  width: 70%;
   /* background-color: white; */
 } 
 .search { 
