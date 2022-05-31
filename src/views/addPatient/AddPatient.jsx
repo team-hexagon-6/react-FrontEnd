@@ -66,7 +66,6 @@ function AddPatient() {
   };
 
   const handleSubmit = async (e) => {
-    setLoader(true);
     e.preventDefault();
     const { value, error } = Validation.addPatient(state);
     console.log(state);
@@ -77,6 +76,7 @@ function AddPatient() {
       console.log(errors);
     } else {
       try {
+        setLoader(true);
         console.log(state);
         const response = await ExaminerServices.addPatient(state);
         console.log(response);
