@@ -142,7 +142,7 @@ const RegisterUser = () => {
                                         <div className="row">
                                             {userTypes && userTypes.map((userType) =>
                                                 <div className="col-md-3" key={userType.slug}>
-                                                    <input type="radio" value={userType.slug} name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
+                                                    <input type="radio" value={userType.slug} style={{margin: "10px"}} onChange name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
                                                 </div>
                                             )}
                                         </div>

@@ -6,7 +6,7 @@
   border-left:15px solid #1376bdf5 ;
   /* border-radius: 5px; */
   margin: auto;
-  width: 60%;
+  width: fit-content;
   margin-top:100px;
   padding-left: 50px;
   padding-right: 50px;
