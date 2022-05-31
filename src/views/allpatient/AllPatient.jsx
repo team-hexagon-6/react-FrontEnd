@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { useNavigate,Link } from "react-router-dom";
 import HeaderTwo from "../../components/headers/HeaderTwo";
+import Paginate from "../../components/pagination/paginate";
 import { useEffect, useState } from "react";
 import {
   Card,
@@ -21,12 +22,25 @@ const AllPatient = () => {
   // const [names, setnames] = useState(['Bruce', 'Clark', 'Diana', 'Bruce1', 'Clark1', 'Diana1', 'Bruce2', 'Clark2', 'Diana2']);
   const [filter, setfilter] = useState("");
   const [patient_id, setPatientId] = useState("");
+    //For Pagination
+    const [skip, setSkip] = useState(0);
+    const [take, setTake] = useState(1);
+    const [totalItems, setTotalItems] = useState(0);
   const ROLES ={
     'Examiner':'_32247',
     'Doctor':'_32446',
     'Admin':'_32345'
   }
   
+
+  const changePage = async (skip) => {
+    console.log(skip);
+    // setSkip(skip_value);
+    getPatients(skip, take);
+  }
+
+
+
 
   const [loader, setLoader] = useState(false);
 
@@ -48,24 +62,46 @@ const AllPatient = () => {
    catch(err){
      user=null
    }
-
-
-  useEffect(() => {
-    getPatients();
-  }, []);
-
-  const getPatients = async () => {
+  const filterpatient= async (filter)=>{
     setLoader(true);
+    
     try {
-      const response = await ExaminerServices.getPatients(0, 50);
-      console.log(response);
-      setAllPatient(response.data.data);
+      console.log("hereee");
+      const response = await ExaminerServices.getpatientdetails(filter);
+      console.log(response.data.data);
+      setAllPatient([response.data.data]);
+      setfilter('');
     } catch (error) {
       console.log(error);
     }
     setTimeout(() => {
       setLoader(false);
     }, 200);
+  };
+
+  useEffect(() => {
+    getPatients(skip, take);
+  }, []);
+
+  const getPatients = async (skip_value, take) => {
+    setLoader(true);
+    console.log(take);
+    try {
+      console.log("hereee");
+      const response = await ExaminerServices.getPatients(skip_value, take);
+      console.log(response.data.data);
+      console.log(response.data.total_items);
+      setAllPatient(response.data.data);
+      setTotalItems(response.data.total_items);
+      setSkip(skip_value);
+    } catch (error) {
+      console.log(error);
+    }
+    setTimeout(() => {
+      setLoader(false);
+    }, 200);
+
+    
   };
 
   if (loader) {
@@ -90,7 +126,15 @@ const AllPatient = () => {
                     }}
                     style={{ borderRadius: "20px 0 0 20px" }}
                   />
-                 
+                                   <button
+                    onClick={() => filterpatient(filter)}
+                    className="btn btn-outline-primary"
+                    style={{ borderRadius: "0 20px 20px 0" }}
+                    type="button"
+                    id="button-addon2"
+                  >
+                    Filter Patient
+                  </button>
                 </div>
               </div>
             </div>
@@ -142,17 +186,17 @@ const AllPatient = () => {
               <tbody style={{ color: "black" }}>
                 {/* sample database result object to html convert with search enabled */}
                 {all_ids
-                  .filter((name) => {
-                    if (filter == "") {
-                      return name;
-                    } else if (
-                      (name.id+name.firstname + name.lastname)
-                        .toLocaleLowerCase()
-                        .includes(filter.toLocaleLowerCase())
-                    ) {
-                      return name;
-                    }
-                  })
+                  // .filter((name) => {
+                  //   if (filter == "") {
+                  //     return name;
+                  //   } else if (
+                  //     (name.id+name.firstname + name.lastname)
+                  //       .toLocaleLowerCase()
+                  //       .includes(filter.toLocaleLowerCase())
+                  //   ) {
+                  //     return name;
+                  //   }
+                  // })
                   .map((name) => {
                     // Tables should come here
 
@@ -222,6 +266,14 @@ const AllPatient = () => {
               </tbody>
             </Table>
           </div>
+          <div className="container paginate_div text-center">
+              <Paginate
+                skip={skip}
+                take={take}
+                setSkip={changePage}
+                totalItems={totalItems}
+              />
+            </div>
         </div>
       </div>
     );

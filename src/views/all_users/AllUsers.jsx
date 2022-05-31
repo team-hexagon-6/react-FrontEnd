@@ -78,6 +78,7 @@ const AllUsers = () => {
   }
 
   const [users, setUsers] = useState([]);
+  
   useEffect(() => {
     getUsers("doctor", skip, take, search);
   }, []);
