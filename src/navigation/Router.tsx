@@ -42,7 +42,7 @@ const  Router =() =>{
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/dashboard" element = {<Dashboard/>}></Route>
+        <Route path="/dashboard" element = {<RequireAuth allowedRoles={[ROLES.Admin,ROLES.Doctor,ROLES.Examiner]} ><Dashboard/></RequireAuth>}></Route>
 
         {/* Prohibited routings */}
         <Route path="*" element = {<NotFound/>}></Route>
