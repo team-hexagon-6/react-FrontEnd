@@ -105,7 +105,7 @@ function Login() {
         <HeaderOne />
         <div className="container  d-flex flex-column col-4 justify-content-center " style={{ border: "1px solid #1376BD", borderLeft: "10px solid #1376BD" }}>
           <div className="image">
-            <img src="../../public/login.png" alt="" />
+            <img src="https://i.ibb.co/f0D5tLF/login.png" alt="" />
           </div>
           <h3 className="fa header">Login</h3>
           <div className="form1">

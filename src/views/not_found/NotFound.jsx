@@ -23,7 +23,7 @@ const NotFound = (props) => {
     
 
             <div className="image">
-                <img src="../../public/404.png" alt=""/>
+                <img src="https://i.ibb.co/TLJmmJW/404.png" alt=""/>
             </div>
 
             <div className="back_button">        

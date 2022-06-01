@@ -85,7 +85,7 @@ const Examiner = () => {
           <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
 
           <div className="image" style={{ marginBottom: "0px" }}>
-            <img src="../../public/dashboard.png" alt="" />
+            <img src="https://i.ibb.co/6n0rvNF/dashboard.png" alt="" />
           </div>
 
           <ButtonGroup vertical className="d-flex">
