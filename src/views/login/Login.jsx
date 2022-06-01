@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import AuthServices from "../../services/AuthServices";
 import Validation from "../../Validation";
 import { useNavigate, useLocation } from "react-router-dom";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faEyeSlash,faEye} from  '@fortawesome/free-solid-svg-icons'
 
 
 import { toast } from "react-toastify";
@@ -27,6 +29,10 @@ function Login() {
   const [passwordError, setPasswordError] = useState("");
 
   const [loader, setLoader] = useState(false);
+  const [passwordShown,setPasswordShown]=useState(false);
+  const togglePassword=()=>{
+    setPasswordShown( !(passwordShown));
+}
 
   const handleSubmit = async (e) => {
     setLoader(true);
@@ -85,8 +91,7 @@ function Login() {
         const errormessage=error.response.data.message;
         Messages.ErrorMessage({
           error: error,
-          main_part: "LOGIN FAILED",
-          custom_message:"LOGIN FAILED:- "+error.response.data.message
+          custom_message:error.response.data.message
         });
       }
     }
@@ -109,12 +114,12 @@ function Login() {
           <h3 className="fa header">Login</h3>
           <div className="form1">
             <div className="justify-content-center row g-3 align-items-center">
-              <div className="col-auto">
-                <label htmlFor="Username" className="col-form-label fa">
+              <div className="col-2">
+                <label htmlFor="Username" className="col-form-label fa fw-bold">
                   Username
                 </label>
               </div>
-              <div className="col-auto">
+              <div className="col-7">
                 <input
                   type="text"
                   className="form-control"
@@ -126,6 +131,7 @@ function Login() {
                   }}
                 />
               </div>
+              <div className="col-auto"></div>
             </div>
             {usernameError && (
               <p
@@ -136,23 +142,26 @@ function Login() {
               </p>
             )}
             <div className="justify-content-center row g-3 align-items-center">
-              <div className="col-auto">
-                <label htmlFor="Password" className="col-form-label fa">
+              <div className="col-2">
+                <label htmlFor="Password" style={{margin:'0px 0px 0px 15px'}} className="col-form-label fa fw-bold ">
                   Password
                 </label>
               </div>
-              <div className="col-auto">
+              <div className="col-7">
                 <input
-                  type="password"
+                  type={passwordShown ? 'text':'password'}
                   id="inputPassword"
                   className="form-control"
-                  style={{ borderRadius: "20px" }}
+                  style={{ borderRadius: "20px",margin:'0px 0px 0px 16px'}}
                   aria-describedby="passwordHelpInline"
                   value={password}
                   onChange={(e) => {
                     setPassword(e.target.value);
                   }}
                 />
+              </div >
+              <div className="col-auto">
+              <FontAwesomeIcon  style={{margin:'0px 0px 0px 5px'}} className='fa-lg'  icon={passwordShown? faEye:faEyeSlash} onClick={togglePassword}></FontAwesomeIcon>
               </div>
             </div>
             {passwordError && (
