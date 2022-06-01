@@ -146,7 +146,7 @@ const NewTest = () => {
                         <Form onSubmit={handleSubmit}>
 
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-2">
                                     <Form.Group className="mb-3">
                                         <Form.Label>Patient ID</Form.Label>
                                         <Form.Control
@@ -161,7 +161,7 @@ const NewTest = () => {
                                 </div>
 
                                 <div className="col-md-6">
-                                    <Form.Group className="mb-3">
+                                    <Form.Group>
                                         <Form.Label>Type of The Test</Form.Label>
 
                                         <div className="col-md-3">
