@@ -197,7 +197,7 @@ const NewTest = () => {
                                         <div className="container upload_preview">
                                             <Form.Control type="file" id="file" onChange={fileValidation} />
                                             {img_err != '' && <p className="error">{img_err}</p>}
-                                            <div className="preview" id="imagePreview"><img src="../../public/No_Preview.png" alt="" /></div>
+                                            <div className="preview" id="imagePreview"><img src="https://i.ibb.co/Q68tPz8/No-Preview.png" alt="" /></div>
                                         </div>
 
                                     </Form.Group>

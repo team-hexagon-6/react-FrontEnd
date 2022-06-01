@@ -115,7 +115,7 @@ const RegisterUser = () => {
                         <h1 className="reg_header">Register a User</h1>
 
                         <div className="image">
-                            <img src="../../public/register.png" alt="" />
+                            <img src="https://i.ibb.co/GJXcYwn/register.png" alt="" />
                         </div>
 
 

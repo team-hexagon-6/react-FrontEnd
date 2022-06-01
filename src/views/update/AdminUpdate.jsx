@@ -79,7 +79,7 @@ const AdminUpdate = () => {
                     <h1 className="update_header">Update Password</h1>
 
                     <div className="image">
-                        <img src="../../public/pwd.png" alt="" />
+                        <img src="https://i.ibb.co/W03rmc3/pwd.png" alt="" />
                     </div>
 
                     <div className="container reg_form justify-content-center">

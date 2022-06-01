@@ -54,7 +54,7 @@ const AdminDashboard = () => {
                     <div className="container dashboard justify-content-center text-center">
 
                         <div className="image" style={{ marginBottom: "0px" }}>
-                            <img src="../../public/dashboard.png" alt="" />
+                            <img src="https://i.ibb.co/6n0rvNF/dashboard.png" alt="" />
                         </div>
 
                         <ButtonGroup vertical className="d-flex">
