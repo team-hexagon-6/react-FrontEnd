@@ -1,0 +1,27 @@
+.reg {
+    justify-content: center;
+    width: fit-content;
+    border: 1px solid #1376BD;
+    border-left: 10px solid #1376BD;
+    padding: 10px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    top: 50%;
+}
+
+.reg_header {
+    color: #1376BD;
+    text-align: center;
+}
+
+.error {
+    color: crimson;
+    width: fit-content;
+    margin: 2px
+}
+
+.required {
+    text-align: right;
+    color: #1376BD;
+}
