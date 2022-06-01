@@ -7,6 +7,9 @@ import Validation from "../../Validation";
 import { useNavigate, useParams ,useLocation} from "react-router-dom";
 import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faEyeSlash,faEye} from  '@fortawesome/free-solid-svg-icons'
+import { Row, Col,InputGroup } from 'react-bootstrap';
 
 import Messages from "../../helpers/Messages";
 
@@ -22,6 +25,15 @@ const AdminUpdate = () => {
 
     const [pwd_err, setPwdErr] = useState('');
     console.log("Id ", location.state.user_id);
+    const [passwordShown,setPasswordShown]=useState({
+        'new password':false,
+        'renew password':false
+
+    });
+    const togglePassword=(e)=>{
+        setPasswordShown({...passwordShown,[e]: !(passwordShown[e])});
+    }
+
 
     const handleSubmit = async (e) => {
         setLoader(true);
@@ -86,32 +98,47 @@ const AdminUpdate = () => {
 
                         <Form onSubmit={handleSubmit}>
 
-                            <div className="justify-content-center row g-3 align-items-center">
+                            <div className="fw-bold justify-content-center row g-3 align-items-center">
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>New Password</Form.Label>
+                                    <Form.Label style={{ margin:'0px 0px 0px  85px'}}>New Password</Form.Label>
+                                    <Row>
+                                    <Col align='left' sm={8}>
                                     <Form.Control
-                                        type="password"
+                                        type={passwordShown['new password'] ? 'text':'password'}
                                         name="password"
                                         placeholder="Password"
-                                        style={{ borderRadius: "20px" }}
+                                        style={{ borderRadius: "20px",margin:'0px 0px 0px 80px' }}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
+                                    </Col>
+                                    <Col sm={3}><FontAwesomeIcon style={{margin:'0px 0px 0px  20px'}} className='mt-2 fa-lg'  icon={passwordShown['new password'] ? faEye:faEyeSlash} on onClick={()=>togglePassword('new password')}></FontAwesomeIcon>
+                                    </Col>
+                                    </Row>
                                 </Form.Group>
                             </div>
 
-                            <div className="justify-content-center row g-3 align-items-center">
+                            <div className="fw-bold justify-content-center row g-3 align-items-center">
                                 <Form.Group className="mb-3" controlId="formBasicPassword">
-                                    <Form.Label>Re-enter New Password</Form.Label>
+                                    <Form.Label style={{ margin:'0px 0px 0px  85px'}}>Re-enter New Password</Form.Label>
+                                    <Row>
+                                    <Col align='left' sm={8}>
                                     <Form.Control
-                                        type="password"
+                                        type={passwordShown['renew password'] ? 'text':'password'}
                                         name="re_password"
                                         placeholder="Password"
-                                        style={{ borderRadius: "20px" }}
+                                        style={{ borderRadius: "20px",margin:'0px 0px 0px 80px'  }}
                                         value={re_password}
                                         onChange={(e) => setRePassword(e.target.value)}
                                     />
-                                    {pwd_err != '' && <p className="error">{pwd_err}</p>}
+                                    
+                                    </Col>
+                                    
+                                    <Col sm={1}><FontAwesomeIcon style={{margin:'0px 0px 0px  20px'}} className='mt-2 fa-lg'  icon={passwordShown['renew password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('renew password')}></FontAwesomeIcon>
+                                    </Col>
+                                    
+                                    </Row>
+                                    {pwd_err != '' && <p className="error" style={{margin:'0px 0px 0px 150px' }}>{pwd_err}</p>}
                                 </Form.Group>
                             </div>
 

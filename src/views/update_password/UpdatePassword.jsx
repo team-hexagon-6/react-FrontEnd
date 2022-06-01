@@ -104,20 +104,20 @@ const UpdatePassword = () => {
 
                         <div className="justify-content-center row g-3 align-items-center">
                                 <Form.Group className="mb-3 fw-bold" controlId="formBasicPassword">
-                                <Form.Label style={{ margin:'0px 0px 0px  60px'}}>Current Password</Form.Label>
+                                <Form.Label style={{ margin:'0px 0px 0px  75px'}}>Current Password</Form.Label>
                                 <Row>
                                     <Col align='left' sm={8}>
                                     <Form.Control
                                         type={passwordShown['current password'] ? 'text':'password'}
                                         name="old_password"
                                         placeholder="Current Password"
-                                        style={{ borderRadius: "20px",margin:'0px 0px 0px  60px'}}
+                                        style={{ borderRadius: "20px",margin:'0px 0px 0px  70px'}}
                                         value={old_password}
                                         onChange={(e) => setOldPassword(e.target.value)}
                                     />
                                     </Col>
                                     <Col sm={1}>
-                                <FontAwesomeIcon style={{margin:'0px 0px 0px  40px'}} className='mt-2 fa-lg'  icon={passwordShown['current password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('current password')}></FontAwesomeIcon>
+                                <FontAwesomeIcon style={{margin:'0px 0px 0px  10px'}} className='mt-2 fa-lg'  icon={passwordShown['current password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('current password')}></FontAwesomeIcon>
                                 </Col>
                                     </Row>
                                 </Form.Group>
@@ -125,20 +125,20 @@ const UpdatePassword = () => {
                            
                             <div className="justify-content-center row g-3 align-items-center">
                                 <Form.Group  className="mb-3 fw-bold" controlId="formBasicPassword">
-                                <Form.Label  style={{ margin:'0px 0px 0px  60px' }}>New Password</Form.Label>
+                                <Form.Label  style={{ margin:'0px 0px 0px  75px' }}>New Password</Form.Label>
                                    <Row>
                                     <Col align='left' sm={8}>
                                     <Form.Control
                                         type={passwordShown['new password'] ? 'text':'password'}
                                         name="password"
                                         placeholder="New Password"
-                                        style={{ borderRadius: "20px",margin:'0px 2px 0px  60px' }}
+                                        style={{ borderRadius: "20px",margin:'0px 2px 0px  70px' }}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                     </Col>
-                                    <Col sm={1}>
-                                    <FontAwesomeIcon style={{margin:'0px 0px 0px  40px'}} className='mt-2 fa-lg'  icon={passwordShown['new password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('new password')}></FontAwesomeIcon>
+                                    <Col sm={2}>
+                                    <FontAwesomeIcon style={{margin:'0px 0px 0px  10px'}} className='mt-2 fa-lg'  icon={passwordShown['new password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('new password')}></FontAwesomeIcon>
                                     </Col>
                                     </Row>
                                 </Form.Group>
@@ -146,25 +146,25 @@ const UpdatePassword = () => {
                            
                             <div className="justify-content-center row g-3 align-items-center">
                                 <Form.Group className="mb-3 fw-bold" controlId="formBasicPassword">
-                                <Form.Label style={{ margin:'0px 0px 0px  60px' }}>Re-enter New Password</Form.Label>
+                                <Form.Label style={{ margin:'0px 0px 0px  75px' }}>Re-enter New Password</Form.Label>
                                     <Row>
                                     <Col align='left' sm={8}>
                                     <Form.Control
                                         type={passwordShown['renew password'] ? 'text':'password'}
                                         name="re_password"
                                         placeholder="New Password"
-                                        style={{ borderRadius: "20px",margin:'0px 0px 0px  60px' }}
+                                        style={{ borderRadius: "20px",margin:'0px 0px 0px  70px' }}
                                         value={re_password}
                                         onChange={(e) => setRePassword(e.target.value)}
                                     />
-                                    {pwd_err != '' && <p className="error">{pwd_err}</p>}
                                     </Col>
                                     <Col sm={1}>
                                
                                
-                                    <FontAwesomeIcon style={{margin:'0px 0px 0px  40px'}} className='mt-2 fa-lg' icon={passwordShown['renew password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('renew password')}></FontAwesomeIcon>
+                                    <FontAwesomeIcon style={{margin:'0px 0px 0px  10px'}} className='mt-2 fa-lg' icon={passwordShown['renew password'] ? faEye:faEyeSlash} onClick={()=>togglePassword('renew password')}></FontAwesomeIcon>
                                     </Col>
                                     </Row>
+                                    {pwd_err != '' && <p className="error" style={{margin:'0px 0px 0px  130px'}}>{pwd_err}</p>}
                                 
                                 </Form.Group>
                             </div>

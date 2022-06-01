@@ -120,6 +120,7 @@ const NewTest = () => {
             const testType = await ExaminerServices.gettesttypes();
             console.log(testType.data.testTypes);
             setTestTypes(testType.data.testTypes);
+            setPatientID(params.patientid)
 
         }
         catch (err) {
@@ -152,7 +153,7 @@ const NewTest = () => {
                                             className="fa"
                                             style={{ borderRadius: "20px" }}
                                             placeholder="&#xf2c2; Patient id"
-                                            value={params.patientid}
+                                            value={patient_id}
                                             // onChange={(e) => setPatientID(e.target.value)}
                                             disabled />
                                         {id_err != '' && <p className="error">{id_err}</p>}
