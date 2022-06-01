@@ -91,7 +91,7 @@ function Login() {
         const errormessage=error.response.data.message;
         Messages.ErrorMessage({
           error: error,
-          custom_message:error.response.data.message
+          custom_message:error.response.data.message.user
         });
       }
     }
@@ -115,7 +115,7 @@ function Login() {
           <div className="form1">
             <div className="justify-content-center row g-3 align-items-center">
               <div className="col-2">
-                <label htmlFor="Username" className="col-form-label fa fw-bold">
+                <label htmlFor="Username" style={{margin:'0px 0px 0px 50px'}}  className="col-form-label fa fw-bold">
                   Username
                 </label>
               </div>
@@ -123,7 +123,7 @@ function Login() {
                 <input
                   type="text"
                   className="form-control"
-                  style={{ borderRadius: "20px" }}
+                  style={{ borderRadius: "20px",margin:'0px 20px 0px 50px' }}
                   aria-describedby="passwordHelpInline"
                   value={username}
                   onChange={(e) => {
@@ -131,19 +131,19 @@ function Login() {
                   }}
                 />
               </div>
-              <div className="col-auto"></div>
+              <div className="col-3"></div>
             </div>
             {usernameError && (
               <p
                 className="d-flex justify-content-center"
-                style={{ color: "red" }}
+                style={{ color: "red",margin:'0px 20px 0px 50px' }}
               >
                 {usernameError}
               </p>
             )}
             <div className="justify-content-center row g-3 align-items-center">
               <div className="col-2">
-                <label htmlFor="Password" style={{margin:'0px 0px 0px 15px'}} className="col-form-label fa fw-bold ">
+                <label htmlFor="Password" style={{margin:'0px 0px 0px 50px'}} className="col-form-label fa fw-bold ">
                   Password
                 </label>
               </div>
@@ -152,7 +152,7 @@ function Login() {
                   type={passwordShown ? 'text':'password'}
                   id="inputPassword"
                   className="form-control"
-                  style={{ borderRadius: "20px",margin:'0px 0px 0px 16px'}}
+                  style={{ borderRadius: "20px",margin:'0px 0px 0px 50px'}}
                   aria-describedby="passwordHelpInline"
                   value={password}
                   onChange={(e) => {
@@ -160,14 +160,14 @@ function Login() {
                   }}
                 />
               </div >
-              <div className="col-auto">
-              <FontAwesomeIcon  style={{margin:'0px 0px 0px 5px'}} className='fa-lg'  icon={passwordShown? faEye:faEyeSlash} onClick={togglePassword}></FontAwesomeIcon>
+              <div className="col-3">
+              <FontAwesomeIcon  style={{margin:'0px 20px 0px 1px'}} className='fa-lg'  icon={passwordShown? faEye:faEyeSlash} onClick={togglePassword}></FontAwesomeIcon>
               </div>
             </div>
             {passwordError && (
               <p
                 className="d-flex justify-content-center"
-                style={{ color: "red" }}
+                style={{ color: "red",margin:'0px 20px 0px 50px' }}
               >
                 {passwordError}
               </p>
@@ -177,7 +177,7 @@ function Login() {
                 type="submit"
                 className="fa btn btn-primary w-50"
                 onClick={handleSubmit}
-                style={{ borderRadius: "20px" }}
+                style={{ borderRadius: "20px",margin:'0px 20px 0px 40px'}}
               >
                 Login
               </button>
