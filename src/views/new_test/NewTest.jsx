@@ -120,6 +120,7 @@ const NewTest = () => {
             const testType = await ExaminerServices.gettesttypes();
             console.log(testType.data.testTypes);
             setTestTypes(testType.data.testTypes);
+            setPatientID(params.patientid)
 
         }
         catch (err) {
@@ -145,14 +146,14 @@ const NewTest = () => {
                         <Form onSubmit={handleSubmit}>
 
                             <div className="row">
-                                <div className="col-md-6">
+                                <div className="col-md-2">
                                     <Form.Group className="mb-3">
                                         <Form.Label>Patient ID</Form.Label>
                                         <Form.Control
                                             className="fa"
                                             style={{ borderRadius: "20px" }}
                                             placeholder="&#xf2c2; Patient id"
-                                            value={params.patientid}
+                                            value={patient_id}
                                             // onChange={(e) => setPatientID(e.target.value)}
                                             disabled />
                                         {id_err != '' && <p className="error">{id_err}</p>}
@@ -160,7 +161,7 @@ const NewTest = () => {
                                 </div>
 
                                 <div className="col-md-6">
-                                    <Form.Group className="mb-3">
+                                    <Form.Group>
                                         <Form.Label>Type of The Test</Form.Label>
 
                                         <div className="col-md-3">
@@ -197,7 +198,7 @@ const NewTest = () => {
                                         <div className="container upload_preview">
                                             <Form.Control type="file" id="file" onChange={fileValidation} />
                                             {img_err != '' && <p className="error">{img_err}</p>}
-                                            <div className="preview" id="imagePreview"><img src="../../public/No_Preview.png" alt="" /></div>
+                                            <div className="preview" id="imagePreview"><img src="https://i.ibb.co/Q68tPz8/No-Preview.png" alt="" /></div>
                                         </div>
 
                                     </Form.Group>
