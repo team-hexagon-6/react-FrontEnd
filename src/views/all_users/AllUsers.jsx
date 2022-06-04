@@ -13,6 +13,8 @@ import Messages from "../../helpers/Messages";
 import { Link } from "react-router-dom";
 import 'font-awesome/css/font-awesome.css';
 
+import Token from "../../services/Token";
+
 const AllUsers = () => {
 
   //For Pagination
@@ -61,6 +63,18 @@ const AllUsers = () => {
         
       }
     } catch (error) {
+      
+      // if(Token.getAuth()===null){
+      //   console.log("SESSION EXPIRED");
+      //   Messages.ErrorMessage({
+      //     error:error,
+      //     custom_message:'Session Expired. Please Login Again'
+      //   });
+      //   setLoader(false);
+      //   navigate('/logout');
+      //   return ;
+      // }
+
       Messages.ErrorMessage({
         error:error,
         custom_message:'Activation change failed'
@@ -103,6 +117,16 @@ const AllUsers = () => {
       console.log(response);
     } catch (error) {
       console.log(error);
+      // if(Token.getAuth()===null){
+      //   console.log("SESSION EXPIRED");
+      //   Messages.ErrorMessage({
+      //     error:error,
+      //     custom_message:'Session Expired. Please Login Again'
+      //   });
+      //   setLoader(false);
+      //   navigate('/logout');
+      //   return ;
+      // }
     }
     setTimeout(() => {
       setLoader(false);
