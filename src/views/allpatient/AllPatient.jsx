@@ -170,7 +170,7 @@ const AllPatient = () => {
             {all_ids.length === 0 &&
               <div><h5 style={{ color: "black", textAlign: "center", margin: "10px" }}>No patients to display</h5>
                 <div className="image">
-                  <img src="../../public/404.png" alt="" />
+                  <img src="https://i.ibb.co/TLJmmJW/404.png" alt="" />
                 </div>
               </div>}
             {all_ids.length !== 0 &&
