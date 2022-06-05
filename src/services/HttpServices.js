@@ -20,18 +20,18 @@ axiosInstance.interceptors.request.use(async (req) => {
     }
     if (bearer_token) {
         bearer_token = Token.getAccessToken();
+
+        const user = await jwtDecode(bearer_token);
+        // unix time expired 
+        const isExpired = dayJS(user.exp * 1000).isBefore(dayJS());
+        console.log("expired :", isExpired);
+
+        if (!isExpired) {
+            req.headers.Authorization = `Bearer ${bearer_token}`
+            return req;
+        }
+
         try {
-            const user = await jwtDecode(bearer_token);
-            // unix time expired 
-            const isExpired = dayJS(user.exp * 1000).isBefore(dayJS());
-            console.log("expired :", isExpired);
-
-            if (!isExpired) {
-                req.headers.Authorization = `Bearer ${bearer_token}`
-                return req;
-            }
-
-
             // refresh token in cookie get the request
             const response = await Axios({
                 method: "get",
