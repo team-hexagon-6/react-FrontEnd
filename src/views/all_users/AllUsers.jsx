@@ -195,7 +195,7 @@ const AllUsers = () => {
             {users.length === 0 &&
               <div><h5 style={{ color: "black", textAlign: "center", margin: "10px" }}>No {usertype} to display</h5>
                 <div className="image">
-                  <img src="../../public/404.png" alt="" />
+                  <img src="https://i.ibb.co/TLJmmJW/404.png" alt="" />
                 </div>
               </div>}
             {users.length !== 0 &&
