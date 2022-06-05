@@ -91,13 +91,13 @@ const Examiner = () => {
           <ButtonGroup vertical className="d-flex">
             <Button
               className=""
-              style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+              style={{ borderRadius: "20px", margin:"20px", width: "100%", marginLeft: "auto" }}
               onClick={() => { navigate("/add-patient") }}>
               Add Patient
             </Button>
             <Button
               className=""
-              style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+              style={{ borderRadius: "20px", width: "100%", marginLeft: "auto" }}
               onClick={() => { navigate('/patients') }}>
               View All Patients
             </Button>
@@ -129,7 +129,7 @@ const Examiner = () => {
           <ButtonGroup vertical className="d-flex">
             <Button
               className=""
-              style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+              style={{ borderRadius: "20px", width: "100%", marginLeft: "auto" }}
               onClick={() => { navigate('/update-profile') }}>
               Update Account
             </Button>
