@@ -9,7 +9,7 @@ Axios.defaults.withCredentials = true;
 let bearer_token = Token.getAccessToken();
 const axiosInstance = Axios.create({
     withCredentials: true,
-    baseURL: config.DOMAIN_NAME,
+    // baseURL: config.DOMAIN_NAME,
     headers: { Authorization: `Bearer ${bearer_token}` }
 })
 
@@ -83,7 +83,7 @@ axiosInstance.interceptors.response.use((response) => {
             error: error,
             custom_message: "Your session has expired. Please login again."
         })
-        // return window.location.href = '/logout';
+        return window.location.href = '/logout';
     }
     return Promise.reject(error);
 });
