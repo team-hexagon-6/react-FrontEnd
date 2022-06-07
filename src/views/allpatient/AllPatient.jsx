@@ -67,13 +67,13 @@ const AllPatient = () => {
     let response = null;
     try {
       response = await ExaminerServices.getpatientdetails(filter);
-      console.log(response.data.data);
+      // console.log(response.data.data);
       setAllPatient([response.data.data]);
-      console.log("All patient details", all_ids);
+      // console.log("All patient details", all_ids);
       setfilter('');
     } catch (error) {
       if (response == null) {setAllPatient([])};
-      console.log();
+      // console.log();
     }
     setTimeout(() => {
       setLoader(false);
@@ -86,16 +86,16 @@ const AllPatient = () => {
 
   const getPatients = async (skip_value, take) => {
     setLoader(true);
-    console.log(take);
+    // console.log(take);
     try {
       const response = await ExaminerServices.getPatients(skip_value, take);
-      console.log(response.data.data);
-      console.log(response.data.total_items);
+      // console.log(response.data.data);
+      // console.log(response.data.total_items);
       setAllPatient(response.data.data);
       setTotalItems(response.data.total_items);
       setSkip(skip_value);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
     setTimeout(() => {
       setLoader(false);
@@ -205,11 +205,11 @@ const AllPatient = () => {
                     //     return name;
                     //   }
                     // })
-                    .map((name) => {
+                    .map((name,index) => {
                       // Tables should come here
 
                       return (
-                        <tr key={name}>
+                        <tr key={index+1}>
                           <td>{name.id}</td>
                           <td>{name.firstname}</td>
                           <td>{name.lastname}</td>

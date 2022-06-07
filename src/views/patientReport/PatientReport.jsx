@@ -40,7 +40,7 @@ const PatientReport = () => {
             })
         }
         catch (err) {
-            console.log(err);
+            // console.log(err);
         }
         setTimeout(() => {
             setLoader(false);
@@ -64,9 +64,9 @@ const PatientReport = () => {
                         </Col>
                         <Col>
                             <div className='Hospital-details mt-3 '>
-                                <h4 className='mb-0' style={{ 'font-size': 17 }}>MDK Hospital</h4>
-                                <h5 className='mb-0' style={{ 'font-size': 15 }}>99/Horana Road</h5>
-                                <h5 className='mb-0' style={{ 'font-size': 14 }}> 0342251888/034227299</h5>
+                                <h4 className='mb-0' style={{ fontSize: 18 }}>MDK Hospital</h4>
+                                <h5 className='mb-0' style={{ fontSize: 16 }}>99/Horana Road</h5>
+                                <h5 className='mb-0' style={{ fontSize: 15 }}> 0342251888/034227299</h5>
 
                             </div>
                         </Col>
@@ -110,7 +110,7 @@ const PatientReport = () => {
                             </Col>
                         </Form.Group>
                         {reportdetails?.testrecords?.testrecord?.map((row, index) => (
-                            <div>
+                            <div key={index}>
                                 <u> <h6 className='DetailsSection'>Test Record: {index + 1}</h6></u>
                                 <Form.Group as={Row} className='fa fw-bold col-xl-10 mt-3 mb-3 mx-auto' controlId='1st Row'>
                                     <Col align='left' sm={6} >

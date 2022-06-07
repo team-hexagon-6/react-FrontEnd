@@ -50,7 +50,7 @@ function Login() {
         setUsernameError(errors.username);
       if (errors.password) {
         setPasswordError(errors.password);
-        console.log(passwordError);
+        // console.log(passwordError);
       }
     } else {
       try {
@@ -76,7 +76,7 @@ function Login() {
 
         }
       } catch (error) {
-        console.log("error response : ",error.response.data.message);
+        // console.log("error response : ",error.response.data.message);
         // console.log(error.response);
         // toast.error(error.message, {
         //   position: "top-center",
@@ -87,7 +87,7 @@ function Login() {
         //   draggable: true,
         //   progress: undefined,
         // });
-        console.log(error.response.data.message);
+        // console.log(error.response.data.message);
         const errormessage=error.response.data.message;
         Messages.ErrorMessage({
           error: error,

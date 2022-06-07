@@ -52,7 +52,7 @@ const TestDetails = () => {
             getPatientDetails();
         }
         catch (err) {
-            console.log(err);
+            // console.log(err);
         }
         setTimeout(() => {
             setLoader(false);
@@ -70,9 +70,9 @@ const TestDetails = () => {
     // }
     const handleActive = async (testid) => {
         const result = await confirm(`Please confirm test deactivation\n\nPatient ID: ${params.patientid}\n\This cannot be undone.`);
-        console.log('result', result)
+        // console.log('result', result)
         if (result) {
-            console.log("You click yes!");
+            // console.log("You click yes!");
             setLoader(true);
             try {
 
@@ -80,14 +80,14 @@ const TestDetails = () => {
                 getPatientDetails();
             }
             catch (err) {
-                console.log(err);
+                // console.log(err);
             }
             setTimeout(() => {
                 setLoader(false);
             }, 200);
 
         }
-        console.log("You click NO!");
+        // console.log("You click NO!");
 
 
     }
@@ -110,7 +110,7 @@ const TestDetails = () => {
             })
         }
         catch (err) {
-            console.log(err);
+            // console.log(err);
         }
         setTimeout(() => {
             setLoader(false);
@@ -169,13 +169,13 @@ const TestDetails = () => {
                             <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
                         </div> : ""
                     }
-                    {console.log(reportdetails.testdetails.length)}
+                    {/* {console.log(reportdetails.testdetails.length)} */}
 
 
                     {/* {storedbuttons.map((row, index)=> row.props.children)} */}
                     {(reportdetails.testdetails.length !== 0 && reportdetails.testdetails.map((row, index) => (
-                        <div>
-
+                        <div key={index}>
+                            
                             <div className="test_ids" style={{ margin: "10px" }}>Test {index + 1}
                                 <div> {row.id}</div>
 

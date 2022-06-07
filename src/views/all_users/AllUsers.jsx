@@ -25,7 +25,7 @@ const AllUsers = () => {
   const [loader, setLoader] = useState(false);
 
   const changePage = async (skip_value) => {
-    console.log(skip_value);
+    // console.log(skip_value);
     // setSkip(skip_value);
     getUsers(usertype, skip_value, take, '');
   }
@@ -53,10 +53,10 @@ const AllUsers = () => {
   // When activate/deactivate is clicked
   const changeActivation = async (user_id) => {
     setLoader(true);
-    console.log("Inside activate changing");
+    // console.log("Inside activate changing");
     try {
       const response = await UserServices.changeActivation( {user_id} );
-      console.log(response);
+      // console.log(response);
       if (response.status === 200) {
         Messages.SuccessMessage("Changed activation successfully");
         getUsers("doctor", skip, take, search);
@@ -114,9 +114,9 @@ const AllUsers = () => {
       setSkip(skip_value);
       setUsers(response.data.data);
       setTotalItems(response.data.total_items);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // if(Token.getAuth()===null){
       //   console.log("SESSION EXPIRED");
       //   Messages.ErrorMessage({

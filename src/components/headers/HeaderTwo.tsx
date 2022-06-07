@@ -29,16 +29,10 @@ function HeaderTwo() {
         <div className="contents">
           <Container>
             <Nav className="me-auto">
-              <NavLink className="navlink" style={{borderRadius: "30px"}}>
-                <Link to="/" style={{textDecoration: "none", color: "#1376BD"}}>Home </Link>
-              </NavLink>
-              <NavLink className="navlink" style={{borderRadius: "30px"}}>
-                <Link to="/dashboard" style={{textDecoration: "none", color: "#1376BD"}}>Dashboard </Link>
-              </NavLink>
+              <Nav.Link as={Link} to="/"  className="navlink" style={{borderRadius: "30px",textDecoration: "none"}}>Home </Nav.Link>
+              <Nav.Link as={Link} to="/dashboard" className="navlink" style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}> Dashboard </Nav.Link>
               {user && (
-                <NavLink className="navlink" style={{borderRadius: "30px"}}>
-                    <Link to='/logout' style={{textDecoration: "none", color: "#1376BD"}}>Logout</Link>
-              </NavLink>
+              <Nav.Link as={Link} to='/logout' className="navlink" style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}>Logout</Nav.Link>
               )}
             </Nav>
           </Container>

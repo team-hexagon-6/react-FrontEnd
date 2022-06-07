@@ -7,8 +7,8 @@ const ErrorMessage = ({
     custom_message = ''
 }) => {
 
-    console.log("error response message : ", error?.response?.data?.message);
-    console.log("error response :", error?.response);
+    // console.log("error response message : ", error?.response?.data?.message);
+    // console.log("error response :", error?.response);
 
     let message = error?.response?.data?.message[0].message;
     message = message ? main_part + " " + message : main_part + " " + default_message;

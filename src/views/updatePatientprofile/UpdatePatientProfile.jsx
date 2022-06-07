@@ -17,7 +17,7 @@ function UpdatePatientProfile() {
   const navigate = useNavigate();
   const location = useLocation();
   const patient_id = location.state.patient_id;
-  console.log("Patient ID  ", patient_id);
+  // console.log("Patient ID  ", patient_id);
   // const patientID = "P233344335";
   const formValues = {
     patient_id: patient_id,
@@ -46,11 +46,11 @@ function UpdatePatientProfile() {
   const getPatientDetails = async () => {
     try {
       const genderType = await ExaminerServices.getgendertypes();
-      console.log(genderType.data.data);
+      // console.log(genderType.data.data);
       setgenderTypes(genderType.data.data);
 
       const getPatient = await ExaminerServices.getpatientdetails(patient_id);
-      console.log("patient",getPatient);
+      // console.log("patient",getPatient);
       state = {
         patient_id:patient_id,
         "First Name": getPatient.data.data.firstname,
@@ -63,7 +63,7 @@ function UpdatePatientProfile() {
         GenderName:getPatient.data.data.gender_type_id===1?genderType.data.data[0]?.name:genderType.data.data[0]?.name,
       };
       setState(state);
-      console.log("state",state);
+      // console.log("state",state);
       
     } catch (error) {}
   };
@@ -82,7 +82,7 @@ function UpdatePatientProfile() {
     // console.log(moment(state['Birthday']).format("MM-DD-YYYY"))
   };
   const handleSelect = (event) => {
-    console.log("event is", event.split(",")[0]);
+    // console.log("event is", event.split(",")[0]);
     setState({
       ...state,
       GenderName: event.split(",")[0],
@@ -94,7 +94,7 @@ function UpdatePatientProfile() {
   const handleSubmit = async (e) => {
   
     state={...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY") }
-    console.log("submit",state);
+    // console.log("submit",state);
     e.preventDefault();
     const { value, error } = Validation.updatePatientProfile(state);
 
@@ -106,15 +106,15 @@ function UpdatePatientProfile() {
       try {
         // const patient_id = params.patient_id;
         
-        console.log("State:", state);
+        // console.log("State:", state);
       
         const response = await ExaminerServices.updatePatientProfile(state);
-        console.log(response);
+        // console.log(response);
         if (response.status === 200) {            
           Messages.SuccessMessage("Patient Updated Successfully");
       }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         Messages.ErrorMessage({
           error: error,
           custom_message: `Patient update failed`,

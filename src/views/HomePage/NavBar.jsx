@@ -21,24 +21,19 @@ function NavBar({site}) {
         <div className="contents">
           <Container>
             <Nav className="me-auto">
-              <NavLink className="navlink" to="/about" style={{borderRadius: "30px"}}>
-                {site=='About'?<Link to="/about" style={{textDecoration: "none", color: "#1376BD"}}>About </Link>:<Link to="/" style={{textDecoration: "none", color: "#1376BD"}}>Home </Link>}
+              
+                {site=='About'?<Nav.Link as={Link} to="/about" className="navlink" to="/about" style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}>About</Nav.Link>:<Nav.Link as={Link} className="navlink" to="/" style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}>Home </Nav.Link>
+                }
                 
-              </NavLink>
+              
               {!user && (
-                <NavLink className="navlink" to="/login" style={{borderRadius: "30px"}}>
-                  <Link to="/login" style={{textDecoration: "none", color: "#1376BD"}}>Login </Link>
-                </NavLink>
+                <Nav.Link as={Link} to="/login" className="navlink" to="/login" style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}>Login</Nav.Link>
               )}
               {user && (
-                <NavLink className="navlink" to="/login" style={{borderRadius: "30px"}}>
-                  <Link to="/dashboard" style={{textDecoration: "none", color: "#1376BD"}}>Dashboard </Link>
-                </NavLink>
+                <Nav.Link as={Link} to="/dashboard" className="navlink" style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}>Dashboard</Nav.Link>
               )}
               {user && (
-                <NavLink className="navlink" to="/logout" style={{borderRadius: "30px"}}>
-                  <Link to="/logout" style={{textDecoration: "none", color: "#1376BD"}}>Logout </Link>
-                </NavLink>
+                <Nav.Link as={Link} to="/logout" className="navlink"  style={{borderRadius: "30px",textDecoration: "none", color: "#1376BD"}}>Logout</Nav.Link>
               )}
             </Nav>
           </Container>

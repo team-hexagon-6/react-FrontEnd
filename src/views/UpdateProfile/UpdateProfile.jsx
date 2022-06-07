@@ -35,12 +35,12 @@ const UpdateProfile = () => {
     const [user_id, setUserID] = useState();
 
     const handleUser = (event) => {
-        console.log(event.target.value);
+        // console.log(event.target.value);
         setState({
             ...state,
             [event.target.name]: event.target.value
         })
-        console.log(moment(state['Birthday']).format("MM-DD-YYYY"))
+        // console.log(moment(state['Birthday']).format("MM-DD-YYYY"))
     }
 
     const errors = {};
@@ -53,7 +53,7 @@ const UpdateProfile = () => {
         setLoader(true);
         try {
             const getuser = await UserServices.getUser();
-            console.log("user",getuser.data.data)
+            // console.log("user",getuser.data.data)
             //  setUser( getuser.data.data);
             setUserID(getuser.data.data.user_id);
 
@@ -80,7 +80,7 @@ const UpdateProfile = () => {
     }
     const handleSubmit = async (event) => {
         setLoader(true);
-        console.log(state);
+        // console.log(state);
         state={ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY")}
         const { value, error } = Validation.validateupdateprofile(state)
         event.preventDefault();
@@ -88,7 +88,7 @@ const UpdateProfile = () => {
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
             });
-            console.log(error);
+            // console.log(error);
         }
         else {
             try {
@@ -98,9 +98,9 @@ const UpdateProfile = () => {
                     navigate('/dashboard')
                 }
 
-                console.log(response)
+                // console.log(response)
             } catch (error) {
-                console.log(error.message);
+                // console.log(error.message);
                 Messages.ErrorMessage({
                     error: error,
                     main_part: "UPDATE FAILED",

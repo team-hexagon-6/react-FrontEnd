@@ -6,7 +6,7 @@ import token from "./Token";
 const APIEndpoint = config.DOMAIN_NAME + '/auth';
 
 const register = (data) => {
-  console.log(data);
+  // console.log(data);
 
   return axios({
     method: "post",
@@ -30,7 +30,7 @@ const getusertypes = () => {
 
 
 const login = async (data) => {
-  console.log(data);
+  // console.log(data);
 
   const response = await axios({
     method: "post",
@@ -40,7 +40,7 @@ const login = async (data) => {
       password: data.password,
     },
   });
-  console.log("response", response);
+  // console.log("response", response);
   token.setAccessToken(response.data.access_token);
   return response;
 };

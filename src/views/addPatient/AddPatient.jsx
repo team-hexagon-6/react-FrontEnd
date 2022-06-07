@@ -41,7 +41,7 @@ function AddPatient() {
     setLoader(true);
     try {
       const genderType = await ExaminerServices.getgendertypes();
-      console.log(genderType.data.data);
+      // console.log(genderType.data.data);
       setgenderTypes(genderType.data.data);
     } catch (err) {
       
@@ -58,7 +58,7 @@ function AddPatient() {
     });
   };
   const handleSelect = (event) => {
-    console.log("event is", event.split(",")[0]);
+    // console.log("event is", event.split(",")[0]);
     setState({
       ...state,
       GenderName: event.split(",")[0],
@@ -70,18 +70,18 @@ function AddPatient() {
     e.preventDefault();
     state={ ...state, 'Birthday': moment(state['Birthday']).format("MM-DD-YYYY")}
     const { value, error } = Validation.addPatient(state);
-    console.log(state);
+    // console.log(state);
     if (error) {
       error.details.map((item) => {
         errors[item.path[0]] = item.message;
       });
-      console.log(errors);
+      // console.log(errors);
     } else {
       try {
         setLoader(true);
-        console.log(state);
+        // console.log(state);
         const response = await ExaminerServices.addPatient(state);
-        console.log(response);
+        // console.log(response);
         if (response.status === 201) {
           Messages.SuccessMessage("Patient Added Successfully");
           setTimeout(() => {
@@ -90,7 +90,7 @@ function AddPatient() {
           navigate("/dashboard");
         }
       } catch (error) {
-        console.log(error.message);
+        // console.log(error.message);
         Messages.ErrorMessage({
             error: error,
             main_part: "PATIENT ADDING FAILED",
