@@ -40,8 +40,8 @@ const PatientReport = () => {
             })
         }
         catch (err) {
-            console.log(err);
-        }
+        //     console.log(err);
+        // }
         setTimeout(() => {
             setLoader(false);
         }, 200);

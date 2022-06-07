@@ -17,7 +17,7 @@ const getAuth = () => {
 
   try {
     const user = jwtDecode(jwt);
-    console.log("user :", user);
+    // console.log("user :", user);
     return user;
   } catch (err) {
     return null;

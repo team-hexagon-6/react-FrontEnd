@@ -54,7 +54,7 @@ const Dashboard = () => {
                 navigate('/update-profile');
             }
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
         setTimeout(() => {
             setLoader(false);

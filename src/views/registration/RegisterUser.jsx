@@ -41,7 +41,7 @@ const RegisterUser = () => {
         
         const { value, error } = Validation.registration({ user_id, user_type});
         if (error) {
-            console.log(error);
+            // console.log(error);
             const errors = {};
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
@@ -60,7 +60,7 @@ const RegisterUser = () => {
         else {
             try {
                 setLoader(true);
-                console.log(user_type);
+                // console.log(user_type);
                 const response = await AuthServices.register({ user_id, user_type });
                 if (response.status === 201) {
                     Messages.SuccessMessage("Registration Successfull");

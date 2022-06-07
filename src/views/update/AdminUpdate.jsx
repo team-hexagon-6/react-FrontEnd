@@ -24,7 +24,7 @@ const AdminUpdate = () => {
     const [re_password, setRePassword] = useState('');
 
     const [pwd_err, setPwdErr] = useState('');
-    console.log("Id ", location.state.user_id);
+    // console.log("Id ", location.state.user_id);
     const [passwordShown,setPasswordShown]=useState({
         'new password':false,
         'renew password':false
@@ -47,7 +47,7 @@ const AdminUpdate = () => {
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
             });
-            console.log(errors)
+            // console.log(errors)
             
             if (errors.password)
                 setPwdErr(errors.password);

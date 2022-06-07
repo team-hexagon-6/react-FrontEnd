@@ -38,7 +38,7 @@ const TestRecords = () => {
             )
         }
         catch (err) {
-            console.log(err);
+            // console.log(err);
         }
         setTimeout(() => {
             setLoader(false);

@@ -25,7 +25,7 @@ const AdminDashboard = () => {
             const response = await UserServices.getUser();
             setUser(response.data.data);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
         setTimeout(() => {
             setLoader(false);

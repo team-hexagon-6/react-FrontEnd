@@ -48,7 +48,7 @@ const UpdatePassword = () => {
             error.details.map(item => {
                 errors[item.path[0]] = item.message;
             });
-            console.log(errors)
+            // console.log(errors)
             
             if (errors.password)
                 setPwdErr(errors.password);
