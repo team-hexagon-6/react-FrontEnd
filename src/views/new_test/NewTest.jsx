@@ -18,12 +18,12 @@ const NewTest = () => {
     const [checked, setChecked] = useState(false);
 
     const [patient_id, setPatientID] = useState('');
-    const [test_type, setTestType] = useState([]);
+    const [testtype, setTestType] = useState({});
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
     const [testTypes, setTestTypes] = useState([]);
     const params = useParams();
-    console.log(params);
+    
 
     const [loader, setLoader] = useState(false);
 
@@ -32,10 +32,10 @@ const NewTest = () => {
     const [img_err, setImgErr] = useState('');
     const [date_err, setDateErr] = useState('');
 
-    const radios = [
-        { name: 'Spiral', value: 'spiral' },
-        { name: 'Wave', value: 'wave' },
-    ];
+    // const radios = [
+    //     { name: 'Spiral', value: 'spiral' },
+    //     { name: 'Wave', value: 'wave' },
+    // ];
 
     // Validate uploaded image file
     const fileValidation = () => {
@@ -62,11 +62,16 @@ const NewTest = () => {
     }
 
     const handleSelect = (event) => {
-        console.log("event is", event.split(",")[0]);
+        // console.log(event)
+        // console.log("event is", event.split(",")[0]);
+        // console.log('helllo',event)
+        // console.log(event[0]);
+        // console.log(event[1]);
         setTestType({
-          testTypeName: event.split(",")[0],
-          testType: event.split(",")[1],
+          name: event[0],
+          value: event[1],
         });
+        // console.log('ererere',testtype)
       };
 
     const handleSubmit = async (e) => {
@@ -79,9 +84,12 @@ const NewTest = () => {
         if (!document.getElementById('file').value) {
             setImgErr("Test image sample is required")
         }
-
-        const { value, error } = Validation.new_test({ patient_id, test_type, date });
-
+        const testtypevalue=testtype.value
+        console.log('valuefdsafasfa',testtypevalue)
+        // console.log('type',testtypevalue)
+        const { value, error } = Validation.new_test({patient_id,test_type:testtypevalue, date });
+        //  console.log('valuefdsafasfa',testtypevalue)
+        console.log(error);
         if (error) {
             const errors = {};
             error.details.map(item => {
@@ -95,10 +103,10 @@ const NewTest = () => {
             if (errors.date)
                 setDateErr(errors.date.replace('"date"', 'Date'));
         } else {
-            window.alert(`Please confirm test details\n\nPatient ID: ${patient_id}\nTest type: ${test_type}\nDate: ${date}\n\n\Click OK to start the test.`);
+            window.alert(`Please confirm test details\n\nPatient ID: ${patient_id}\nTest type: ${testtype.name}\nDate: ${date}\n\n\Click OK to start the test.`);
             setLoader(true);
             try {
-                const response = await ExaminerServices.dotest({ patient_id, test_type, date, base64_img });
+                const response = await ExaminerServices.dotest({ patient_id,  testtypevalue  , base64_img });
                 if (response.status === 201) {
                     Messages.SuccessMessage("Start test Successfull'");
                     setTimeout(() => {
@@ -127,7 +135,7 @@ const NewTest = () => {
     const getTestTypes = async () => {
         try {
             const testType = await ExaminerServices.gettesttypes();
-            console.log(testType.data.testTypes);
+            // console.log(testType.data.testTypes);
             setTestTypes(testType.data.testTypes);
             setPatientID(params.patientid)
 
@@ -175,16 +183,18 @@ const NewTest = () => {
 
                                         <div className="col-md-3">
                                             <ButtonGroup className="mb-12">
-                                                {testTypes.map((radio, idx) => (
+                                                {/* {console.log('testTypes',testTypes)} */}
+                                                {testTypes?.map((radio, idx) => (
                                                     <ToggleButton
                                                         key={idx}
                                                         id={`radio-${idx}`}
                                                         type="radio"
                                                         variant={idx % 2 ? 'outline-primary' : 'outline-primary'}
                                                         name="radio"
-                                                        value={radio.slug}
-                                                        checked={test_type === radio.value}
-                                                        onChange={handleSelect}
+                                                        hover={false}
+                                                        // value={radio.slug}
+                                                        checked={testtype.value === radio.slug}
+                                                        onChange={()=>handleSelect([radio.name, radio.slug])}
                                                     >
                                                         {radio.name}
                                                     </ToggleButton>
@@ -216,7 +226,7 @@ const NewTest = () => {
                             </div>
 
                             <div className=" container row bottom_div justify-content-center">
-                                <div className="col-md-6">
+                                {/* <div className="col-md-6">
                                     <Form.Label>Date</Form.Label>
                                     <Form.Control
                                         style={{ borderRadius: "20px", width: "50%" }}
@@ -225,7 +235,8 @@ const NewTest = () => {
                                         onChange={(e) => setDate(e.target.value)}
                                     />
                                     {date_err != '' && <p className="error">{date_err}</p>}
-                                </div>
+                                </div> */}
+                                <div className="col-md-6"></div>
                                 <div className="col-md-6">
                                     <br />
                                     <Button type="submit" className="test_button" style={{ borderRadius: "20px" }}>
