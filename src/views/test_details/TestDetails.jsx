@@ -174,8 +174,8 @@ const TestDetails = () => {
 
                     {/* {storedbuttons.map((row, index)=> row.props.children)} */}
                     {(reportdetails.testdetails.length !== 0 && reportdetails.testdetails.map((row, index) => (
-                        <div>
-
+                        <div key={index}>
+                            
                             <div className="test_ids" style={{ margin: "10px" }}>Test {index + 1}
                                 <div> {row.id}</div>
 

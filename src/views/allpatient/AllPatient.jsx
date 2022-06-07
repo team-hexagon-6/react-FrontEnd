@@ -205,11 +205,11 @@ const AllPatient = () => {
                     //     return name;
                     //   }
                     // })
-                    .map((name) => {
+                    .map((name,index) => {
                       // Tables should come here
 
                       return (
-                        <tr key={name}>
+                        <tr key={index+1}>
                           <td>{name.id}</td>
                           <td>{name.firstname}</td>
                           <td>{name.lastname}</td>

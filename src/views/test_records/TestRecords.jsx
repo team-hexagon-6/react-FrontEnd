@@ -63,7 +63,7 @@ const TestRecords = () => {
                                 <Form.Control type="text" value={params.testid} name='First Name' disabled />
                             </Form.Group>
                             {testrecords?.testrecord?.map((row, index) => (
-                                <div>
+                                <div key={index}>
                                     <Accordion defaultActiveKey="0">
                                         <Accordion.Item eventKey="0">
                                             <Accordion.Header>Test Record {index + 1} {row.examiner.firstname} {row.examiner.user_id}</Accordion.Header>
