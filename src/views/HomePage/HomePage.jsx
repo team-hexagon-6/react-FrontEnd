@@ -21,7 +21,7 @@ export default function HomePage() {
           }}>
             <div className="col-lg-4 mt-5">
               <div className="image">
-                <img src="../../public/Parkinson-bro.png" alt="" style={{
+                <img src="https://i.ibb.co/KmH9zws/Parkinson-bro.png" alt="" style={{
                   height: "100%",
 
                 }} />

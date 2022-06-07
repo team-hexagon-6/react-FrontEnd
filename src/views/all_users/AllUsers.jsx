@@ -11,6 +11,9 @@ import { toast } from 'react-toastify';
 import Loader from "../../components/loader/Loader";
 import Messages from "../../helpers/Messages";
 import { Link } from "react-router-dom";
+import 'font-awesome/css/font-awesome.css';
+
+import Token from "../../services/Token";
 
 const AllUsers = () => {
 
@@ -60,6 +63,18 @@ const AllUsers = () => {
         
       }
     } catch (error) {
+      
+      // if(Token.getAuth()===null){
+      //   console.log("SESSION EXPIRED");
+      //   Messages.ErrorMessage({
+      //     error:error,
+      //     custom_message:'Session Expired. Please Login Again'
+      //   });
+      //   setLoader(false);
+      //   navigate('/logout');
+      //   return ;
+      // }
+
       Messages.ErrorMessage({
         error:error,
         custom_message:'Activation change failed'
@@ -102,6 +117,16 @@ const AllUsers = () => {
       console.log(response);
     } catch (error) {
       console.log(error);
+      // if(Token.getAuth()===null){
+      //   console.log("SESSION EXPIRED");
+      //   Messages.ErrorMessage({
+      //     error:error,
+      //     custom_message:'Session Expired. Please Login Again'
+      //   });
+      //   setLoader(false);
+      //   navigate('/logout');
+      //   return ;
+      // }
     }
     setTimeout(() => {
       setLoader(false);
@@ -170,7 +195,7 @@ const AllUsers = () => {
             {users.length === 0 &&
               <div><h5 style={{ color: "black", textAlign: "center", margin: "10px" }}>No {usertype} to display</h5>
                 <div className="image">
-                  <img src="../../public/404.png" alt="" />
+                  <img src="https://i.ibb.co/TLJmmJW/404.png" alt="" />
                 </div>
               </div>}
             {users.length !== 0 &&
@@ -195,7 +220,8 @@ const AllUsers = () => {
                     return (
                       <tr key={key}>
                         <td>
-                          {value.auth.active ? <p>Active</p> : <p>No Active</p>}
+                          {value.auth.active ? <i class="fa fa-check-square" aria-hidden="true" style={{color: "green"}}/> : <i class="fa fa-power-off" aria-hidden="true" style={{margin: "5px", color: "crimson"}}/>}
+                          <i class=""></i>
                         </td>
                         <td>{value.auth.id}</td>
                         <td>{value.firstname}</td>
@@ -223,7 +249,7 @@ const AllUsers = () => {
                               style={{ borderRadius: "20px" }}
                               onClick={() => changeActivation(value.auth.id)}
                             >
-                              Deactivate
+                              <i class="fa fa-power-off" aria-hidden="true" style={{margin: "5px"}}></i>Deactivate
                             </Button>
                           ) : (
                             <Button
@@ -232,7 +258,7 @@ const AllUsers = () => {
                               style={{ borderRadius: "20px" }}
                               onClick={() => changeActivation(value.auth.id)}
                             >
-                              Activate
+                              <i class="fa fa-check-square" aria-hidden="true" style={{margin: "5px"}}/>Activate
                             </Button>
                           )}
                         </td>

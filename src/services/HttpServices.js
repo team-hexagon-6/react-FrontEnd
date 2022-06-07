@@ -9,7 +9,7 @@ Axios.defaults.withCredentials = true;
 let bearer_token = Token.getAccessToken();
 const axiosInstance = Axios.create({
     withCredentials: true,
-    baseURL: config.DOMAIN_NAME,
+    // baseURL: config.DOMAIN_NAME,
     headers: { Authorization: `Bearer ${bearer_token}` }
 })
 
@@ -20,6 +20,7 @@ axiosInstance.interceptors.request.use(async (req) => {
     }
     if (bearer_token) {
         bearer_token = Token.getAccessToken();
+
         const user = await jwtDecode(bearer_token);
         // unix time expired 
         const isExpired = dayJS(user.exp * 1000).isBefore(dayJS());
@@ -48,7 +49,10 @@ axiosInstance.interceptors.request.use(async (req) => {
             console.log("bearer_token", req.headers.Authorization);
         } catch (err) {
             console.log("err :", err);
-            Messages.error("Your session has expired. Please login again.");
+            // Messages.error("Your session has expired. Please login again.");
+            // remove access token when session is expired
+            // console.log(err.response.status);
+            Token.removeAccessToken();
             return Promise.reject(err);
         }
     }
@@ -69,6 +73,35 @@ axiosInstance.interceptors.request.use(async (req) => {
 //     }
 //     return Promise.reject(error);
 // });
+
+axiosInstance.interceptors.response.use((response) => {
+    return response;
+}, (error) => {
+    if ([401, 403].includes(error?.response?.status) || Token.getAuth() === null) {
+        console.log("error response message : ", error?.response?.data?.message);
+        Messages.ErrorMessage({
+            error: error,
+            custom_message: "Your session has expired. Please login again."
+        })
+        return window.location.href = '/logout';
+    }
+    return Promise.reject(error);
+});
+
+
+// if (!response.ok) {
+//     if ([401, 403].includes(response.status) && auth?.token) {
+//         // auto logout if 401 Unauthorized or 403 Forbidden response returned from api
+//         localStorage.removeItem('user');
+//         setAuth(null);
+//         history.push('/account/login');
+//     }
+
+//     const error = (data && data.message) || response.statusText;
+//     alertActions.error(error);
+//     return Promise.reject(error);
+// }
+
 
 export default axiosInstance;
 

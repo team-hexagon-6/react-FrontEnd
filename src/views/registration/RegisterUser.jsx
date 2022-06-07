@@ -115,7 +115,7 @@ const RegisterUser = () => {
                         <h1 className="reg_header">Register a User</h1>
 
                         <div className="image">
-                            <img src="../../public/register.png" alt="" />
+                            <img src="https://i.ibb.co/GJXcYwn/register.png" alt="" />
                         </div>
 
 
@@ -142,7 +142,7 @@ const RegisterUser = () => {
                                         <div className="row">
                                             {userTypes && userTypes.map((userType) =>
                                                 <div className="col-md-3" key={userType.slug}>
-                                                    <input type="radio" value={userType.slug} style={{margin: "10px"}} onChange name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
+                                                    <input type="radio" value={userType.slug} style={{margin: "10px"}} name="user_type" onChange={(e) => setUserType(e.target.value)} />{userType.name}
                                                 </div>
                                             )}
                                         </div>

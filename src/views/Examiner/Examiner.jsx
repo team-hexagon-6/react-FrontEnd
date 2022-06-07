@@ -85,19 +85,19 @@ const Examiner = () => {
           <h6 className="admindash_header">Welcome, {user.firstname && user.firstname.charAt(0).toUpperCase() + user.firstname.slice(1)}!</h6>
 
           <div className="image" style={{ marginBottom: "0px" }}>
-            <img src="../../public/dashboard.png" alt="" />
+            <img src="https://i.ibb.co/6n0rvNF/dashboard.png" alt="" />
           </div>
 
           <ButtonGroup vertical className="d-flex">
             <Button
               className=""
-              style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+              style={{ borderRadius: "20px", margin:"20px", width: "100%", marginLeft: "auto" }}
               onClick={() => { navigate("/add-patient") }}>
               Add Patient
             </Button>
             <Button
               className=""
-              style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+              style={{ borderRadius: "20px", width: "100%", marginLeft: "auto" }}
               onClick={() => { navigate('/patients') }}>
               View All Patients
             </Button>
@@ -129,7 +129,7 @@ const Examiner = () => {
           <ButtonGroup vertical className="d-flex">
             <Button
               className=""
-              style={{ borderRadius: "20px", margin: "20px", width: "100%", marginLeft: "auto" }}
+              style={{ borderRadius: "20px", width: "100%", marginLeft: "auto" }}
               onClick={() => { navigate('/update-profile') }}>
               Update Account
             </Button>

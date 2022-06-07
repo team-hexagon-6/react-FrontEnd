@@ -16,7 +16,7 @@ const About = () => {
                 <div className="row">
                     <div className="about_card col-lg-3 clo-md-6">
                         <div className="image">
-                            <img src="../../public/doc_ex.png" alt="" />
+                            <img src="https://i.ibb.co/vH7LnZq/doc-ex.png" alt="" />
                         </div>
                         <h5 className="h_6">Register as a Doctor or an Examiner</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
@@ -24,7 +24,7 @@ const About = () => {
 
                     <div className="about_card col-lg-3 clo-md-6">
                         <div className="image">
-                            <img src="../../public/about.png" alt="" />
+                            <img src="https://i.ibb.co/BPswCvn/about.png" alt="" />
                         </div>
                         <h5 className="h_6">Add Patients for Tests</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
@@ -32,7 +32,7 @@ const About = () => {
 
                     <div className="about_card col-lg-3 clo-md-6">
                         <div className="image">
-                            <img src="../../public/test.png" alt="" />
+                            <img src="https://i.ibb.co/2FNrvtC/test.png" alt="" />
                         </div>
                         <h5 className="h_6">Spiral & Wave Testing</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
@@ -40,7 +40,7 @@ const About = () => {
 
                     <div className="about_card col-lg-3 clo-md-6">
                         <div className="image">
-                            <img src="../../public/report.png" alt="" />
+                            <img src="https://i.ibb.co/ns6M3xx/report.png" alt="" />
                         </div>
                         <h5 className="h_6">Save and View Test Records</h5>
                         <p className="des">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, magni, ipsum impedit assumenda doloribus voluptas in, consequatur nulla esse molestiae soluta quo! Provident, ab? Deserunt recusandae nam libero magnam quas.</p>
@@ -54,7 +54,7 @@ const About = () => {
                 <div className="row">
                     <div className="col-lg-3">
                         <div className="image">
-                            <img src="../../public/parkinson.png" alt="" />
+                            <img src="https://i.ibb.co/GMzgMJC/parkinson.png" alt="" />
                         </div>
                     </div>
                     <div className="info_p col-lg-9">
@@ -85,7 +85,7 @@ const About = () => {
                     </div>
                     <div className="col-lg-3">
                         <div className="image">
-                            <img src="../../public/parkinson2.png" alt="" />
+                            <img src="https://i.ibb.co/cD4Dd4t/parkinson2.png" alt="" />
                         </div>
                     </div>
                 </div>
