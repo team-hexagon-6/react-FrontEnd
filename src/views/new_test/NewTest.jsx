@@ -6,7 +6,7 @@ import Validation from '../../Validation';
 import ExaminerServices from "../../services/API/ExaminerServices";
 import _503 from "../not_found/_503";
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Loader from "../../components/loader/Loader";
 
 import Messages from "../../helpers/Messages";
@@ -24,6 +24,9 @@ const NewTest = () => {
     const [testTypes, setTestTypes] = useState([]);
     const params = useParams();
     
+    console.log(params);
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const [loader, setLoader] = useState(false);
 
@@ -106,21 +109,25 @@ const NewTest = () => {
             window.alert(`Please confirm test details\n\nPatient ID: ${patient_id}\nTest type: ${testtype.name}\nDate: ${date}\n\n\Click OK to start the test.`);
             setLoader(true);
             try {
-                const response = await ExaminerServices.dotest({ patient_id,  testtypevalue  , base64_img });
-                if (response.status === 201) {
-                    Messages.SuccessMessage("Start test Successfull'");
+                const test_id = location.state.test_id;
+                const formData = new FormData();
+                formData.append('patient_id', patient_id);
+                formData.append('test_id', test_id);
+                formData.append('image_string', base64_img);
+                formData.append('test_type', test_type);
+                const response = await ExaminerServices.dotest(formData);
+                if (response.status === 200) {
+                    Messages.SuccessMessage("Test was conducted successfully");
                     setTimeout(() => {
                         setLoader(false);
                     }, 200);
-                    setTimeout(navigate('/login?registration=successful'), 3000);
+                    navigate(`/test-records/${test_id}`);
                 }
-
-
             } catch (error) {
                 console.log(error);
                 Messages.ErrorMessage({
                     error: error,
-                    custom_message: `P with ID: ${patient_id} already exists`
+                    custom_message: `Test Failed`,
                   });
             }
 
@@ -137,7 +144,7 @@ const NewTest = () => {
             const testType = await ExaminerServices.gettesttypes();
             // console.log(testType.data.testTypes);
             setTestTypes(testType.data.testTypes);
-            setPatientID(params.patientid)
+            setPatientID(location.state.patient_id)
 
         }
         catch (err) {

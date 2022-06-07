@@ -85,16 +85,15 @@ const getpatienttestrecordsforatest = (testid) => {
   });
 };
 
-const dotest = (data) => {
+const dotest = (formData) => {
   return axios({
     method: "post",
     url: APIEndpoint + "/test/do-test",
-    data: {
-      patient_id: data.patient_id,
-      test_type: data.test_type,
-      base64_img: "ewrw",
+    data: formData,
+    headers: { 
+      Authorization: `Bearer ${token.getAccessToken()}`,
+      content_type: 'multipart/form-data', 
     },
-    headers: { Authorization: `Bearer ${token.getAccessToken()}` },
   });
 };
 
