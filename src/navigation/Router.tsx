@@ -55,7 +55,7 @@ const  Router =() =>{
         <Route path="/update-user" element ={<RequireAuth allowedRoles={[ROLES.Admin]}><AdminUpdate/></RequireAuth>}></Route>
 
         {/* Examiner routings */}
-        <Route path="/new-test/:patientid" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><NewTest/></RequireAuth>}></Route>
+        <Route path="/new-test" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><NewTest/></RequireAuth>}></Route>
         <Route path="/examiner" element = {<RequireAuth allowedRoles={[ROLES.Examiner]}><Examiner/></RequireAuth>}></Route>
         <Route path="/add-patient" element={<RequireAuth allowedRoles={[ROLES.Examiner]}><AddPatient/></RequireAuth>}></Route>
         <Route path="/update-patient-profile" element ={<RequireAuth allowedRoles={[ROLES.Examiner]}><UpdatePatientProfile/></RequireAuth>}></Route>

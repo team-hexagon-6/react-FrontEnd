@@ -6,10 +6,10 @@ import { Row, Col } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ExaminerServices from '../../services/API/ExaminerServices';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import Loader from "../../components/loader/Loader";
 import NotFound from './../not_found/NotFound';
-import {confirm} from "react-confirm-box"
+import { confirm } from "react-confirm-box"
 import Token from '../../services/Token'
 import jwtDecode from "jwt-decode";
 
@@ -20,22 +20,22 @@ const TestDetails = () => {
         details: [],
         testdetails: []
     });
-    const ROLES ={
-        'Examiner':'_32247',
-        'Doctor':'_32446',
-        'Admin':'_32345'
-      }
+    const ROLES = {
+        'Examiner': '_32247',
+        'Doctor': '_32446',
+        'Admin': '_32345'
+    }
     let navigate = useNavigate();
     const params = useParams();
 
     const [loader, setLoader] = useState(false);
-    try{
-        var user=jwtDecode(Token.getAccessToken())
-       }
-       catch(err){
-         user=null
-       }
-  
+    try {
+        var user = jwtDecode(Token.getAccessToken())
+    }
+    catch (err) {
+        user = null
+    }
+
 
     // var today = new Date();
     // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -64,18 +64,18 @@ const TestDetails = () => {
 
     }
 
-    const handleStartTest = () => {
-        navigate(`/new-test/${params.patientid}`)
+    // const handleStartTest = () => {
+    //     navigate(`/new-test/${params.patientid}`)
 
-    }
+    // }
     const handleActive = async (testid) => {
-        const result=await confirm(`Please confirm test deactivation\n\nPatient ID: ${params.patientid}\n\This cannot be undone.`);
-        console.log('result',result)
-        if (result){
+        const result = await confirm(`Please confirm test deactivation\n\nPatient ID: ${params.patientid}\n\This cannot be undone.`);
+        console.log('result', result)
+        if (result) {
             console.log("You click yes!");
             setLoader(true);
             try {
-              
+
                 const respone = await ExaminerServices.confirmtest(testid, params.patientid);
                 getPatientDetails();
             }
@@ -85,11 +85,11 @@ const TestDetails = () => {
             setTimeout(() => {
                 setLoader(false);
             }, 200);
-            
+
         }
         console.log("You click NO!");
-        
-      
+
+
     }
 
     useEffect(() => {
@@ -102,7 +102,7 @@ const TestDetails = () => {
 
             const patientDetails = await ExaminerServices.getpatientdetails(params.patientid);
             const patienttestDetails = await ExaminerServices.getpatienttestdetails(0, 10, params.patientid);
-        
+
             setReportDetails({
                 ...reportdetails,
                 details: patientDetails.data.data,
@@ -132,13 +132,13 @@ const TestDetails = () => {
 
     if (loader) {
         return <Loader />
-    } else if(reportdetails?.details.length!=0) {
+    } else if (reportdetails?.details.length != 0) {
 
         return (
             <div>
                 <HeaderTwo />
                 <div className='form-container col-xl-6 mx-auto '>
-                    <h1 className='fs-1 fw-bold mb-0 reg_header' >{user.role==ROLES.Examiner ? 'Start Test' : 'Patient Information'}</h1>
+                    <h1 className='fs-1 fw-bold mb-0 reg_header' >{user.role == ROLES.Examiner ? 'Start Test' : 'Patient Information'}</h1>
 
                     <hr style={{ margin: '1px 3px' }} />
 
@@ -164,47 +164,51 @@ const TestDetails = () => {
                         </Form.Group>
 
                     </Form>
-                    {user.role==ROLES.Examiner?
-                    <div className='b'>
-                        <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
-                    </div> :""
+                    {user.role == ROLES.Examiner ?
+                        <div className='b'>
+                            <Button type="submit" style={{ borderRadius: "20px", margin: "0px 5px 20px" }} onClick={handleButton} >Create New Test</Button>
+                        </div> : ""
                     }
                     {console.log(reportdetails.testdetails.length)}
-                   
+
 
                     {/* {storedbuttons.map((row, index)=> row.props.children)} */}
-                    {(reportdetails.testdetails.length!==0 && reportdetails.testdetails.map((row, index) => (
+                    {(reportdetails.testdetails.length !== 0 && reportdetails.testdetails.map((row, index) => (
                         <div>
-                            
-                            <div className="test_ids" style={{margin: "10px"}}>Test {index+1}
-                                <div> {row.id}</div>
-                                
 
-                                    <div className="btn-group" role="group" aria-label="Basic example">
-                                        <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
-                                        {user.role==ROLES.Examiner? <>
-                                        <button type="button" className="opt_btn btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button>
-                                        <button type="button" className="opt_btn btn btn-secondary" onClick={()=>handleActive(row.id)} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
-                                        </>:''}
-                                    </div>
+                            <div className="test_ids" style={{ margin: "10px" }}>Test {index + 1}
+                                <div> {row.id}</div>
+
+
+                                <div className="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" className="opt_btn btn btn-secondary" onClick={handleButtonTestRecords} data-id={row.id}>Test Records</button>
+                                    {user.role == ROLES.Examiner ? <>
+                                        <Link to={"/new-test"} state={{ patient_id: params.patientid, test_id: row.id }}>
+                                            <button type="button" className="opt_btn btn btn-secondary" disabled={row.confirmed} >Start Test</button>
+                                        </Link>
+
+                                        {/* <button type="button" className="opt_btn btn btn-secondary" onClick={handleStartTest} disabled={row.confirmed} >Start Test</button> */}
+                                        <button type="button" className="opt_btn btn btn-secondary" onClick={() => handleActive(row.id)} disabled={row.confirmed} data-id={row.id} >{row.confirmed ? 'DeActivated' : 'DeActive'}</button>
+                                    </> : ''}
+                                </div>
 
                             </div>
                         </div>
-                        
+
 
                     ))) || (reportdetails.testdetails.length === 0 && <h4 className="mb-5">No Tests Found</h4>)
-                    
-    }
+
+                    }
 
                 </div>
             </div>
         )
 
     }
-    else if(reportdetails?.details.length==0){
+    else if (reportdetails?.details.length == 0) {
         return (
             <div>
-                <NotFound content="NoPatient"/>
+                <NotFound content="NoPatient" />
             </div>
 
         );
