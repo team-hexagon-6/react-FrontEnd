@@ -62,7 +62,7 @@ const AdminUpdate = () => {
                 const response = await AdminServices.updatePassword({ password, user_id });
                 if (response.status === 200) {            
                     Messages.SuccessMessage("Password Updated Successfully");
-                    setTimeout(navigate('/allUsers'), 3000);
+                    setTimeout(navigate('/users'), 3000);
                 }
 
             } catch (error) {

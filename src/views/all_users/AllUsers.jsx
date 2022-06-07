@@ -220,8 +220,8 @@ const AllUsers = () => {
                     return (
                       <tr key={key}>
                         <td>
-                          {value.auth.active ? <i class="fa fa-check-square" aria-hidden="true" style={{color: "green"}}/> : <i class="fa fa-power-off" aria-hidden="true" style={{margin: "5px", color: "crimson"}}/>}
-                          <i class=""></i>
+                          {value.auth.active ? <i className="fa fa-check-square" aria-hidden="true" style={{color: "green"}}/> : <i className="fa fa-power-off" aria-hidden="true" style={{margin: "5px", color: "crimson"}}/>}
+                          <i className=""></i>
                         </td>
                         <td>{value.auth.id}</td>
                         <td>{value.firstname}</td>
@@ -249,7 +249,7 @@ const AllUsers = () => {
                               style={{ borderRadius: "20px" }}
                               onClick={() => changeActivation(value.auth.id)}
                             >
-                              <i class="fa fa-power-off" aria-hidden="true" style={{margin: "5px"}}></i>Deactivate
+                              <i className="fa fa-power-off" aria-hidden="true" style={{margin: "5px"}}></i>Deactivate
                             </Button>
                           ) : (
                             <Button
@@ -258,7 +258,7 @@ const AllUsers = () => {
                               style={{ borderRadius: "20px" }}
                               onClick={() => changeActivation(value.auth.id)}
                             >
-                              <i class="fa fa-check-square" aria-hidden="true" style={{margin: "5px"}}/>Activate
+                              <i className="fa fa-check-square" aria-hidden="true" style={{margin: "5px"}}/>Activate
                             </Button>
                           )}
                         </td>
