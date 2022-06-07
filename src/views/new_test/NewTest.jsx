@@ -18,7 +18,7 @@ const NewTest = () => {
     const [checked, setChecked] = useState(false);
 
     const [patient_id, setPatientID] = useState('');
-    const [test_type, setTestType] = useState('');
+    const [test_type, setTestType] = useState([]);
     const [date, setDate] = useState('');
     const [base64_img, setBase64Img] = useState('');
     const [testTypes, setTestTypes] = useState([]);
@@ -60,6 +60,14 @@ const NewTest = () => {
             }
         }
     }
+
+    const handleSelect = (event) => {
+        console.log("event is", event.split(",")[0]);
+        setTestType({
+          testTypeName: event.split(",")[0],
+          testType: event.split(",")[1],
+        });
+      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -176,7 +184,7 @@ const NewTest = () => {
                                                         name="radio"
                                                         value={radio.slug}
                                                         checked={test_type === radio.value}
-                                                        onChange={(e) => setTestType(e.currentTarget.value)}
+                                                        onChange={handleSelect}
                                                     >
                                                         {radio.name}
                                                     </ToggleButton>
