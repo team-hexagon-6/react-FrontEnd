@@ -273,8 +273,8 @@ function UpdatePatientProfile() {
                 style={{ margin: " 0px  110px 0px 0px" }}
               >
                 {" "}
-                {genderTypes.map((row) => (
-                  <Dropdown.Item eventKey={[row.name, row.slug]}>
+                {genderTypes.map((row,index) => (
+                  <Dropdown.Item key={index} eventKey={[row.name, row.slug]}>
                     {row.name}
                   </Dropdown.Item>
                 ))}

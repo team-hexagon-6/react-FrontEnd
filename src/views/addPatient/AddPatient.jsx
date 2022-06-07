@@ -320,8 +320,8 @@ function AddPatient() {
                   onSelect={handleSelect}
                 >
                   {" "}
-                  {genderTypes.map((row) => (
-                    <Dropdown.Item eventKey={[row.name, row.slug]}>
+                  {genderTypes.map((row,index) => (
+                    <Dropdown.Item key={index} eventKey={[row.name, row.slug]}>
                       {row.name}
                     </Dropdown.Item>
                   ))}

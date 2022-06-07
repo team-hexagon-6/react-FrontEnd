@@ -205,7 +205,6 @@ const NewTest = () => {
                               idx % 2 ? "outline-primary" : "outline-primary"
                             }
                             name="radio"
-                            hover={false}
                             // value={radio.slug}
                             checked={testtype.value === radio.slug}
                             onChange={() =>
